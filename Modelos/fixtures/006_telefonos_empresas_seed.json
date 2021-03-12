@@ -1,0 +1,235 @@
+[
+    {
+        "model": "Modelos.telefo_empresas",
+        "pk": 1,
+        "fields": {
+            "telefono": "0939563223",
+            "empresa_id": 1
+        }
+    },
+    {
+        "model": "Modelos.telefo_empresas",
+        "pk": 2,
+        "fields": {
+            "telefono": "0939924891",
+            "empresa_id": 1
+        }
+    },
+
+
+    {
+        "model": "Modelos.telefo_empresas",
+        "pk": 3,
+        "fields": {
+            "telefono": "072-695114",
+            "empresa_id": 2
+        }
+    },
+    {
+        "model": "Modelos.telefo_empresas",
+        "pk": 4,
+        "fields": {
+            "telefono": "0990035180",
+            "empresa_id": 2
+        }
+    },
+
+
+
+    {
+        "model": "Modelos.telefo_empresas",
+        "pk": 5,
+        "fields": {
+            "telefono": "0996107617",
+            "empresa_id": 3
+        }
+    },
+
+
+    {
+        "model": "Modelos.telefo_empresas",
+        "pk": 6,
+        "fields": {
+            "telefono": "0991577673",
+            "empresa_id": 4
+        }
+    },
+    {
+        "model": "Modelos.telefo_empresas",
+        "pk": 7,
+        "fields": {
+            "telefono": "2694852",
+            "empresa_id": 4
+        }
+    },
+
+
+    {
+        "model": "Modelos.telefo_empresas",
+        "pk": 8,
+        "fields": {
+            "telefono": "0980706050",
+            "empresa_id": 5
+        }
+    },
+
+
+    {
+        "model": "Modelos.telefo_empresas",
+        "pk": 9,
+        "fields": {
+            "telefono": "0986868973",
+            "empresa_id": 6
+        }
+    },
+
+
+    {
+        "model": "Modelos.telefo_empresas",
+        "pk": 10,
+        "fields": {
+            "telefono": "0986868973",
+            "empresa_id": 7
+        }
+    },
+
+
+    {
+        "model": "Modelos.telefo_empresas",
+        "pk": 11,
+        "fields": {
+            "telefono": "0979452254",
+            "empresa_id": 8
+        }
+    },
+
+
+    {
+        "model": "Modelos.telefo_empresas",
+        "pk": 12,
+        "fields": {
+            "telefono": "0968863493",
+            "empresa_id": 9
+        }
+    },
+    {
+        "model": "Modelos.telefo_empresas",
+        "pk": 13,
+        "fields": {
+            "telefono": "0999502521",
+            "empresa_id": 9
+        }
+    },
+
+
+    {
+        "model": "Modelos.telefo_empresas",
+        "pk": 14,
+        "fields": {
+            "telefono": "0980706050",
+            "empresa_id": 10
+        }
+    },
+
+
+    {
+        "model": "Modelos.telefo_empresas",
+        "pk": 15,
+        "fields": {
+            "telefono": "0980706050",
+            "empresa_id": 11
+        }
+    },
+
+
+    {
+        "model": "Modelos.telefo_empresas",
+        "pk": 16,
+        "fields": {
+            "telefono": "0990989393",
+            "empresa_id": 12
+        }
+    },
+    {
+        "model": "Modelos.telefo_empresas",
+        "pk": 17,
+        "fields": {
+            "telefono": "072696-625",
+            "empresa_id": 12
+        }
+    },
+
+
+    {
+        "model": "Modelos.telefo_empresas",
+        "pk": 18,
+        "fields": {
+            "telefono": "0993781513",
+            "empresa_id": 13
+        }
+    },
+    {
+        "model": "Modelos.telefo_empresas",
+        "pk": 19,
+        "fields": {
+            "telefono": "0979783056",
+            "empresa_id": 13
+        }
+    },
+
+
+    {
+        "model": "Modelos.telefo_empresas",
+        "pk": 20,
+        "fields": {
+            "telefono": "0997674845",
+            "empresa_id": 14
+        }
+    },
+
+
+    {
+        "model": "Modelos.telefo_empresas",
+        "pk": 21,
+        "fields": {
+            "telefono": "0997674845",
+            "empresa_id": 15
+        }
+    },
+    {
+        "model": "Modelos.telefo_empresas",
+        "pk": 22,
+        "fields": {
+            "telefono": "0967954964",
+            "empresa_id": 15
+        }
+    },
+
+
+    {
+        "model": "Modelos.telefo_empresas",
+        "pk": 23,
+        "fields": {
+            "telefono": "0991183724",
+            "empresa_id": 16
+        }
+    },
+    {
+        "model": "Modelos.telefo_empresas",
+        "pk": 24,
+        "fields": {
+            "telefono": "072695771",
+            "empresa_id": 16
+        }
+    },
+
+
+    {
+        "model": "Modelos.telefo_empresas",
+        "pk": 25,
+        "fields": {
+            "telefono": "0986433422",
+            "empresa_id": 17
+        }
+    }
+]

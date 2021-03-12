@@ -1,0 +1,23 @@
+[
+    {
+        "model": "Modelos.Rol",
+        "pk": 1,
+        "fields": {
+            "nombre": "Cliente"
+        }
+    },
+    {
+        "model": "Modelos.Rol",
+        "pk": 2,
+        "fields": {
+            "nombre": "Emprendedor"
+        }
+    },
+    {
+        "model": "Modelos.Rol",
+        "pk": 3,
+        "fields": {
+            "nombre": "Administrador"
+        }
+    }
+]

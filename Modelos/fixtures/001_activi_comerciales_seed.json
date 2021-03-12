@@ -1,0 +1,122 @@
+[
+  {
+    "model": "Modelos.activi_comerciales",
+    "pk": 1,
+    "fields": {
+      "nombre": "Condimentos y especias",
+      "ruta_foto": "ActividadC/condimentos y especias.jpg"
+    }
+  },
+  {
+    "model": "Modelos.activi_comerciales",
+    "pk": 2,
+    "fields": {
+      "nombre": "Confiterías",
+      "ruta_foto": "ActividadC/confiterias.jpg"
+    }
+  },
+  {
+    "model": "Modelos.activi_comerciales",
+    "pk": 3,
+    "fields": {
+      "nombre": "Cursos",
+      "ruta_foto": "ActividadC/cursos.png"
+    }
+  },
+  {
+    "model": "Modelos.activi_comerciales",
+    "pk": 4,
+    "fields": {
+      "nombre": "Cyber café",
+      "ruta_foto": "ActividadC/cyber cafe.jpg"
+    }
+  },
+  {
+    "model": "Modelos.activi_comerciales",
+    "pk": 5,
+    "fields": {
+      "nombre": "Diseños y gigantografías",
+      "ruta_foto": "ActividadC/diseño y gigantografias.png"
+    }
+  },
+  {
+    "model": "Modelos.activi_comerciales",
+    "pk": 6,
+    "fields": {
+      "nombre": "Farmacias",
+      "ruta_foto": "ActividadC/farmacias.jpg"
+    }
+  },
+  {
+    "model": "Modelos.activi_comerciales",
+    "pk": 7,
+    "fields": {
+      "nombre": "Floristerías y decoraciones",
+      "ruta_foto": "ActividadC/floresterias.jpg"
+    }
+  },
+  {
+    "model": "Modelos.activi_comerciales",
+    "pk": 8,
+    "fields": {
+      "nombre": "Funerarias",
+      "ruta_foto": "ActividadC/funerarias.jpg"
+    }
+  },
+  {
+    "model": "Modelos.activi_comerciales",
+    "pk": 9,
+    "fields": {
+      "nombre": "Heladerías",
+      "ruta_foto": "ActividadC/heladerias.jpg"
+    }
+  },
+  {
+    "model": "Modelos.activi_comerciales",
+    "pk": 10,
+    "fields": {
+      "nombre": "Librerías y papelerías",
+      "ruta_foto": "ActividadC/librerias.jpg"
+    }
+  },
+  {
+    "model": "Modelos.activi_comerciales",
+    "pk": 11,
+    "fields": {
+      "nombre": "Mariscos",
+      "ruta_foto": "ActividadC/mariscos.png"
+    }
+  },
+  {
+    "model": "Modelos.activi_comerciales",
+    "pk": 12,
+    "fields": {
+      "nombre": "Productos artesanales y agronomía",
+      "ruta_foto": "ActividadC/productos de agro.jpg"
+    }
+  },
+  {
+    "model": "Modelos.activi_comerciales",
+    "pk": 13,
+    "fields": {
+      "nombre": "Productos naturales",
+      "ruta_foto": "ActividadC/productos naturales.jpg"
+    }
+  },
+  {
+    "model": "Modelos.activi_comerciales",
+    "pk": 14,
+    "fields": {
+      "nombre": "Restaurantes",
+      "ruta_foto": "ActividadC/restaurantes.jpg"
+    }
+  },
+  {
+    "model": "Modelos.activi_comerciales",
+    "pk": 15,
+    "fields": {
+      "nombre": "Taxis y transportes",
+      "ruta_foto": "ActividadC/taxis.png"
+    }
+  }
+]

@@ -1,0 +1,50 @@
+[
+    {
+        "model": "Modelos.usuarios",
+        "pk": 19,
+        "fields": {
+            "nom_usuario": "Hanna Pérez Ulloa",
+            "correo": "hannapu@gmail.com",
+            "credenciales": "310119hg",
+            "ruta_foto": "Perfiles/Hanna_Perez_Ulloa_19.jpeg",
+            "estado": true,
+            "correo_verificado": true,
+            "rol_id": 1
+        }
+    },
+    {
+        "model": "Modelos.clientes",
+        "pk": 1,
+        "fields": {
+            "nombres": "Hanna Pérez Ulloa",
+            "cedula": "1206784782",
+            "direccion": "Quinsaloma - Los Ríos - Ecuador",
+            "telefono": "0979482663",
+            "usuario_id": 19
+        }
+    },
+    {
+        "model": "Modelos.usuarios",
+        "pk": 20,
+        "fields": {
+            "nom_usuario": "Henry Pérez M",
+            "correo": "perug@gmail.com",
+            "credenciales": "123456",
+            "ruta_foto": null,
+            "estado": true,
+            "correo_verificado": true,
+            "rol_id": 1
+        }
+    },
+    {
+        "model": "Modelos.clientes",
+        "pk": 2,
+        "fields": {
+            "nombres": "Henry Pérez M",
+            "cedula": "124587563",
+            "direccion": "Quinsaloma - Los Ríos - Ecuador",
+            "telefono": "0979482663",
+            "usuario_id": 20
+        }
+    }
+]

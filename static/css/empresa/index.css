@@ -1,0 +1,228 @@
+:root {
+  --color_morado_hover: #2e5595;
+  --color_naranja: #ed7d2b;
+  --color_gris: #252525;
+  --color_verde_oscuro: rgb(5, 44, 2);
+}
+
+div.portada-index {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0rem !important;
+  margin-bottom: 1rem !important;
+}
+
+#slogan {
+  width: 35%;
+  color: var(--color_gris);
+}
+
+#slogan > h5 {
+  font-weight: bold;
+  margin-bottom: 1.3rem;
+}
+
+#slogan > p {
+  max-width: 100%;
+  margin-bottom: 2rem;
+}
+
+#slogan > a.btn-info {
+  display: block;
+  background-color: var(--color_naranja);
+  color: var(--color_blanco);
+  padding: 0.5rem 1.2rem;
+  text-decoration: none;
+  border-radius: 30px;
+  max-width: fit-content; /*para que se ajuste al contenido*/
+}
+#slogan > a.btn-info:hover {
+  background-color: #c2611c;
+  transition: ease-in-out 0.15s;
+}
+
+#phone {
+  background-color: transparent;
+}
+
+#delivery {
+  display: flex;
+  justify-content: flex-end;
+}
+#delivery > img {
+  width: auto;
+  height: 100%;
+}
+
+.contenedor {
+  margin-top: 0.7rem;
+}
+
+.subtitulo {
+  border-bottom: 1px solid var(--color_verde_oscuro);
+  color: var(--color_gris);
+}
+
+.categorias {
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 18px;
+}
+
+.categorias .text-card {
+  color: var(--color_gris);
+  text-decoration: none;
+}
+
+.categorias .card {
+  height: 15rem;
+  border: 1px solid var(--color_verde_oscuro);
+  border-radius: 10px;
+}
+
+.categorias .card:hover {
+  background-color: var(--color_verde);
+  color: var(--color_blanco);
+  transition: ease-in-out 0.2s;
+}
+
+.card .card-header {
+  height: 12.18rem;
+  overflow: hidden;
+}
+.card .card-header .card-img {
+  border-radius: 11px 11px 0px 0px;
+}
+
+@media screen and (max-width: 1430px) {
+  .categorias {
+    grid-template-columns: repeat(5, 1fr);
+    transition: ease-in-out 0.3s;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .categorias {
+    grid-template-columns: repeat(4, 1fr);
+    transition: ease-in-out 0.3s;
+  }
+}
+
+@media screen and (max-width: 1165px) {
+  #phone {
+    display: none;
+  }
+  #slogan {
+    width: 100%;
+  }
+  #delivery {
+    width: 100%;
+    transition: ease-in-out 0.5s;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  #delivery {
+    height: 250px;
+    transition: ease-in-out 0.6s;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .categorias {
+    grid-template-columns: repeat(3, 1fr);
+    transition: ease-in-out 0.3s;
+  }
+}
+
+@media screen and (max-width: 880px) {
+  #delivery {
+    height: 240px;
+    transition: ease-in-out 0.5s;
+  }
+}
+
+@media screen and (max-width: 815px) {
+  #slogan {
+    position: absolute;
+    max-width: 60%;
+  }
+}
+
+@media screen and (max-width: 635px) {
+  .categorias {
+    grid-template-columns: repeat(2, 1fr);
+    transition: ease-in-out 0.3s;
+  }
+}
+
+@media screen and (max-width: 570px) {
+  div.portada-index {
+    position: relative;
+    height: 260px;
+    width: 100%;
+  }
+  #slogan {
+    position: absolute;
+    top: 0.1rem;
+    left: 0;
+    max-width: 100%;
+    height: 100%;
+    padding: 0.8rem 1.3rem 0rem 1.3rem;
+    background: linear-gradient(rgba(103, 158, 240, 0.8), transparent);
+  }
+  #slogan > a.btn-info {
+    display: initial;
+  }
+
+  #delivery {
+    height: auto;
+    width: 100%;
+  }
+  #delivery > img {
+    height: auto;
+    width: 100%;
+  }
+
+  .categorias {
+    grid-template-columns: repeat(2, 1fr);
+    transition: ease-in-out 0.3s;
+  }
+}
+
+@media screen and (max-width: 485px) {
+  .categorias {
+    grid-template-columns: repeat(1, 1fr);
+    transition: ease-in-out 0.3s;
+  }
+
+  .text-card {
+    width: 70%;
+    margin: 0px auto;
+  }
+
+  .categorias .card {
+    width: 100%;
+    height: 19rem;
+    border-radius: 10px;
+  }
+
+  .card .card-header {
+    height: 15.18rem;
+  }
+
+  .card-body {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 395px) {
+  .text-card {
+    width: 85%;
+  }
+}

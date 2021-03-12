@@ -1,0 +1,87 @@
+.cards-grid{
+    display: grid;
+    grid-gap: 15px;
+}
+
+.imagen-card{
+    height: 11rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+.imagen-card > .img-card{
+    width: 100%;
+}
+
+.cards-grid > .card > div p{
+    font-size: 0.9rem;
+    line-height: 1.1rem;
+}
+
+.estado-abierto{
+    background-color: #007bff;
+    color: white;
+    padding: 5px 20px;
+    margin: 0px;
+    font-size: 0.8rem;
+}
+
+.estado-cerrado{
+    background-color: #ffc107;
+    color: #2d2d2d;
+    padding: 5px 15px;
+    margin: 0px;
+    font-size: 0.8rem;
+}
+
+.pegar-footer{
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+}
+
+@media screen and (min-width: 1350px){
+    .cards-grid{
+        grid-template-columns: repeat(6, 1fr);
+    }
+}
+
+@media screen and (max-width: 1350px){
+    .cards-grid{
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+@media screen and (max-width: 1120px){
+    .cards-grid{
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media screen and (max-width: 935px){
+    .cards-grid{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width: 660px){
+    .cards-grid > .card > div p{
+        font-size: 0.8rem;
+    }
+    .estado-abierto, .estado-cerrado{
+        font-size: 0.7rem;
+    }
+}
+
+@media screen and (max-width: 600px){
+    .cards-grid{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 435px){
+    .cards-grid{
+        grid-template-columns: 1fr;
+        margin: 4%;
+    }
+}

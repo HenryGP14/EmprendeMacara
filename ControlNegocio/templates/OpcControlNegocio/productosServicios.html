@@ -1,0 +1,357 @@
+{% extends 'adminNegocioMenu.html' %}
+{% load static %}
+
+{% block title %}Productos y servicios - {% endblock title %}
+
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/controlnegocio/panel-contenido.css' %}" />
+{% endblock css %}
+
+{% block content %}
+<div>
+    <div class="titulo">Administrar productos y servicios</div>
+    <div class="mt-3">
+        <div>
+            <div class="alert alert-success" role="alert">
+                <h4 class="alert-heading">Notas:</h4>
+                <p><i class="fas fa-cog"></i> Permite configurar el producto (nombre, precio, descripción, etc).</p>
+
+            </div>
+        </div>
+        <div>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                        aria-controls="home" aria-selected="true">
+                        Productos
+                    </a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                        aria-controls="profile" aria-selected="false">
+                        Servicios
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active pb-2" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <section>
+                        <button type="button" class="btn btn-agregar" data-toggle="modal" data-target="#modalProducto">
+                            <i class="fas fa-plus mr-2"></i>
+                            Agregar producto
+                        </button>
+                        <section class="group-cards">
+                            {% for unProducto in ltProductos %}
+                            <div class="cards card">
+                                {% if unProducto.ruta_foto %}
+                                <img src="{{ unProducto.ruta_foto.url }}" class="img-card">
+                                {% else %}
+                                <div class="img-card"></div>
+                                {% endif %}
+                                <div class="card-content">
+                                    <p class="card-title">{{unProducto.nombre}}</p>
+                                </div>
+                                <div class="card-action">
+                                    <h5 style="color: red;display:inline-block">
+                                        ${{unProducto.precio_unitario}}
+                                    </h5>
+                                    <div>
+                                        <button type="submit" class="btn btn-light btnEditProducto"
+                                            pid="{{unProducto.id}}" data-toggle="modal"
+                                            data-target="#modalEditProducto">
+                                            <i class="fas fa-cog"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </section>
+                    </section>
+                </div>
+                <div class="tab-pane fade pb-2" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <section>
+                        <button type="button" class="btn btn-agregar" data-toggle="modal" data-target="#modalServicio">
+                            <i class="fas fa-plus mr-2"></i>
+                            Agregar servicio</button>
+                        <section class="group-cards">
+                            {% for unServicio in ltServicios %}
+                            <div class="cards card">
+                                {% if unServicio.ruta_foto %}
+                                <img src="{{ unServicio.ruta_foto.url }}" class="img-card">
+                                {% else %}
+                                <div class="img-card"></div>
+                                {% endif %}
+                                <div class="card-content">
+                                    <p class="card-title">{{unServicio.nombre}}</p>
+                                </div>
+                                <div class="card-action">
+                                    <div style="display:inline-block"></div>
+                                    <button type="button" class="btn btn-light btnEditServicio" pid="{{unServicio.id}}"
+                                        data-toggle="modal" data-target="#editmodalServicio">
+                                        <i class="fas fa-cog"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </section>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include "OpcControlNegocio/MdlEditServicio.html" %}
+{% include "OpcControlNegocio/MdlEditProducto.html" %}
+{% include 'OpcControlNegocio/MdlAnadProducto.html' %}
+{% include 'OpcControlNegocio/MdlAnadServicio.html' %}
+{% endblock content %}
+{% block js2 %}
+<script type="application/javascript">
+    //=======PREVIEW FOTO
+    function previewimagenServicio(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#foto')
+                    .attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function previewimagenProducto(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#fotoProducto')
+                    .attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function previewimagenEditProducto(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#fotoEditProducto')
+                    .attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function previewimagenEditServicio(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#fotoEditServicio')
+                    .attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    //=======AÑADIR
+    $(document).on('submit', '#formAnadirProducto', function (e) {
+        e.preventDefault();
+
+        if ($.trim($('#inputproducto').val()).length > 0 &
+            $.trim($('#txtNombre').val()).length > 0 &
+            $.trim($('#txtDescripcion').val()).length > 0 &
+            $.trim($('#txtCantidad').val()).length > 0 &
+            $.trim($('#txtPrecUnit').val()).length > 0) {
+            var data = new FormData(this);
+            $.ajax({
+                type: 'POST',
+                url: '{% url "anadirProducto" %}',
+                data: data,
+                contentType: false,
+                processData: false,
+            }).done(function (d) {
+                if (d.result === '1') {
+                    location.href = "{% url 'ProductosServicios' %}"
+                }
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+
+            }).always(function (data) {
+
+            });
+        } else {
+            $("div #alertaCamposVaciosProductos").replaceWith(
+                '<div id="alertaCamposVacios" style="width: 100%;">' +
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert">' +
+                'Datos incompletos!' +
+                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                '<span aria-hidden="true">&times;</span>' +
+                '</button>' +
+                '</div>' +
+                '</div>'
+            );
+        }
+
+    });
+
+    $(document).on('submit', '#formAnadirServicio', function (e) {
+        e.preventDefault();
+        if ($.trim($('#inputservicio').val()).length > 0 &
+            $.trim($('#txtSerNombre').val()).length > 0 &
+            $.trim($('#txtSerDesc').val()).length > 0) {
+            var data = new FormData(this);
+            $.ajax({
+                type: 'POST',
+                url: '{% url "anadirServicio" %}',
+                data: data,
+                contentType: false,
+                processData: false,
+            }).done(function (d) {
+                if (d.result === '1') {
+                    location.href = "{% url 'ProductosServicios' %}"
+                }
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+
+            }).always(function (data) {
+
+            });
+        } else {
+            $("div #alertaCamposVaciosServicios").replaceWith(
+                '<div id="alertaCamposVaciosServicios" style="width: 100%;">' +
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert">' +
+                'Datos incompletos!' +
+                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                '<span aria-hidden="true">&times;</span>' +
+                '</button>' +
+                '</div>' +
+                '</div>'
+            );
+        }
+    });
+
+    //=======OBTENER OBJETO
+    $('.btnEditServicio').click(function () {
+        var pid = $(this).attr('pid');
+
+        $.ajax({
+            type: 'POST',
+            url: '{% url "obtenerServicio" %}',
+            data: {
+                idServicio: pid,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+        }).done(function (d) {
+            console.log(d)
+            $('#EditNombreServicio').val(d.nombre);
+            $('#EditDescripcionServicio').val(d.descripcion);
+            $('#fotoEditServicio').attr('src', d.ruta_foto);
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+
+        }).always(function (data) {
+
+        });
+    });
+
+    $('.btnEditProducto').click(function () {
+        var pid = $(this).attr('pid');
+
+        $.ajax({
+            type: 'POST',
+            url: '{% url "obtenerProducto" %}',
+            data: {
+                idProducto: pid,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+        }).done(function (d) {
+            console.log(d)
+            $('#EditNombreProducto').val(d.nombre);
+            $('#EditDescripcionProducto').val(d.descripcion);
+            $('#EditCantidadProducto').val(d.cantidad);
+            $('#EditPrecUnitProducto').val(d.precio_unitario);
+            $('#fotoEditProducto').attr('src', d.ruta_foto);
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+
+        }).always(function (data) {
+
+        });
+    });
+
+    $(document).on('submit', '#formEditarProducto', function (e) {
+        e.preventDefault();
+        if ($.trim($('#EditNombreProducto').val()).length > 0 &
+            $.trim($('#EditDescripcionProducto').val()).length > 0 &
+            $.trim($('#EditCantidadProducto').val()).length > 0 &
+            $.trim($('#EditPrecUnitProducto').val()).length > 0) {
+            var data = new FormData(this);
+            $.ajax({
+                type: 'POST',
+                url: '{% url "editarProducto" %}',
+                data: data,
+                contentType: false,
+                processData: false,
+            }).done(function (d) {
+                if (d.result === '1') {
+                    location.href = "{% url 'ProductosServicios' %}"
+                }
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+
+            }).always(function (data) {
+
+            });
+        } else {
+            $("div #alertaCamposVaciosEditProductos").replaceWith(
+                '<div id="alertaCamposVaciosEditProductos" style="width: 100%;">' +
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert">' +
+                'Datos incompletos!' +
+                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                '<span aria-hidden="true">&times;</span>' +
+                '</button>' +
+                '</div>' +
+                '</div>')
+        }
+    });
+
+    $(document).on('submit', '#formEditServicio', function (e) {
+        e.preventDefault();
+        if ($.trim($('#EditNombreServicio').val()).length > 0 &
+            $.trim($('#EditDescripcionServicio').val()).length > 0) {
+            var data = new FormData(this);
+            $.ajax({
+                type: 'POST',
+                url: '{% url "editarServicio" %}',
+                data: data,
+                contentType: false,
+                processData: false,
+            }).done(function (d) {
+                if (d.result === '1') {
+                    location.href = "{% url 'ProductosServicios' %}"
+                }
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+
+            }).always(function (data) {
+
+            });
+        } else {
+            $("div #alertaCamposVaciosEditServicio").replaceWith(
+                '<div id="alertaCamposVaciosEditServicio" style="width: 100%;">' +
+                '<div class="alert alert-danger alert-dismissible fade show" role="alert">' +
+                'Datos incompletos!' +
+                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+                '<span aria-hidden="true">&times;</span>' +
+                '</button>' +
+                '</div>' +
+                '</div>')
+        }
+    });
+
+    //======VALIDAR FOTO
+    function validarinput(idInput) {}
+</script>
+{% endblock js2 %}

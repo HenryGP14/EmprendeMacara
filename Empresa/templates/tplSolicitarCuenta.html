@@ -1,0 +1,248 @@
+{% extends 'components/base.html' %}
+{% load static%}
+
+{% block title %}Registrar empresa - {% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/empresa/estilosempresa.css' %}" type="text/css" />
+{% endblock css %}
+
+{% block navbar %}
+{% include 'components/nav.html' %}
+{% endblock navbar %}
+
+{% block content %}
+<section class="container col-sm-8">
+	<header class="card">
+		<section class="card-header bg-white text-center">
+			<h5>Solicitar cuenta para empresa</h5>
+		</section>
+	</header>
+
+	<form id="formSolicitar" name="formSolicitar" method="POST">
+		{% csrf_token %}
+
+		<section class="card">
+			<section class="card-header bg-white pt-3">
+				<label>
+					<h6><span class="blue">1</span>Datos del gerente</h6>
+				</label>
+			</section>
+
+			<section class="card-body">
+				<section class="form-group row justify-content-center">
+					<section class="col-sm-3 text-center">
+						<label for="txtGerente" class="col-form-label">Nombre: </label>
+					</section>
+					<section class="col-sm-6">
+						<input type="text" class="form-control" id="txtGerente" name="txtGerente"
+							placeholder="Ingrese su nombre" autocomplete="off" maxlength="50"
+							onkeypress="javascript:soloLetras(event);" required />
+					</section>
+				</section>
+				<section class="form-group row justify-content-center">
+					<section class="col-sm-3 text-center">
+						<label for="txtUsuario" class="col-form-label">Usuario: </label>
+					</section>
+					<section class="col-sm-6">
+						<input type="email" class="form-control" id="txtUsuario" name="txtUsuario" maxlength="75"
+							placeholder="Ejemplo: usuario@gmail.com" autocomplete="off" required />
+					</section>
+				</section>
+				<section class="form-group row justify-content-center">
+					<section class="col-sm-3 text-center">
+						<label for="txtContrasenia" class="col-form-label">Contraseña:
+						</label>
+					</section>
+					<section class="col-sm-6">
+						<input type="password" class="form-control" id="txtContrasenia" name="txtContrasenia"
+							placeholder="Ingrese una contraseña" autocomplete="off" required />
+					</section>
+				</section>
+				<section class="form-group row justify-content-center">
+					<section class="col-sm-3 text-center">
+						<label for="txtConfirContra" class="col-form-label">Confirme la contraseña:
+						</label>
+					</section>
+					<section class="col-sm-6">
+						<input type="password" class="form-control" id="txtConfirContra" name="txtConfirContra"
+							placeholder="Confirme la contraseña" autocomplete="off" required />
+					</section>
+				</section>
+			</section>
+		</section>
+
+		<section class="card">
+			<section class="card-header bg-white pt-3">
+				<label>
+					<h6><span class="blue">2</span>Datos de la empresa</h6>
+				</label>
+			</section>
+			<section class="card-body">
+				<section class="form-group row justify-content-center">
+					<section class="col-sm-3 text-center">
+						<label for="txtEmpresa" class="col-form-label">Nombre: </label>
+					</section>
+					<section class="col-sm-6">
+						<input type="text" class="form-control" id="txtEmpresa" name="txtEmpresa" maxlength="50"
+							placeholder="Ingrese el nombre de su empresa" autocomplete="off" required />
+					</section>
+				</section>
+				<section class="form-group row justify-content-center">
+					<section class="col-sm-3 text-center">
+						<label for="txtRuc" class="col-form-label">RUC:
+						</label>
+					</section>
+					<section class="col-sm-6">
+						<input type="text" class="form-control" id="txtRuc" name="txtRuc"
+							placeholder="Ingrese su número de ruc o cédula" minlength="10" maxlength="13"
+							autocomplete="off" onkeypress="javascript:soloNumeros(event);" required />
+					</section>
+				</section>
+				<section class="form-group row justify-content-center">
+					<section class="col-sm-3 text-center">
+						<label for="cmbActComerc" class="col-form-label">Actividiad comercial:
+						</label>
+					</section>
+					<section class="col-sm-6">
+						<select class="form-control custom-select" id="cmbActComerc" name="cmbActComerc" required>
+							<option value="">-- Seleccione su actividad comercial --</option>
+							{% for act in actividadesCom %}
+							<option value="{{act.id}}">{{act.nombre}}</option>
+							{% endfor %}
+						</select>
+						<section class="invalid-feedback">Debe seleccionar una actividad comercial</section>
+					</section>
+				</section>
+				<section class="form-group row justify-content-center">
+					<section class="col-sm-3 text-center">
+						<label for="txtCorreo" class="col-form-label">Correo: </label>
+					</section>
+					<section class="col-sm-6">
+						<input type="email" class="form-control" id="txtCorreo" name="txtCorreo" maxlength="75"
+							placeholder="Ejemplo: empresa@gmail.com" autocomplete="off" required />
+					</section>
+				</section>
+				<section class="form-group row justify-content-center">
+					<section class="col-sm-3 text-center">
+						<label for="txtDireccion" class="col-form-label">Dirección:
+						</label>
+					</section>
+					<section class="col-sm-6">
+						<input type="text" class="form-control" id="txtDireccion" name="txtDireccion"
+							placeholder="Ingrese la dirección de su empresa" maxlength="150" autocomplete="off"
+							required />
+					</section>
+				</section>
+				<section class="form-group row justify-content-center">
+					<section class="col-sm-3 text-center">
+						<label for="txtHoraInicio" class="col-form-label"> Inicio de atención:
+						</label>
+					</section>
+					<section class="col-sm-6">
+						<input type="time" class="form-control" id="txtHoraInicio" name="txtHoraInicio" required />
+					</section>
+				</section>
+				<section class="form-group row justify-content-center">
+					<section class="col-sm-3 text-center">
+						<label for="txtHoraFin" class="col-form-label">Fin de atención:
+						</label>
+					</section>
+					<section class="col-sm-6">
+						<input type="time" class="form-control" id="txtHoraFin" name="txtHoraFin" required />
+					</section>
+				</section>
+				<section class="form-group row justify-content-center">
+					<section class="col-sm-3 text-center">
+						<label for="txtSlogan" class="col-form-label">Slogan: </label>
+					</section>
+					<section class="col-sm-6">
+						<textarea class="form-control" id="txtSlogan" name="txtSlogan" style="height: 135px;"
+							placeholder="Ingrese el slogan de su empresa" maxlength="600" required></textarea>
+					</section>
+				</section>
+				<section class="form-group row justify-content-center">
+					<section class="col-sm-3 text-center">
+						<label for="txtPoliticas" class="col-form-label">Políticas: </label>
+					</section>
+					<section class="col-sm-6">
+						<textarea class="form-control" id="txtPoliticas" name="txtPoliticas" style="height: 135px;"
+							placeholder="Ingrese las políticas de su empresa" maxlength="600" required></textarea>
+					</section>
+				</section>
+				<section class="form-group row justify-content-center">
+					<section class="col-sm-3 text-center">
+						<label for="txttelefono" class="col-form-label">Teléfono:
+						</label>
+					</section>
+					<section class="col-sm-6">
+						<section class="form-group row justify-content-left">
+							<section class="col-sm-8 pr-1 pt-1">
+								<input type="text" class="form-control" name="txttelefono" id="txttelefono"
+									placeholder="Ingrese un número" maxlength="10" minlength="7"
+									onkeypress="javascript:soloNumeros(event);" autocomplete="off">
+							</section>
+							<section class="col-sm-4 pr-1 pt-1 text-center">
+								<button type="button" class="btn btn-success" id="btnAddTelefono"><i class="fa fa-plus"
+										aria-hidden="true"></i> Añadir</button>
+							</section>
+						</section>
+						<section class="table-responsive-sm pl-4 pr-4 pt-2">
+							<table id="tableTelefonos" class="table table-hover">
+								<thead>
+									<tr>
+										<th>Número</th>
+										<th style="width:60px;">
+											Acción
+										</th>
+									</tr>
+								</thead>
+								<tbody id="tableTelefono-body">
+								</tbody>
+							</table>
+						</section>
+					</section>
+				</section>
+			</section>
+		</section>
+
+		<section class="card">
+			<section class="card-body">
+				<section class="form-group justify-content-center">
+					<section class="col-sm-12" style="text-align: center;">
+						<a id="btnCancelar" class="btn btn-warning" href="/"><i class="fa fa-ban"
+								aria-hidden="true"></i> Cancelar</a>
+						<button type="submit" class="btn btn-success" id="btnEnviar">
+							<i class="fa fa-paper-plane" aria-hidden="true"></i> Enviar solicitud
+						</button>
+					</section>
+				</section>
+			</section>
+		</section>
+	</form>
+</section>
+
+<div class="modal fade" id="solicitud_enviada" data-backdrop="static" data-keyboard="false" tabindex="-1"
+	aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="staticBackdropLabel">Mensaje</h5>
+			</div>
+			<div class="modal-body">
+				La solicitud fue enviada exitosamente y estará en proceso de revisión, la respuesta de su solicitud se
+				enviará al correo de la empresa
+			</div>
+			<div class="modal-footer">
+				<a href="{% url 'index' %}" class="btn btn-primary">Aceptar</a>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/global/sweetalert.min.js'%}"></script>
+<script src="{% static 'js/global/validaciones.js'%}"></script>
+<script src="{% static 'js/empresa/empresa.js'%}"></script>
+{% endblock js %}

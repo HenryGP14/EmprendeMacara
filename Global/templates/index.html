@@ -1,0 +1,54 @@
+{% extends "components/base.html" %}
+{% load static%}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/empresa/index.css' %}" />
+{% endblock css %}
+
+{% block navbar %}
+{% include 'components/nav.html' %}
+{% endblock navbar %}
+
+{% block content %}
+<main>
+    <div class="portada-index">
+        <div class="columna-izquierda" id="slogan">
+            <h5>Entregas a domicilio</h5>
+            <p>Todo está aquí. Descubra las entregas a nivel local por pedido en restaurantes, tiendas, floresterías,
+                ferreterías y más. Su entrega está asegurada, reserve su pedido ahora y recíbelo en menos de 15 minutos.
+            </p>
+            <a class="btn-info"
+                href="https://www.facebook.com/Emprendimientos-Macar%C3%A1-FanPage-108430887314519/?ref=page_internal"
+                target="_blank">Saber más</a>
+        </div>
+        <div class="columna-medio" id="phone">
+            <img src="{% static 'img/img_macara/celular-min.png' %}" style="max-height: 300px;" alt="Celular">
+        </div>
+        <div class="columna-derecha" id="delivery">
+            <img src="{% static 'img/img_macara/delivery-min.png' %}" style="max-height: 300px;" alt="Delivery">
+        </div>
+    </div>
+    <div class="contenedor">
+        <div class="subtitulo mb-3">
+            <h5>Categorías</h5>
+        </div>
+
+        <div class="categorias">
+
+            {% for negocio in categorias %}
+            <a href="{% url 'list_negocios' negocio.id %}" class="text-card">
+                <div class="card">
+                    <div class="card-header p-0">
+                        <img class="card-img" src="{{ negocio.ruta_foto.url }}" alt="icono">
+                    </div>
+                    <div class="card-body text-center pb-0 pt-0" style="height: 60px;">
+                        <h6 class="card-title mt-2">{{ negocio.nombre }}</h6>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+
+        </div>
+    </div>
+</main>
+{% endblock content %}

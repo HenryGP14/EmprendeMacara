@@ -1,0 +1,429 @@
+[
+    {
+        "model": "Modelos.servicios",
+        "pk": 1,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 1,
+            "nombre": "",
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+
+    {
+        "model": "Modelos.servicios",
+        "pk": 2,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 3,
+            "nombre": "Mantenimiento y Reparación de computadoras",
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.servicios",
+        "pk": 3,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 3,
+            "nombre": "Formateo de Computadoras Windows & Macbook",
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.servicios",
+        "pk": 4,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 3,
+            "nombre": "Instalación de Antivirus",
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.servicios",
+        "pk": 5,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 3,
+            "nombre": "Elaboración de páginas Web",
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.servicios",
+        "pk": 6,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 3,
+            "nombre": "Diseño Arquitectónico",
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.servicios",
+        "pk": 7,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 3,
+            "nombre": "Copias a B/N y Color",
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.servicios",
+        "pk": 8,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 3,
+            "nombre": "Escaneos",
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.servicios",
+        "pk": 9,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 3,
+            "nombre": "Impresiones de inyección a tinta",
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.servicios",
+        "pk": 10,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 3,
+            "nombre": "Impresiones láser",
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.servicios",
+        "pk": 11,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 3,
+            "nombre": "Todo tipo de trámites en línea",
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+
+    {
+        "model": "Modelos.servicios",
+        "pk": 12,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 4,
+            "nombre": "Impresión en lona vinilo micro perforado",
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.servicios",
+        "pk": 13,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 4,
+            "nombre": "Impresión en vinil transparente",
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.servicios",
+        "pk": 14,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 4,
+            "nombre": "Vinilo de corte",
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.servicios",
+        "pk": 15,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 4,
+            "nombre": "Corte en láser de MDF acrílico blanco transparente",
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+
+    {
+        "model": "Modelos.servicios",
+        "pk": 16,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 5,
+            "nombre": "Elaboración de detalles personalizados.",
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+
+    {
+        "model": "Modelos.servicios",
+        "pk": 17,
+        "fields": {
+            "descripcion": "Arreglos para todo compromiso social con flores naturales y artificiales",
+            "empresa_id": 6,
+            "nombre": "Arreglos para compromisos sociales",
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+
+    {
+        "model": "Modelos.servicios",
+        "pk": 18,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 7,
+            "nombre": "Capilla ardiente",
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.servicios",
+        "pk": 19,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 7,
+            "nombre": "Carpas",
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.servicios",
+        "pk": 20,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 7,
+            "nombre": "Sillas",
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.servicios",
+        "pk": 21,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 7,
+            "nombre": "Amplificación",
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.servicios",
+        "pk": 22,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 7,
+            "nombre": "Iluminación",
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.servicios",
+        "pk": 23,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 7,
+            "nombre": "Ambientación de lugar de velación",
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.servicios",
+        "pk": 24,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 7,
+            "nombre": "Decoración de iglesia",
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+
+    {
+        "model": "Modelos.servicios",
+        "pk": 25,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 8,
+            "nombre": "Elaboración de detalles para toda ocasión",
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+
+    {
+        "model": "Modelos.servicios",
+        "pk": 26,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 9,
+            "nombre": "Papelería",
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.servicios",
+        "pk": 27,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 9,
+            "nombre": "Copiadora",
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.servicios",
+        "pk": 28,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 9,
+            "nombre": "Impresora",
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.servicios",
+        "pk": 29,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 9,
+            "nombre": "Bazar y Manualidades",
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.servicios",
+        "pk": 30,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 9,
+            "nombre": "Emplasticados y Snillados",
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+
+    {
+        "model": "Modelos.servicios",
+        "pk": 31,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 13,
+            "nombre": "Compras de Comida, bebida, etc",
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.servicios",
+        "pk": 32,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 13,
+            "nombre": "Compras de Medicina",
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.servicios",
+        "pk": 33,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 13,
+            "nombre": "Servicio de Paquetería",
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.servicios",
+        "pk": 34,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 13,
+            "nombre": "Depósitos y Retiros Bancarios",
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.servicios",
+        "pk": 35,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 13,
+            "nombre": "Servicio de Fletes",
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+
+    {
+        "model": "Modelos.servicios",
+        "pk": 36,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 16,
+            "nombre": "Curso para obtener la Licencia A, B o F",
+            "ruta_foto": "Productos_Servicios/sportmancar_00004.jpeg",
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.servicios",
+        "pk": 37,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 16,
+            "nombre": "Examen psicosensométrico para canje de licencia",
+            "ruta_foto": "Productos_Servicios/sportmancar_00001.jpeg",
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.servicios",
+        "pk": 37,
+        "fields": {
+            "descripcion": "",
+            "empresa_id": 16,
+            "nombre": "Renovación de licencias A-B-F-C-D-E-G",
+            "ruta_foto": "Productos_Servicios/sportmancar_00002.jpeg",
+            "visible": true
+        }
+    }
+]

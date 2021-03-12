@@ -1,0 +1,158 @@
+:root {
+    --color_panel_contenido: rgba(35, 92, 69, 0.1);
+    --color_btn_succees: rgb(40, 167, 69);
+    --color_btn_succees_hover: rgb(31, 141, 57);
+    --color_btn_cancel: rgb(250, 154, 0);
+    --color_btn_cancel_hover: rgb(232, 137, 0);
+}
+
+body {
+    background-color: var(--color_panel_contenido);
+}
+/*********** PANEL DE CONTENIDO ************/
+
+.nombre-opcion {
+    background-color: #ffffff;
+    color: #505050;
+    padding: 0.7rem 1rem;
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+    border-radius: 5px;
+}
+
+.grid-notificaciones {
+    width: 100%;
+    margin: 2rem 0rem;
+    display: grid;
+    grid-gap: 1.5rem;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.notificacion {
+    /* offset-x | offset-y | blur-radius | spread-radius | color */
+    box-shadow: 0rem 0.25rem 0.75rem 0rem rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+.notificacion .head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--color_verde_turquesa);
+    padding-left: 1rem;
+    color: white;
+    min-height: 1.8rem;
+}
+.notificacion .head .titulo {
+    display: flex;
+    align-items: center;
+}
+.notificacion .head .titulo i {
+    color: #00ce7b;
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+}
+.notificacion .head .btn-deshabilitar {
+    text-decoration: none;
+    color: rgb(29, 29, 29);
+    background-color: var(--color_btn_cancel);
+    padding: 0.5rem 0.8rem;
+}
+.notificacion .head .btn-deshabilitar:hover {
+    background-color: var(--color_btn_cancel_hover);
+    transition: ease 0.2s;
+    text-decoration: none;
+}
+.notificacion .head .btn-habilitar {
+    text-decoration: none;
+    color: rgb(29, 29, 29);
+    background-color: rgb(0, 206, 122);
+    padding: 0.5rem 0.8rem;
+}
+.notificacion .head .btn-habilitar:hover {
+    background-color: rgb(0, 182, 109);
+    text-decoration: underline;
+    transition: ease 0.2s;
+    text-decoration: none;
+}
+.notificacion .body {
+    padding: 0.6rem 0.5rem;
+}
+.notificacion .body table {
+    height: 280px;
+}
+.notificacion .body table tbody td {
+    font-size: 15px;
+}
+.notificacion .body .acciones {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.8rem;
+}
+.acciones .btn-aceptar,
+.acciones .btn-rechazar {
+    text-decoration: none;
+    padding: 0.3rem 1.1rem;
+    margin: 0rem 0.6rem;
+    border-radius: 5px;
+}
+.acciones .btn-aceptar {
+    color:white;
+    background-color: var(--color_btn_succees);
+}
+.acciones .btn-aceptar:hover {
+    background-color: var(--color_btn_succees_hover);
+}
+.acciones .btn-rechazar {
+    color:black;
+    background-color: var(--color_btn_cancel);
+}
+.acciones .btn-rechazar:hover {
+    background-color: var(--color_btn_cancel_hover);
+}
+
+.card-deshabilitado {
+    background-color: #5f5f5f;
+}
+
+@media screen and (max-width: 1075px) {
+    .form-inline {
+        display: block;
+    }
+    .form-inline #cmbEstados {
+        min-width: 15rem;
+        width: 100%;
+    }
+    .grid-notificaciones {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media screen and (max-width: 1055px) {
+    td.t-column-width {
+        width: 90px;
+    }
+}
+
+
+
+img#foto {
+    max-height: 235px;
+}
+
+label[for="imgFoto"],
+input.guardar {
+    margin: 10px;
+}
+
+input[type="file"]#imgFoto {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}

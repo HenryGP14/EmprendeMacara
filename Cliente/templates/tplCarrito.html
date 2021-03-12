@@ -1,0 +1,107 @@
+{% extends 'components/base.html' %}
+{% load static %}
+
+{% block title %} Carrito - {% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/cliente/carrito.css' %}">
+{% endblock css %}
+
+{% block navbar %}
+{% include 'components/nav.html' %}
+{% endblock navbar %}
+
+{% block content %}
+<div class="cart-container">
+    <h2>Carrito <i class="fas fa-shopping-cart mr-1"></i></h2>
+    <div class="cart">
+
+        {% if request.session.carrito %}
+        {% for carrito in request.session.carrito.values %}
+        <div class="content">
+            <div class="description">
+                {% if carrito.foto %}
+                <img src="{{ carrito.foto }}" class="img-cart">
+                {% else %}
+                <div class="img-cart"></div>
+                {% endif %}
+                <div>
+                    <h4>{{ carrito.nom_producto }}</h4>
+                    <p>{{ carrito.descripcion }}</p>
+                    <h4>Empresa</h4>
+                    <p>{{ carrito.empresa }}</p>
+                    <strong>Precio unitario: </strong>{{ carrito.precio }}
+                </div>
+            </div>
+            <div class="options">
+                <div>
+                    <div class="handle" id="handleCounter{{ carrito.producto_id }}">
+                        <button class="btn-decrementar" pid="{{ carrito.producto_id }}" type="button">-</button>
+                        <input type="text" value="{{ carrito.cantidad }}" class="cart-imput">
+                        <button class="btn-incrementar" pid="{{ carrito.producto_id }}" type="button">+</button>
+                    </div>
+                    <a href="{% url 'remove-producto' carrito.producto_id %}" class="btn btn-danger mr-1">
+                        Quitar
+                        <i class=" far fa-trash-alt"></i>
+                    </a>
+                    <a href="{% url 'factura' carrito.producto_id %}" class="btn btn-success ml-1">
+                        Comprar
+                        <i class=" fas fa-check-circle"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="alert alert-danger">
+            Por el momento no cuentas con ningún producto a comprar, si quieres visita las categorías que ofrece nuestra
+            página.
+            <a href="{% url 'index' %}">click aquí</a>
+        </div>
+        {% endif %}
+
+    </div>
+</div>
+{% endblock content %}
+
+{% block js %}
+<script src="{% static 'js/carrito/handleCounter.js' %}"></script>
+
+{% for carrito in request.session.carrito.values %}
+<script>
+    $('#handleCounter{{ carrito.producto_id }}').handleCounter({
+        num_minimo: 1,
+        num_maximo: 100,
+    })
+</script>
+{% endfor %}
+
+<script>
+    $('.btn-decrementar').click(function () {
+        var pid = $(this).attr('pid');
+        $.ajax({
+            type: 'POST',
+            url: '{% url "decrementar-pr" %}',
+            data: {
+                producto_id: pid,
+                csrfmiddlewaretoken: '{{  csrf_token  }}'
+            }
+        }).done(function (d) {
+
+        })
+    })
+    $('.btn-incrementar').click(function () {
+        var pid = $(this).attr('pid');
+        $.ajax({
+            type: 'POST',
+            url: '{% url "incrementar-pr" %}',
+            data: {
+                producto_id: pid,
+                csrfmiddlewaretoken: '{{  csrf_token  }}'
+            }
+        }).done(function (d) {
+
+        })
+    })
+</script>
+{% endblock js %}

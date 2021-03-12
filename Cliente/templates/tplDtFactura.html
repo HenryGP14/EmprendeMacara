@@ -1,0 +1,209 @@
+{% extends 'components/base.html' %}
+{% load static %}
+
+{% block title %}Facturación - {% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/cliente/facturacion.css' %}">
+{% endblock css %}
+
+{% block navbar %}
+{% include 'components/nav.html' %}
+{% endblock navbar %}
+
+{% block content %}
+<div class="contenedor">
+    <div class="fila">
+        <div class="titulo-pagina">
+            <h5>Facturación del pedido</h5>
+        </div>
+    </div>
+    <form method="post" id="frmPedidos">
+        {% csrf_token %}
+        <div class="fila">
+            <div class="titulo">
+                <div class="numero-circulo">1</div>
+                <h5>Datos del cliente</h5>
+            </div>
+            <div class="agrupacion-datos d-flex justify-content-center">
+                <div class="with-form">
+                    <div class="dato">
+                        <div class="etiqueta">Nombres:</div>
+                        <input type="text" name="nombres" id="nombres" class="form-control" value="{{ datos.nombre }}"
+                            required onkeypress="soloLetras(event)">
+                    </div>
+                    <div class="dato">
+                        <div class="etiqueta">E-mail:</div>
+                        <input type="email" name="email" id="email" class="form-control" value="{{ datos.correo }}"
+                            required>
+                    </div>
+                    <div class="dato">
+                        <div class="etiqueta">Dirección:</div>
+                        <input type="text" name="direccion" id="direccion" class="form-control"
+                            value="{{ datos.direccion }}" required>
+                    </div>
+                    <div class="dato">
+                        <div class="etiqueta">Celular:</div>
+                        <input type="text" name="celular" id="celular" class="form-control" value="{{ datos.telefono }}"
+                            maxlength="10" minlength="7" onkeypress="soloNumeros(event)" required>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="fila">
+            <div class="titulo">
+                <div class="numero-circulo">2</div>
+                <h5>Datos de facturación</h5>
+            </div>
+            <div class="agrupacion-datos d-flex justify-content-center">
+                <div style="width: 500px;">
+                    <div class="productos">
+                        <div>Productos seleccionados de la empresa "Zentral Coffee":</div>
+                        <table class="tabla-detalle-items">
+                            <thead>
+                                <th>#</th>
+                                <th>Producto</th>
+                                <th class="text-center">Cantidad</th>
+                                <th class="text-right">Total</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>{{ datos.nombre_producto }}</td>
+                                    <td class="text-center">{{ datos.cantidad }}</td>
+                                    <td class="text-right">$ {{ datos.precio }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="resumen">
+                        <div class="valor"><strong>SubTotal:</strong> $ {{ datos.subtotal }}</div>
+                        <div class="valor"><strong>Costo de envío:</strong> $ {{ datos.costo_envio }}</div>
+                        <div class="valor"><strong>Total:</strong> $ {{ datos.total }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="fila">
+            <div class="titulo">
+                <div class="numero-circulo">3</div>
+                <h5>Método de pago</h5>
+            </div>
+            <div class="agrupacion-datos d-flex justify-content-center">
+                <div class="with-form">
+                    <select id="metodo_pago" name="metodo_pago" class="form-control opciones" style="width: 100%;">
+                        <option value="Default" selected disabled>Seleccione el método de pago</option>
+                        <option value="Depósito" id="deposito">Depósito bancario</option>
+                        <option value="Efectivo">Pago en efectivo</option>
+                    </select>
+                    {% include 'pago-deposito.html' %}
+                    {% include 'pago-efectivo.html' %}
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="enviar_pedido" data-backdrop="static" data-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">¡Felicitaciones!</h5>
+                    </div>
+                    <div class="modal-body">
+                        <p>Gracias por preferirnos, revisaremos tu compra, tu producto te llegará en breve.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="btn-aceptar" class="btn btn-secondary">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+{% endblock content %}
+
+{% block js %}
+<script>
+    $(document).ready(function () {
+
+        $('#pago-deposito').hide();
+        $('#pago-efectivo').hide();
+        $('#realizar-pedido-deposito').hide();
+
+        $('#metodo_pago').change(function (e) {
+            let valor = $('#metodo_pago').val();
+            if (valor == 'Depósito') {
+                deposito();
+            } else if (valor == 'Efectivo') {
+                efectivo();
+            }
+        });
+
+        function deposito() {
+            if (!($('#pago-efectivo').is(':hidden'))) {
+                $('#pago-efectivo').hide(300);
+            }
+            var inputs = document.getElementsByClassName('input-requerido');
+            for (var i = 0; i < inputs.length; i++) {
+                inputs[i].setAttribute('required', '');
+            }
+            $('#pago-deposito').show(300);
+        }
+
+        function efectivo() {
+            if (!($('#pago-deposito').is(':hidden'))) {
+                $('#pago-deposito').hide(300);
+            }
+            var inputs = document.getElementsByClassName('input-requerido');
+            for (var i = 0; i < inputs.length; i++) {
+                inputs[i].removeAttribute('required');
+            }
+            $('#pago-efectivo').show(300);
+        }
+
+        $('#subir-deposito').change(function () {
+
+            var archivo = this.files[0];
+            var archivoImagen = archivo.type;
+            var extension = ['image/jpeg', 'image/png', 'image/jpg']
+
+            if (!((archivoImagen == extension[0]) || (archivoImagen == extension[1]) || (
+                    archivoImagen == extension[2]))) {
+                $('#imagen-erronea').modal('show');
+                $('#subir-deposito').val('');
+                return false;
+            }
+
+            $('#realizar-pedido-deposito').show(300);
+        });
+
+        $('#frmPedidos').on('submit', function (e) {
+            e.preventDefault();
+            let formulario = new FormData($('#frmPedidos').get(0));
+            formulario.append('id_producto', '{{datos.id_producto}}')
+            formulario.append('cantidad', '{{datos.cantidad}}')
+
+            $.ajax({
+                type: "POST",
+                url: "{% url 'registrar_pedido' %}",
+                data: formulario,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    $('#enviar_pedido').modal('show');
+                    $('#btn-aceptar').click(function () {
+                        window.location = "{% url 'index' %}";
+                    });
+                },
+                error: function (response) {
+                    $('#enviar_pedido').modal('hide');
+                }
+            });
+        });
+    });
+</script>
+<script src="{% static 'js/global/validaciones.js' %}"></script>
+{% endblock js %}

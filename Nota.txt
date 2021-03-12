@@ -1,0 +1,150 @@
+****** Colocar argumentos necesarios ********************
+Se cambio el modelo de Usuario, en el campo credenciales lo cual se añadio encriptación para la contraseña, 
+cada uno de ustedes deben descargar o intalar el paquete para la encriptación, lo cual esta en el archivo 
+requeriments.txt, ustedes deben ejecutar el comando.
+pip install -r requeriments.txt -- Si tienen django global
+pipenv install -r requeriments.txt -- Si tienen entorno virtual
+si utilizan virtualenv también funciona, solo tienen que intalar los paquetes.
+
+El paquete que se instalo se llama "django-fernet-fields" y puenden buscar más información en la siguiente 
+url = https://django-fernet-fields.readthedocs.io/en/latest/
+Para desencriptarlo no hace falta aplicar alguna función o algo por el estilo, lo que deben hacer es llamar al usuario.credenciales
+y automaticamente lo desencripta. También hay varias maneras para hacer pero eso queda criterios para ustedes. Así
+como encriptar dos veces para que sea más segura.
+Para ver la desencriptación, ejecuten el servidor e ir a la siguiete url http://127.0.0.1:8000/error404
+Y pueden ver como se desencripta, en el archivo Global/templates/components/error404.html
+
+Posdata ir a la carpeta Modelos/fixtures y lean las instrucciones.
+
+
+# --- # --- # --- # DEPLOY # --- # --- # --- #
+
+PASOS:
+##### Instalación de las librerías #####
+1.- Instalar Gunicorn: un servidor HTTP WSGI de Python para UNIX
+    #Sirve para poder correr comando python en el despliegue
+    pip install gunicorn
+
+2.- Instalar el driver para el gestor de base de datos PostgreSQL
+    pip install psycopg2==2.8.6
+
+3.- Conexion entre la aplicacion y el gestor bd
+    pip install dj-database-url
+
+4.- Iniciar el servidor: variables de entorno
+    pip install python-decouple
+
+5.- Instalar libreria para soportar archivos estaticos en producción
+    #Django no soporta trabajar con archivos estáticos en producción
+    #por lo que hay que instalar la siguiente librería:
+    pip install whitenoise
+
+6.- Generar archivo requirements: contendrá todas las dependencias
+    pip freeze > requirements.txt
+
+
+##### Configurar el proyecto #####
+6.- Abrir archivo setting
+7.- Cambiar de modo desarrollo a producción
+    DEBUG = False
+
+8.- Asignar host válidos para el proyecto
+    ALLOWED_HOSTS = ['*']     #con '*' estas permitiendo cualquier host
+
+9.- Configurar base de datos
+    #Comenta la conexión que tenías y pon debajo la nueva forma de conexión
+    #Note que DATABASE_URL es una variable de entorno en Heroku que contiene
+    #la url a la base de datos a usar.
+    
+    import dj_database_url
+    from decouple import config
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=config('DATABASE_URL')
+        )
+    }
+
+10.- Trabajar con los archivos estáticos
+    #Agregar al final del archivo setting.py
+
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATIC_URL = '/static/'
+
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, 'static'),
+    )
+
+11.- Agregar whitenoise a la lista de MIDDLEWARE
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+
+12.- Agregar al final del setting lo siguiente
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+13.- Agregar al urls.py lo siguiente
+    from django.conf import settings
+    from django.conf.urls.static import static
+
+14.- En el mismo archivo agregar en el urlpatterns
+    + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+15.- Crear una carpeta static en la raíz (al mismo nivel que el manage.py)
+
+16.- Crear el archivo Procfile en el directorio raíz (EmprendeMacara/)
+    # Este archivo nos servirá para poder correr comando como por ejemplo las migraciones.
+    # Este nombre tiene que ser igual al proyecto local.
+    web: gunicorn EmprendeMacara.wsgi
+
+
+##### Configurar Heroku para subir el proyecto #####
+1.- Autenticarse: al escribir el siguiente comando se abre una pestaña para loguearse.
+    una vez logueado se visualizará en la consola el correo
+    $ heroku login
+
+2.- Crear el proyecto en Heroku
+    $ heroku create EmprendeMacara
+
+3.- Agregar todo al repositorio Heroku
+    $ git add --all
+    $ git commit -m "mensaje"
+
+4.- Ligar el repositorio a la app de Heroku
+    $ heroku git:remote -a EmprendeMacara
+
+5.- Crear la base de datos en Heroku
+    $ heroku addons:create heroku-postgresql:hobby-dev
+
+6.- Subir el proyecto al repositorio
+    # Esto hará:
+        * instalar todos los requerimientos (requirements.txt)
+        * se crea el entorno para producción
+        * se compilan los archivos estaticos
+    
+    $ git push -u heroku master
+
+    #Si tienes problemas al desplegar por COLLECTSTATIC, desactivalos con $ heroku config:set DISABLE_COLLECTSTATIC=1
+
+7.- Ejecutar las migraciones a la base de datos de heroku
+    $ heroku run python manage.py migrate
+
+8. Configuracion de tipos de dyno (Si en Resouces / Dynos no te aparece nada, es porque no pusiste el Procfile)
+    # Escalar el tamaño de un dyno
+    $ heroku ps:scale web=1
+    
+    # Escalar el tipo de proceso
+    $ heroku ps:scale worker=1
+
+    #Consultar los dynos
+
+
+8.- Abrir el sistema en el navegador
+    $ heroku open
+
+
+Para acceder al shell de python en Heroku lo hacemos de la siguiente manera:
+$ heroku run python manage.py shell
+>>>> _
+
+
+# Si estas usando variable de entorno que no existe en el .env, debes crearla, ejemplo:
+$ heroku config:get DATABASE_URL -s  >> .env
+DATABASE_URL=postgres://hhqolnlbgbktah:f07d1800fbafcae0522f231d8e32e6a056e34c15a89eac5b0d60efb3fbfeb62c@ec2-34-230-167-186.compute-1.amazonaws.com:5432/d32b7r5rjpr68oCONFIG-VAR-NAME=

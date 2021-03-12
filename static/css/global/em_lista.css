@@ -1,0 +1,104 @@
+.text-truncation-hu {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+}
+.ptb-2 {
+    padding: 0.5rem 0;
+}
+
+.ptb-4 {
+    padding: 1.5rem 0;
+}
+
+.text-truncation-hu-2 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+
+.text-truncation-hu-3 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+}
+
+.text-card {
+    text-decoration: none !important;
+    color: unset !important;
+}
+
+.card-height {
+    background-color: gainsboro;
+    height: 200px;
+}
+
+.card-content {
+    padding: 10px;
+}
+
+.card-flex {
+    display: grid;
+    gap: 1em;
+    grid-template-rows: auto;
+}
+
+.card-hover:hover {
+    background: var(--color_verde);
+    color: #f3f3f3;
+    transition: ease-in-out 0.4s;
+}
+
+.modal-body strong{
+    font-weight: 645;
+}
+.modal-body table{
+    width: 100%;
+}
+.modal-body table tr,
+.modal-body .borde-inferior{
+    border-bottom: 1px solid #d2d2d2;
+}
+.modal-body table td,
+.modal-body .borde-inferior{
+    padding: 0.3rem 0rem;
+}
+
+@media (min-width: 1660px) {
+    .card-flex {
+        grid-template-columns: repeat(6, 1fr);
+    }
+}
+
+@media (max-width: 1660px) {
+    .card-flex {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+@media (max-width: 1360px) {
+    .card-flex {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 1010px) {
+    .card-flex {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 700px) {
+    .card-flex {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 400px) {
+    .card-flex {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

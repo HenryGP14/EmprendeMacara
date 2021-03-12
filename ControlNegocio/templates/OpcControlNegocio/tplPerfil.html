@@ -1,0 +1,807 @@
+{% extends 'adminNegocioMenu.html' %}
+{% load static%}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/controlnegocio/perfil.css' %}" />
+{% endblock css %}
+
+{% block content %}
+<div class="nombre-opcion">Perfil</div>
+
+<form id="formPerfil" name="formPerfil" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+</form>
+
+<div class="grid-columnas">
+    <div class="columna">
+        <div class="datos-empresa">
+            <h5>Datos de la empresa</h5>
+
+            <div class="fila">
+                <div class="etiqueta">Nombre:</div>
+                <div class="datos">
+                    <input class="form-control txt-input" id="txtEmpresa" name="txtEmpresa" type="text"
+                        form="formPerfil" placeholder="Nombre de la empresa" value="{{unEmpresa.nom_empresa}}"
+                        maxlength="50" required>
+                </div>
+            </div>
+
+            <div class="fila">
+                <div class="etiqueta">RUC/CI:</div>
+                <div class="datos">
+                    <input class="form-control txt-input" id="txtRuc_ci" name="txtRuc_ci" type="text" form="formPerfil"
+                        placeholder="RUC o Cédula de la empresa" value="{{unEmpresa.ruc}}" minlength="10" maxlength="13"
+                        required>
+                </div>
+            </div>
+
+            <div class="fila">
+                <div class="etiqueta">Actividad comercial:</div>
+                <div class="datos">
+                    <select class="form-control txt-input" id="cmbActComerc" name="cmbActComerc" form="formPerfil">
+                        {% for act in actividadesCom %}
+                        {% if unEmpresa.activi_comercial.id == act.id %}
+                        <option selected value="{{act.id}}">{{act.nombre}}</option>
+                        {% else %}
+                        <option value="{{act.id}}">{{act.nombre}}</option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="fila">
+                <div class="etiqueta">Correo:</div>
+                <div class="datos">
+                    <input class="form-control txt-input" id="txtCorreo" name="txtCorreo" type="email" form="formPerfil"
+                        placeholder="Correo de la empresa" value="{{unEmpresa.correo}}" maxlength="75" required>
+                </div>
+            </div>
+
+            <div class="fila">
+                <div class="etiqueta">Dirección:</div>
+                <div class="datos">
+                    <input class="form-control txt-input" id="txtDireccion" name="txtDireccion" type="text"
+                        form="formPerfil" maxlength="150" placeholder="Dirección de la empresa"
+                        value="{{unEmpresa.direccion}}" required>
+                </div>
+            </div>
+
+            <div class="fila">
+                <div class="etiqueta">Slogan:</div>
+                <div class="datos">
+                    <textarea class="form-control txt-input" id="txtSlogan" name="txtSlogan" rows="6" form="formPerfil"
+                        maxlength="600" required>{{unEmpresa.slogan}}</textarea>
+                </div>
+            </div>
+
+            <div class="fila">
+                <div class="etiqueta">Descripción:</div>
+                <div class="datos">
+                    <textarea class="form-control txt-input" id="txtDescripcion" name="txtDescripcion" rows="6"
+                        form="formPerfil" required>{{unEmpresa.descripcion}}</textarea>
+                </div>
+            </div>
+
+            <div class="fila">
+                <div class="etiqueta">Políticas:</div>
+                <div class="datos">
+                    <textarea class="form-control txt-input" id="txtPoliticas" name="txtPoliticas" rows="6"
+                        form="formPerfil" maxlength="600" required>{{unEmpresa.politicas}}</textarea>
+                </div>
+            </div>
+
+            <div class="fila">
+                <div class="etiqueta">Forma de venta:</div>
+                <div class="datos">
+                    <textarea class="form-control txt-input" id="txtFormaVenta" name="txtFormaVenta" rows="6"
+                        form="formPerfil" maxlength="600" required>{{unEmpresa.forma_venta}}</textarea>
+                </div>
+            </div>
+
+            <div class="fila">
+                <div class="etiqueta">Forma de pago:</div>
+                <div class="datos">
+                    <textarea class="form-control txt-input" id="txtFormaPago" name="txtFormaPago" rows="6"
+                        form="formPerfil" maxlength="600" required>{{unEmpresa.forma_pago}}</textarea>
+                </div>
+            </div>
+
+            <div class="fila">
+                <div class="etiqueta">Precio de envio:</div>
+                <div class="datos">
+                    <input type="number" class="form-control txt-input" id="txtCostoEnvio" name="txtCostoEnvio"
+                        form="formPerfil" min="0" max="5" step=".01" autocomplete="off"
+                        value="{{unEmpresa.costo_envio}}" required>
+                </div>
+            </div>
+
+            <div class="fila">
+                <div class="etiqueta">Horario de atención:</div>
+                <div class="datos">
+                    <input type="time" class="form-control hora" id="txtHoraInicio" name="txtHoraInicio"
+                        form="formPerfil" value="{{unEmpresa.inicio_atencion}}" required />
+                    <input type="time" class="form-control hora" id="txtHoraFin" name="txtHoraFin" form="formPerfil"
+                        value="{{unEmpresa.fin_atencion}}" required />
+                </div>
+            </div>
+
+            <div class="fila">
+
+            </div>
+
+
+        </div>
+    </div>
+    <div class="columna">
+        <div class="portada">
+            <div class="titulo">
+                <h5>Foto de perfil</h5>
+                <label for="imgFotoPerfil" class="btn btn-primary"><i class="fas fa-cog"></i></label>
+                <input class="btn btn-success btn-sm" type="file" name="imgFotoPerfil" id="imgFotoPerfil" form="formPerfil"
+                    accept="image/jpeg,image/png" onchange="previewImagenP(this);">
+            </div>
+            <div class="img-perfil">
+                {% if unEmpresa.perfil_foto %}
+                <img id="fotoPerfil" src="{{ unEmpresa.perfil_foto.url }}" class="img-thumbnail img-fluid" name="fotoPerfil"
+                    form="formPerfil">
+                {% else %}
+                <img id="fotoPerfil" src="" class="img-thumbnail img-fluid" name="fotoPerfil" form="formPerfil">
+                {% endif %}
+            </div>
+            <script>
+                if ($("#fotoPerfil").attr("src") == "") {
+                    $(".img-perfil").prepend(
+                        '<div class="alert alert-warning alerta-sin-perfil">La empresa no cuenta con una imagen de perfil</div>'
+                    )
+                }
+            </script>
+        </div>
+        <div class="portada">
+            <div class="titulo">
+                <h5>Foto de portada</h5>
+                <label for="imgFoto" class="btn btn-primary"><i class="fas fa-cog"></i></label>
+                <input class="btn btn-success btn-sm" type="file" name="imgFoto" id="imgFoto" form="formPerfil"
+                    accept="image/jpeg,image/png" onchange="previewImagen(this);">
+            </div>
+            <div class="img-portada">
+                {% if unEmpresa.ruta_foto %}
+                <img id="foto" src="{{ unEmpresa.ruta_foto.url }}" class="img-thumbnail img-fluid" name="foto"
+                    form="formPerfil">
+                {% else %}
+                <img id="foto" src="" class="img-thumbnail img-fluid" name="foto" form="formPerfil">
+                {% endif %}
+            </div>
+            <script>
+                if ($("#foto").attr("src") == "") {
+                    $(".img-portada").prepend(
+                        '<div class="alert alert-warning alerta-sin-portada">La empresa no cuenta con una imagen de portada</div>'
+                    )
+                }
+            </script>
+        </div>
+        <div class="carousel-empresa">
+            <div class="titulo">
+                <h5>Foto del carousel</h5>
+                <form class="was-validated" id="formFoto" name="formFoto" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <label for="imgFotoCarousel" class="btn btn-primary">Subir foto</label>
+                    <input class="btn btn-success btn-sm" type="file" name="imgFotoCarousel" id="imgFotoCarousel"
+                        accept="image/jpeg,image/png">
+                </form>
+            </div>
+
+            <div class="imagenes-carousel">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <div id="fotos" class="carousel-inner">
+                        {% for foto in fotos %}
+                        <div id="foto{{foto.id}}" class="carousel-item">
+                            <a class="btn btn-xs btn-danger text-white float-right"
+                                href="javascript:deleteFoto('{{foto.id}}');"><i class="fa fa-trash"
+                                    aria-hidden="true"></i></a>
+                            <div class="content-img-carrusel">
+                                <img id="foto{{foto.id}}" src="media/{{ foto.ruta_foto }}"
+                                    class="img-thumbnail img-fluid fotoCarousel">
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <script>
+                        if ($("#fotos .carousel-item").length > 0) {
+                            document.getElementById("fotos").firstElementChild.className = 'carousel-item active'
+                        } else {
+                            $("#carouselExampleIndicators").prepend(
+                                '<div class="alert alert-warning alerta-sin-portada">La empresa no cuenta con imágenes para el carousel</div>'
+                            )
+                        }
+                    </script>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
+                        style="margin-top: 35px;" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button"
+                        style="margin-top: 35px;" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-4">
+        <h5 class="w-100">Teléfonos</h5>
+        <section class="table-responsive">
+            <div class="fila">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalTelefono">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Añadir teléfono
+                </button>
+            </div>
+
+            <table id="tableTelefonos" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Teléfono</th>
+                        <th style="width: 14%;">
+                            Acción
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="tableTelefono-body">
+                    {% for telefono in unEmpresa.telefonos.all %}
+                    <tr class="telefono" id="{{telefono.telefono}}">
+                        <td>{{telefono.telefono}}</td>
+                        <td><a class="btn btn-xs btn-danger text-white"
+                                href="javascript:deleteTelefo('{{telefono.telefono}}');"><i class="fa fa-trash"
+                                    aria-hidden="true"></i></a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+
+    <div class="col-sm-8">
+        <div>
+            <h5 class="w-100">Cuentas Bancarias</h5>
+            <div class="fila">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalCuentas">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Añadir cuenta
+                </button>
+            </div>
+            <div class="table-responsive">
+                <table id="tableCuentas" class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Entidad</th>
+                            <th>Tipo</th>
+                            <th>Número</th>
+                            <th>Razón social</th>
+                            <th style="width: 14%;">
+                                Acción
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableCuentas-body">
+                        {% for cuenta in unEmpresa.cuentas_bancarias.all %}
+                        <tr class="numCuenta" id="{{cuenta.numero}}">
+                            <td class="entidad" id="{{cuenta.entidad}}">{{cuenta.entidad}}</td>
+                            <td class="tipo_cuenta" id="{{cuenta.tipo_cuenta}}">{{cuenta.tipo_cuenta}}</td>
+                            <td class="numero" id="{{cuenta.numero}}">{{cuenta.numero}}</td>
+                            <td class="razon_social" id="{{cuenta.razon_social}}">{{cuenta.razon_social}}</td>
+                            <td><a class="btn btn-xs btn-danger text-white"
+                                    href="javascript:deleteCuenta('{{cuenta.numero}}');"><i class="fa fa-trash"
+                                        aria-hidden="true"></i></a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="form-group justify-content-center">
+    <section class="col-sm-12" style="text-align: center;">
+        <button type="submit" class="btn btn-success" id="btnGuardar" form="formPerfil">
+            <i class="fas fa-save" aria-hidden="true"></i> Guardar
+        </button>
+    </section>
+</section>
+
+<div class="modal fade" id="modalCuentas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Añadir cuenta bancaria</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="w-100 p-3">
+                        <div class="pb-1">Entidad bancaria</div>
+                        <select name="entidad_bancaria" id="entidad_bancaria" class="form-control">
+                            <option value="default" selected disabled>-- Seleccione un banco --</option>
+                            <option value="Banco Bolivariano">Banco Bolivariano</option>
+                            <option value="Banco de Loja">Banco de Loja</option>
+                            <option value="Banco del Pacífico">Banco del Pacífico</option>
+                            <option value="Banco del Pichincha">Banco del Pichincha</option>
+                            <option value="Banco Finca">Banco Finca</option>
+                            <option value="Banco Guayaquil">Banco Guayaquil</option>
+                            <option value="Banco Internacional">Banco Internacional</option>
+                            <option value="Banco Solidario">Banco Solidario</option>
+                            <option value="BanEcuador">BanEcuador</option>
+                        </select>
+                    </div>
+                    <div class="w-100 p-3">
+                        <div class="pb-1">Tipo de cuenta</div>
+                        <select name="tipo_cuenta" id="tipo_cuenta" class="form-control">
+                            <option value="default" selected disabled>-- Seleccione un tipo --</option>
+                            <option value="Cuenta Corriente">Cuenta Corriente</option>
+                            <option value="Cuenta de Ahorro">Cuenta de Ahorro</option>
+                            <option value="Cuenta de Ahorro Programado">Cuenta de Ahorro Programado</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="w-100 p-3">
+                        <div class="pb-1">Razón social</div>
+                        <input type="text" class="form-control" id="txtTitular" id="txtTitular" maxlength="50"
+                            placeholder="Ingrese el titular de la cuenta" autocomplete="off">
+                    </div>
+                    <div class="w-100 p-3">
+                        <div class="pb-1">Número de cuenta</div>
+                        <input type="text" class="form-control" id="txtNumCuenta" name="txtNumCuenta" minlength="10"
+                            maxlength="10" placeholder="Ingrese el número de la cuenta"
+                            onkeypress="javascript:soloNumeros(event);" autocomplete="off">
+                    </div>
+                </div>
+                <div class="row float-right pr-3">
+                    <button type="button" id="btnAddCuenta" class="btn btn-success">
+                        Añadir
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="modalTelefono" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Añadir teléfono</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="w-100 p-3">
+                        <div class="pb-1">Teléfono</div>
+                        <input type="text" class="form-control" name="txttelefono" id="txttelefono"
+                            placeholder="Ingrese un número" maxlength="10" minlength="7"
+                            onkeypress="javascript:soloNumeros(event);" autocomplete="off">
+                    </div>
+                </div>
+                <div class="row float-right pr-3">
+                    <button type="button" id="btnAddTelefono" class="btn btn-success">
+                        Añadir
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+
+{% block js2 %}
+
+<script>
+    //Evento click para añadir un teléfono
+    $("#btnAddTelefono").click(function () {
+        txttelefono = $("#txttelefono").val();
+        if (txttelefono.length == 7 | txttelefono.length == 10) {
+            if ($("#tableTelefono-body tr").length < 3) {
+                // Verifica que no existan números repetidos
+                if (validaNumRepe(txttelefono)) {
+                    row = '<tr class="telefono" id="' + txttelefono + '">' +
+                        '<td> ' + txttelefono + ' </td>' +
+                        '<td><a class="btn btn-xs btn-danger text-white" href="javascript:deleteTelefo(' + "'" +
+                        txttelefono + "'" + ');"><i class="fa fa-trash" aria-hidden="true"></i></a></td>' +
+                        '</tr>';
+                    document.querySelector("#txttelefono").value = ""
+                    $('#modalTelefono').modal('hide');
+                    $("#tableTelefonos tbody").prepend(row);
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        text: 'El número de teléfono ya existe, por favor ingrese un número diferente'
+                    })
+                }
+            } else {
+                Swal.fire({
+                    icon: 'info',
+                    text: 'Ya completó el número máximo de ingreso de números de teléfonos'
+                })
+            }
+        } else {
+            Swal.fire({
+                icon: 'warning',
+                text: 'El número de teléfono debe tener 7 o 10 dígitos'
+            })
+        }
+    });
+
+    //Función que verifica que no existan número de teléfonos repetidos
+    function validaNumRepe(telefono) {
+        var bandera = true
+        $('.telefono').each(function () {
+            if (telefono == $(this).attr('id')) {
+                bandera = false;
+            }
+        });
+        return bandera;
+    }
+
+    // Función que muestra un mensaje de confirmación para la eliminación de un número de teléfono
+    function deleteTelefo(txttelefono) {
+        swal({
+            text: "¿Desea eliminar el número de teléfono " + txttelefono + "?",
+            icon: "info",
+            buttons: ['NO', 'YES'],
+            dangerMode: true
+        }).then((value) => {
+            // Si es true, significa que respondió SI
+            if (value == true) {
+                $("#" + txttelefono).remove();
+                Swal.fire({
+                    icon: 'success',
+                    text: 'Número de teléfono eliminado'
+                })
+            }
+        });
+    }
+
+    // Evento click para añadir una cuenta bancaria
+    $("#btnAddCuenta").click(function () {
+        txtNumCuenta = $("#txtNumCuenta").val();
+        if ($("#entidad_bancaria option:selected").val() != "default") {
+            if ($("#tipo_cuenta option:selected").val() != "default") {
+                if ($("#txtTitular").val() != "") {
+                    // Verifica que no existan números de cuentas bancarias repetidos
+                    if (txtNumCuenta.length == 10) {
+                        if (validaCuenta(txtNumCuenta)) {
+                            row = '<tr class="numCuenta" id="' + txtNumCuenta + '">' +
+                                '<td class="entidad" id="' + $("#entidad_bancaria option:selected").val() +
+                                '">' + $("#entidad_bancaria option:selected").val() + '</td>' +
+                                '<td class="tipo_cuenta" id="' + $("#tipo_cuenta option:selected").val() +
+                                '">' + $("#tipo_cuenta option:selected").val() + '</td>' +
+                                '<td class="numero" id="' + txtNumCuenta + '">' + txtNumCuenta + '</td>' +
+                                '<td class="razon_social" id="' + $("#txtTitular").val() + '">' + $(
+                                    "#txtTitular").val() + '</td>' +
+                                '<td><a class="btn btn-xs btn-danger text-white" href="javascript:deleteCuenta(' +
+                                "'" + txtNumCuenta + "'" +
+                                ');"><i class="fa fa-trash" aria-hidden="true"></i></a></td>' +
+                                '</tr>';
+                            document.querySelector("#txtNumCuenta").value = ""
+                            document.querySelector("#txtTitular").value = ""
+                            $('#modalCuentas').modal('hide');
+                            $("#tableCuentas tbody").prepend(row);
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                text: 'El número de cuenta ya existe, por favor ingrese un número diferente'
+                            })
+                        }
+                    } else {
+                        Swal.fire({
+                            icon: 'warning',
+                            text: 'El número de cuenta debe tener 10 dígitos'
+                        })
+                    }
+                } else {
+                    Swal.fire({
+                        icon: 'warning',
+                        text: 'Tiene que ingresar el titular de la cuenta'
+                    })
+                }
+            } else {
+                Swal.fire({
+                    icon: 'warning',
+                    text: 'Tiene que seleccionar un tipo de cuenta'
+                })
+            }
+        } else {
+            Swal.fire({
+                icon: 'warning',
+                text: 'Tiene que seleccionar una entidad bancaria'
+            })
+        }
+    });
+
+    // Función que verifica que no existan números de cuentas bancarias repetidos
+    function validaCuenta(numCuenta) {
+        var bandera = true
+        $('.numCuenta').each(function () {
+            if (numCuenta == $(this).attr('id')) {
+                bandera = false;
+            }
+        });
+        return bandera;
+    }
+
+    // Función que muestra un mensaje de confirmación para la eliminación de una cuenta bancaria
+    function deleteCuenta(txtNumCuenta) {
+        swal({
+            text: "¿Desea eliminar la cuenta bancaria " + txtNumCuenta + "?",
+            icon: "info",
+            buttons: ['NO', 'YES'],
+            dangerMode: true
+        }).then((value) => {
+            // Si es true, significa que respondió SI
+            if (value == true) {
+                $("#" + txtNumCuenta).remove();
+                Swal.fire({
+                    icon: 'success',
+                    text: 'Número de cuenta eliminado'
+                })
+            }
+        });
+    }
+
+    // Evento submit que se ejecuta cuando el usuario da click en Guardar
+    $(document).ready(function () {
+        $("#formPerfil").submit(function (e) {
+            e.preventDefault();
+            var parametros = new FormData($(this)[0]);
+            document.querySelector("#btnGuardar").setAttribute("disabled", false);
+            document.body.style.cursor = 'wait';
+            var txtRuc = $("#txtRuc_ci").val();
+            if (txtRuc.length == 10 | txtRuc.length == 13) {
+                if ($('#tableTelefono-body tr').length > 0) {
+                    var numTelefono = 0
+                    $('.telefono').each(function () {
+                        parametros.append("txtTelefono" + numTelefono, $(this).attr('id'));
+                        numTelefono++;
+                    });
+
+                    var entidad = 0
+                    $('.entidad').each(function () {
+                        parametros.append("entidad" + entidad, $(this).attr('id'));
+                        entidad++;
+                    });
+
+                    var tipo_cuenta = 0
+                    $('.tipo_cuenta').each(function () {
+                        parametros.append("tipo_cuenta" + tipo_cuenta, $(this).attr('id'));
+                        tipo_cuenta++;
+                    });
+
+                    var numero = 0
+                    $('.numero').each(function () {
+                        parametros.append("numero" + numero, $(this).attr('id'));
+                        numero++;
+                    });
+
+                    var razon_social = 0
+                    $('.razon_social').each(function () {
+                        parametros.append("razon_social" + razon_social, $(this).attr(
+                            'id'));
+                        razon_social++;
+                    });
+
+                    parametros.append("cantidadCuentas", entidad);
+                    parametros.append("cantidadTelefo", numTelefono);
+
+                    $.ajax({
+                        url: '{% url "editar-perfil" %}',
+                        type: 'POST',
+                        data: parametros,
+                        dataType: 'json',
+                        cache: false,
+                        contentType: false,
+                        processData: false
+                    }).done(function (data) {
+                        document.body.style.cursor = 'default';
+                        document.querySelector("#btnGuardar").removeAttribute("disabled")
+                        // Si el resultado es 1, la transacción fue realizada correctamente
+                        if (data.result == '1') {
+                            Swal.fire({
+                                icon: 'success',
+                                text: 'Datos de la empresa guardados correctamente'
+                            })
+                        } else if (data.result == '0') {
+                            Swal.fire({
+                                icon: 'error',
+                                text: 'Error al guardar los datos, por favor intente nuevamente'
+                            })
+                        } else {
+                            document.querySelector("#btnGuardar").removeAttribute(
+                                "disabled")
+                            Swal.fire({
+                                icon: 'error',
+                                text: data.result
+                            })
+                        }
+                    }).fail(function (jqXHR, textStatus, errorThrown) {
+                        document.body.style.cursor = 'default';
+                        document.querySelector("#btnGuardar").removeAttribute("disabled")
+                        Swal.fire({
+                            icon: 'error',
+                            text: 'Error al guardar los datos, por favor intente nuevamente'
+                        })
+                    }).always(function (data) {});
+                } else {
+                    document.body.style.cursor = 'default';
+                    document.querySelector("#btnGuardar").removeAttribute("disabled")
+                    Swal.fire({
+                        icon: 'warning',
+                        text: 'Es obligatorio ingresar al menos un número de teléfono'
+                    })
+                }
+            } else {
+                document.body.style.cursor = 'default';
+                document.querySelector("#btnGuardar").removeAttribute("disabled")
+                Swal.fire({
+                    icon: 'error',
+                    text: 'El número de ruc o cédula es inválido, debe tener una longitud de 10 o 13 dígitos'
+                })
+            }
+        });
+    });
+
+    // Función para crear una vista previa de la foto de portada seleccionada mediante el input file
+    function previewImagen(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#foto').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+            $(".img-portada .alerta-sin-portada").remove();
+        }
+    }
+
+     // Función para crear una vista previa de la foto de perfil seleccionada mediante el input file
+     function previewImagenP(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#fotoPerfil').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+            $(".img-perfil .alerta-sin-perfil").remove();
+        }
+    }
+
+    // Evento change que se ejecuta cuando el input file de seleccionar una foto para el carousel tiene un nuevo valor o se ingresó una nueva foto
+    $(document).ready(function () {
+        $("input[name=imgFotoCarousel]").change(function () {
+            if ($("#fotos div").length < 10) {
+                $("#formFoto").submit();
+            } else {
+                Swal.fire({
+                    icon: 'warning',
+                    text: 'Usted ha completado el número máximo de 10 fotos para el carousel'
+                })
+            }
+        });
+    });
+
+    // Evento submit que se ejecuta cuando el usuario acaba de selecciona una foto para el carousel
+    $(document).ready(function () {
+        $("#formFoto").submit(function (e) {
+            e.preventDefault();
+            var parametros = new FormData($(this)[0]);
+            document.body.style.cursor = 'wait';
+            $.ajax({
+                url: '{% url "save-foto-carousel" %}',
+                type: 'POST',
+                data: parametros,
+                dataType: 'json',
+                cache: false,
+                contentType: false,
+                processData: false
+            }).done(function (data) {
+                document.body.style.cursor = 'default';
+                // Si el resultado es 1, la transacción fue realizada correctamente
+                if (data.result == '1') {
+                    Swal.fire({
+                        icon: 'success',
+                        text: 'La foto fue guardada exisotamente'
+                    })
+                    location.href = '{% url "perfil" %}'
+                } else if (data.result == '0') {
+                    Swal.fire({
+                        icon: 'error',
+                        text: 'Existió un error, por favor intente nuevamente'
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        text: data.result
+                    })
+                }
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                document.body.style.cursor = 'default';
+                Swal.fire({
+                    icon: 'error',
+                    text: 'Existió un error, por favor intente nuevamente'
+                })
+            }).always(function (data) {});
+        });
+    });
+
+    // Función que muestra un mensaje de confirmación para la eliminación de una foto del carousel
+    function deleteFoto(id) {
+        if ($("#fotos img").length > 3) {
+            swal({
+                text: "¿Confirme la eliminación de la foto?",
+                icon: "info",
+                buttons: ['NO', 'YES'],
+                dangerMode: true
+            }).then((value) => {
+                // Si es true, significa que respondió SI
+                if (value == true) {
+                    document.body.style.cursor = 'wait';
+                    $.ajax({
+                        url: '{% url "delete-foto" %}',
+                        type: 'POST',
+                        data: {
+                            "id_foto": id,
+                            csrfmiddlewaretoken: "{{ csrf_token }}"
+                        },
+                        dataType: 'json',
+                    }).done(function (data) {
+                        document.body.style.cursor = 'default';
+                        // Si el resultado es 1, la transacción fue realizada correctamente
+                        if (data.result == '1') {
+                            document.getElementById("foto" + id).remove();
+                            primer_foto = document.getElementById("fotos").firstElementChild.className =
+                                "carousel-item active";
+                            Swal.fire({
+                                icon: 'success',
+                                text: 'La foto fue eliminada exisotamente'
+                            })
+                            location.href = '{% url "perfil" %}'
+                        } else if (data.result == '0') {
+                            Swal.fire({
+                                icon: 'error',
+                                text: 'Existió un error, por favor intente nuevamente'
+                            })
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                text: data.result
+                            })
+                        }
+                    }).fail(function (jqXHR, textStatus, errorThrown) {
+                        document.body.style.cursor = 'default';
+                        Swal.fire({
+                            icon: 'error',
+                            text: 'Existió un error, por favor intente nuevamente'
+                        })
+                    }).always(function (data) {});
+                }
+            });
+        } else {
+            Swal.fire({
+                icon: 'warning',
+                text: 'No se puede eliminar la foto, usted tiene que tener al menos tres fotos en el carousel'
+            })
+        }
+    }
+</script>
+{% endblock js2 %}

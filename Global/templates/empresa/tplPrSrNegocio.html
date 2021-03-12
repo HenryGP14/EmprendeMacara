@@ -1,0 +1,138 @@
+{% extends 'components/base.html' %}
+{% load static%}
+
+{% block title %}Producto y servicios - {% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/fanpage/fanpague_style.css' %}" />
+<link rel="stylesheet" href="{% static 'css/global/em_lista.css' %}">
+{% endblock css %}
+
+{% block navbar %}
+{% include 'components/nav.html' %}
+{% endblock navbar %}
+
+{% block content %}
+<div>
+	<div class="portada-flex liner">
+		<div class="pt-2">
+			<div>
+				<h4 class="ptb-2"><strong>{{ empresa.nom_empresa }}</strong></h4>
+				<div class="text-truncation-hu-3">
+					<p>{{ empresa.slogan }}</p>
+				</div>
+				<p>
+					<i class="fas fa-map-marker-alt"></i> <strong>Dirección:</strong>
+					{{ empresa.direccion }}
+				</p>
+				<p>
+					<i class="fas fa-at"></i> <strong>Email:</strong>
+					{{ empresa.correo }}
+				</p>
+				<p>
+					<i class="fas fa-phone"></i> <strong>Teléfono: </strong>
+					{% for telefono in empresa.telefonos.all %}
+					{{ telefono.telefono }},
+					{% endfor %}
+				</p>
+			</div>
+			<div class="d-lg-flex justify-content-lg-between d-sm-block pt-1 pr-2">
+				<div>
+					<p>
+						<strong>Atención:</strong>
+						{{ empresa.inicio_atencion|time:"H\h:i\m" }} -
+						{{ empresa.fin_atencion|time:"H\h:i\m" }}
+					</p>
+				</div>
+				<div>
+					<a href="{% url 'info_negocio' empresa.id %}"
+						class="btn btn-warning d-flex justify-content-center">Conocer más</a>
+				</div>
+			</div>
+		</div>
+		<div class="img-hu-color container-overflow" style="background-color: gainsboro;">
+			<div class="img-hu">
+				{% if empresa.ruta_foto %}
+				<img src="{{ empresa.ruta_foto.url }}" alt="" class="img-width" />
+				{% endif %}
+			</div>
+		</div>
+	</div>
+	<div>
+		{% if em_fotos_servicio.count != 0 %}
+		<div class="liner">
+			<div class="mb-3">
+				<h1>Servicio</h1>
+			</div>
+			<div class="card-flex">
+				{% for servicio in em_fotos_servicio %}
+				<div class="card mb-3">
+					{% if servicio.ruta_foto %}
+					<img src="{{ servicio.ruta_foto.url }}" class="card-img-top card-height" alt="" />
+					{% endif %}
+					<div class="card-content">
+						<h5 class="card-title">{{ servicio.nombre }}</h5>
+						<p class="card-text">{{ servicio.descripcion }} </p>
+					</div>
+					<div class="btn-position">
+						<a class="btn btn-success btn-position-end btn-servicio"
+							onclick="solictServicio('{{ servicio.nombre }}','{{ servicio.empresa.nom_empresa }}','{{ servicio.empresa.telefonos.all.0.telefono }}')">
+							Solicitar servicio
+						</a>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+		{% endif %}
+		{% if em_fotos_producto.count != 0 %}
+		<div>
+			<div class="mb-3">
+				<h1>Producto</h1>
+			</div>
+			<div class="card-flex">
+				{% for producto in em_fotos_producto %}
+				<div class="card">
+					{% if producto.ruta_foto %}
+					<img src="{{ producto.ruta_foto.url }}" class="card-img-top card-height" alt="" />
+					{% endif %}
+					<div class="card-content">
+						<h5 class="card-title">{{ producto.nombre }}</h5>
+						<p class="card-text">{{ producto.descripcion }} </p>
+						<div class="pr-precio">
+							<img src="{% static 'img/img_macara/logo_precio.png' %}" class="pr-img">
+							<span class="precio">
+								{{ producto.precio_unitario }}
+							</span>
+						</div>
+					</div>
+					<div class="btn-position">
+						<a href="{% url 'add-producto' producto.id %}" class="btn btn-success btn-position-end">
+							Añadir al carrito
+						</a>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+		{% endif %}
+	</div>
+</div>
+{% include 'components/modal.html' %}
+{% endblock content %}
+
+{% block js %}
+<script src="{% static 'js/global/modal.js'%}"></script>
+<script>
+	function solictServicio(nom_servicio, nom_empresa, num_empresa) {
+		get_modal("Solicitar un servicio", "Si quiere solicitar el servicio " +
+			"<strong>" + nom_servicio + "</strong> " +
+			"debe contactarse al negocio " +
+			"<strong>" + nom_empresa + "</strong> " +
+			"con el siguiente número de télefono " +
+			"<strong>" + num_empresa + "</strong>.",
+			'<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>',
+			'<button type="button" class="btn btn-success text-white" data-dismiss="modal">Aceptar</button>');
+	}
+</script>
+{% endblock js %}

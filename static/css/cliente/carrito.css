@@ -1,0 +1,102 @@
+.cart-container {
+    padding-top: 1.5rem;
+}
+
+.cart-container i {
+    color: var(--success);
+}
+
+.cart {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+}
+
+.cart i {
+    color: aliceblue;
+}
+
+.cart .btn-all {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.cart .content {
+    display: grid;
+    grid-template-columns: auto 400px;
+    padding: 10px;
+    border-top: solid 2px;
+    border-bottom: solid 2px;
+    border-color: #21903b;
+    margin-bottom: -2px;
+}
+
+.img-cart {
+    background-color: gainsboro;
+    width: 250px;
+    height: 200px;
+    margin-right: 25px;
+    border-style: groove;
+}
+
+.cart .content .description {
+    display: flex;
+}
+
+.cart .content .options {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.cart .options > div {
+    display: flex;
+    height: 40px;
+}
+
+.cart .btn-decrementar,
+.cart .btn-incrementar {
+    float: left;
+    background-color: var(--success);
+    height: 100%;
+    width: 40px;
+    color: aliceblue;
+    border: none;
+    font-weight: bold;
+}
+
+.cart .btn-decrementar:disabled,
+.cart .btn-incrementar:disabled {
+    background-color: rgb(163, 163, 163);
+}
+
+.cart .btn-decrementar:hover,
+.cart .btn-incrementar:hover {
+    background-color: #21903b;
+}
+
+.cart .btn-decrementar {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.cart .btn-incrementar {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.cart-imput {
+    float: left;
+    text-align: center;
+    height: 100%;
+    width: 100px;
+    outline: none;
+    border-radius: 0;
+    border-width: 1px;
+    border-left: none;
+    border-right: none;
+}
+
+.cart .handle {
+    margin-right: 10px;
+}

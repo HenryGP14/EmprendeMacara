@@ -1,0 +1,52 @@
+{% load static %}
+<ul class="navbar-nav nav ml-md-auto align-items-center navbar-responsivo">
+    <li class="nav-item active">
+        <a class="btn-light-nav" href="{% url 'index' %}" aria-current="true">Inicio<span
+                class="sr-only">(current)</span></a>
+    </li>
+
+    {% if request.session.usuario.esta_autenticado %}
+    <li class="nav-item nav-opc-carrito">
+        <a class="nav-opc-carrito btn-light-nav" href="{% url 'carrito' %}">
+            <i class="fas fa-shopping-cart mr-1"></i>
+            <span>{{ request.session.carrito|length }}</span>
+        </a>
+        <a class="nav-opc-carrito btn-light-nav" href="{% url 'pedidos' %}">
+            <i class=" fas fa-clipboard-check mr-2"></i>
+            Pedidos
+        </a>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="dropdown-toggle btn-light-nav" href="#" id="navbarDropdownMenuLink" role="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {% if request.session.usuario.perfil %}
+            <img src="{{ request.session.usuario.perfil }}" class="user-perfil">
+            {% else %}
+            <img src="{% static 'img/img_macara/user.png' %}" class="user-perfil">
+            {% endif %}
+            {{ request.session.usuario.nombre }}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item btn-drop-nav" href="{% url 'configuraciones' %}">
+                <i class="fas fa-cog mr-2"></i>
+                Configuración
+            </a>
+            <form action="{% url 'logout' %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn-drop-nav">
+                    <i class="fas fa-sign-out-alt mr-2"></i>
+                    Cerrar sesión
+                </button>
+            </form>
+        </div>
+
+    </li>
+    {% else %}
+    <li class="nav-item active">
+        <a class="m-0 btn-light" href="{% url 'registrar' %}">Regístrate</a>
+    </li>
+    <li class="nav-item">
+        <a class="m-0 btn-verde" href="{% url 'login' %}">Inicia sesión</a>
+    </li>
+    {% endif %}
+</ul>

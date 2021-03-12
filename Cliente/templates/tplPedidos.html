@@ -1,0 +1,226 @@
+{% extends 'components/base.html' %}
+{% load static %}
+
+{% block title %}Pedidos realizados - {% endblock title %}
+
+{% block navbar %}
+{% include 'components/nav.html' %}
+{% endblock navbar %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/global/em_lista.css' %}">
+<link rel="stylesheet" href="{% static 'css/global/dataTables.css' %}">
+{% endblock css %}
+
+{% block content %}
+<div class="container-report pt-4">
+    <h5>Lista de productos pedidos</h5>
+
+    {% if pedidos %}
+    <div class="pt-2 table-responsive">
+        <table id="detalles_compra" class="table">
+            <thead class="table-success">
+                <tr>
+                    <th>Nombre del producto</th>
+                    <th>Descripción del producto</th>
+                    <th>Tipo de pago</th>
+                    <th class="text-center" style="width: 20px;">Cantidad</th>
+                    <th class="text-center" style="width: 100px;">Precio unitario</th>
+                    <th class="text-center" style="width: 100px;">Estado</th>
+                    <th style="width: 200px;">Fecha de compra</th>
+                    <th class="text-center" style="width: 200px;">Detalles</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pedido in pedidos %}
+                <tr>
+                    <td>{{ pedido.detalles_venta.all.0.producto.nombre }}</td>
+                    {% if pedido.detalles_venta.all.0.producto.descripcion %}
+                    <td>
+                        <div class="text-truncation-hu">
+                            {{ pedido.detalles_venta.all.0.producto.descripcion }}
+                        </div>
+                    </td>
+                    {% else %}
+                    <td>
+                        <div class="text-truncation-hu">
+                            El poducto no cuenta con una descripción
+                        </div>
+                    </td>
+                    {% endif %}
+                    {% if pedido.detalles_venta.all.0.entidad_bancaria %}
+                    <td>
+                        <div class="text-truncation-hu">
+                            La compra se pago con transferencia bancaria
+                        </div>
+                    </td>
+                    {% else %}
+                    <td>
+                        <div class="text-truncation-hu">
+                            La compra se pago en efectivo
+                        </div>
+                    </td>
+                    {% endif %}
+                    <td class="text-center">{{ pedido.detalles_venta.all.0.cantidad }}</td>
+                    <td class="text-center">{{ pedido.detalles_venta.all.0.precio_unitario }}</td>
+                    <td class="text-center">{{ pedido.estado }}</td>
+                    <td>{{ pedido.fecha }}</td>
+                    <td class="p-0 d-flex justify-content-center">
+                        <button type="button" class="btn btn-danger click_modal" data-toggle="modal"
+                            data-target="#descripcion_modal" pedido_id="{{ pedido.id }}">
+                            Ver mas detalles
+                        </button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="alert alert-danger mt-3">
+        <span>
+            Por el momento no has realizado ningún pedido, recibisa nuestras categorias y pide un
+            <a href="{% url 'index' %}">producto aquí</a>
+        </span>
+    </div>
+    {% endif %}
+
+    <div class="modal fade" id="descripcion_modal" tabindex="-1" aria-labelledby="descripcion_modalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="descripcion_modalLabel">Detalles de la compra de "<span
+                            id="det_produto_name"></span>"</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td><strong>Nombre del producto:</strong></td>
+                                <td id="det_nombre"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <strong>Imagen del producto:</strong>
+                    <div class="borde-inferior">
+                        <p id="img_dest"></p>
+                        <img id="img_producto" style="width: 100%;">
+                    </div>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td><strong>Descripción del producto:</strong></td>
+                                <td id="det_descripcion"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Cantidad comprada:</strong></td>
+                                <td id="det_cantidad"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Precio del producto:</strong></td>
+                                <td id="det_precio"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Precio total del producto:</strong></td>
+                                <td id="det_precio_t"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Precio de envio:</strong></td>
+                                <td id="det_precio_envio"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Precio total del pedido:</strong></td>
+                                <td id="det_precio_total"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Estado del pedido:</strong></td>
+                                <td id="det_estado"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Fecha de compra:</strong></td>
+                                <td id="det_fecha"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Metodo de pago:</strong></td>
+                                <td id="det_pago"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div id="metodo_pago">
+                        <div class="borde-inferior"><strong>Número de transferencia: </strong><span
+                                id="det_num_transferencia"></span></div>
+                        <p><strong>Imagen de transferencia</strong></p>
+                        <div>
+                            <img id="img_transferencia" style="width: 100%;">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock content %}
+
+{% block js %}
+<script src="{% static 'js/global/dataTables.js' %}"></script>
+<script src="{% static 'js/global/dataTable_Bootstrap.js' %}"></script>
+<script src="{% static 'js/global/function.datatable.js' %}"></script>
+
+<script>
+    $('.click_modal').click(function () {
+        var id = $(this).attr('pedido_id');
+
+        $.ajax({
+            type: 'POST',
+            url: '{% url "detalles_pedidos" %}',
+            data: {
+                pedido_id: id,
+                csrfmiddlewaretoken: '{{ csrf_token }}'
+            },
+        }).done(function (d) {
+            console.log(d)
+            $('#det_produto_name').text(d.datos.prod_nombre);
+            $('#det_nombre').text(d.datos.prod_nombre);
+            if (d.datos.prod_img) {
+                $('#img_producto').show();
+                $('#img_producto').attr('src', d.datos.prod_img);
+                $('#img_dest').text(null);
+            } else {
+                $('#img_dest').text("El producto no contiene una imagen");
+                $('#img_producto').hide();
+            }
+            $('#det_descripcion').text(d.datos.prod_descripcion);
+            $('#det_cantidad').text(d.datos.prod_cantidad);
+            $('#det_precio').text("$ " + d.datos.prod_precio);
+            $('#det_precio_t').text("$ " + (d.datos.prod_precio * d.datos.prod_cantidad));
+            $('#det_precio_envio').text("$ " + d.datos.prec_envio);
+            $('#det_precio_total').text("$ " + ((d.datos.prod_precio * d.datos
+                .prod_cantidad) + parseFloat(d.datos.prec_envio)));
+            $('#det_estado').text(d.datos.prod_estado);
+            $('#det_fecha').text(d.datos.fecha);
+            if (d.datos.nom_banco) {
+                $('#metodo_pago').show();
+                $('#det_pago').text("Transferencia bancaria en el " +
+                    d.datos.nom_banco);
+                $('#det_num_transferencia').text(d.datos.num_deposito);
+                $('#img_transferencia').attr('src', d.datos.img_deposito)
+            } else {
+                $('#det_pago').text("El pedido se pago en efectivo");
+                $('#metodo_pago').hide();
+            }
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+
+        }).always(function (data) {
+
+        });
+    });
+</script>
+{% endblock js %}

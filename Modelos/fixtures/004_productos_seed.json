@@ -1,0 +1,661 @@
+[
+    {
+        "model": "Modelos.productos",
+        "pk": 1,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "Aliño casero 100% Macareño",
+            "empresa_id": 1,
+            "nombre": "Aliño casero",
+            "precio_unitario": 1.0,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 2,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "Aliño hecho en casa 100% natural",
+            "empresa_id": 2,
+            "nombre": "Aliño casero",
+            "precio_unitario": 0.9,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 3,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 3,
+            "nombre": "Teclados normales e inalámbricos",
+            "precio_unitario": 10.0,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 4,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 3,
+            "nombre": "Mouse normal e inalámbrico",
+            "precio_unitario": 10.0,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 5,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 3,
+            "nombre": "Tintas para Impresora originales y genéricas",
+            "precio_unitario": 5.0,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 6,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 3,
+            "nombre": "Flash memory USB",
+            "precio_unitario": 8.0,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 7,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 3,
+            "nombre": "SD Memorias para celular",
+            "precio_unitario": 7.0,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 8,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 3,
+            "nombre": "Wireless USB",
+            "precio_unitario": 10.5,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 9,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 3,
+            "nombre": "Route & Swich",
+            "precio_unitario": 40.0,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 10,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 3,
+            "nombre": "Reguladores de voltaje",
+            "precio_unitario": 60.0,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 11,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 3,
+            "nombre": "Ventiladores base para portátil",
+            "precio_unitario": 30.0,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 12,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 4,
+            "nombre": "Fomix cartulina gravado en madera letras 3D",
+            "precio_unitario": 0.5,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 13,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 4,
+            "nombre": "Señalización para locales",
+            "precio_unitario": 2.5,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+
+    {
+        "model": "Modelos.productos",
+        "pk": 14,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 5,
+            "nombre": "Bouquet de globos",
+            "precio_unitario": 2.5,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 15,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 5,
+            "nombre": "Rosas",
+            "precio_unitario": 0.5,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+
+    {
+        "model": "Modelos.productos",
+        "pk": 16,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 6,
+            "nombre": "Chocolates",
+            "precio_unitario": 0.5,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 17,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 6,
+            "nombre": "Peluches",
+            "precio_unitario": 5.5,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 18,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 6,
+            "nombre": "Globos",
+            "precio_unitario": 0.2,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 19,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 6,
+            "nombre": "Frutas",
+            "precio_unitario": 0.5,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 20,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 6,
+            "nombre": "Imágenes religiosas",
+            "precio_unitario": 2.5,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 21,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 6,
+            "nombre": "Libros religiosos",
+            "precio_unitario": 4.5,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 22,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 6,
+            "nombre": "Aceite usado en bautizos",
+            "precio_unitario": 4.5,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 23,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 6,
+            "nombre": "Hostias",
+            "precio_unitario": 3.5,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 24,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 6,
+            "nombre": "Vino",
+            "precio_unitario": 4.7,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+
+    {
+        "model": "Modelos.productos",
+        "pk": 25,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "Venta de Cofres mortuorios de metal y madera",
+            "empresa_id": 7,
+            "nombre": "Cofres mortuorios de metal y madera",
+            "precio_unitario": 180.0,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+
+    {
+        "model": "Modelos.productos",
+        "pk": 26,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 8,
+            "nombre": "Helados con frutas y queso",
+            "precio_unitario": 3.5,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 27,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 8,
+            "nombre": "Batidos",
+            "precio_unitario": 1.0,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 28,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 8,
+            "nombre": "Mollejitas",
+            "precio_unitario": 1.0,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 29,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 8,
+            "nombre": "Popcom",
+            "precio_unitario": 1.0,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 30,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 8,
+            "nombre": "Micheladas",
+            "precio_unitario": 1.0,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 31,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 8,
+            "nombre": "Jugos de mango",
+            "precio_unitario": 1.5,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+
+    {
+        "model": "Modelos.productos",
+        "pk": 32,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 10,
+            "nombre": "Albacora (Pescado)",
+            "precio_unitario": 2.5,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 33,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 10,
+            "nombre": "Calamar (Molusco)",
+            "precio_unitario": 3.5,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 34,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 10,
+            "nombre": "Plancha Cangrejo (Crustáceo)",
+            "precio_unitario": 7.0,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+
+    {
+        "model": "Modelos.productos",
+        "pk": 35,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 11,
+            "nombre": "Chaulafan",
+            "precio_unitario": 3.5,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+
+    {
+        "model": "Modelos.productos",
+        "pk": 36,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 12,
+            "nombre": "Arroz con menestra",
+            "precio_unitario": 2.5,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 37,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 12,
+            "nombre": "Plato de carne asada de res, pollo, chorizo e higadillas",
+            "precio_unitario": 4.5,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 38,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 12,
+            "nombre": "Caldo de pata",
+            "precio_unitario": 3.5,
+            "ruta_foto": null,
+            "visible": true
+        }
+    },
+
+    {
+        "model": "Modelos.productos",
+        "pk": 39,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 15,
+            "nombre": "Morocho",
+            "precio_unitario": 1.25,
+            "ruta_foto": "Productos_Servicios/zentral_coffee_00003.jpeg",
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 40,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 15,
+            "nombre": "Empanadas especiales",
+            "precio_unitario": 0.5,
+            "ruta_foto": "Productos_Servicios/zentral_coffee_00008.jpeg",
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 41,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 15,
+            "nombre": "Muchines de yuca con queso",
+            "precio_unitario": 0.5,
+            "ruta_foto": "Productos_Servicios/zentral_coffee_00005.jpeg",
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 42,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 15,
+            "nombre": "Tostadas",
+            "precio_unitario": 0.75,
+            "ruta_foto": "Productos_Servicios/zentral_coffee_00006.jpeg",
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 43,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 15,
+            "nombre": "Bolones de chicharrón mixtos",
+            "precio_unitario": 1.0,
+            "ruta_foto": "Productos_Servicios/zentral_coffee_00007.jpeg",
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 44,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "",
+            "empresa_id": 15,
+            "nombre": "Empanadas de verde con pollo",
+            "precio_unitario": 1.5,
+            "ruta_foto": "Productos_Servicios/zentral_coffee_00004.jpeg",
+            "visible": true
+        }
+    },
+
+    {
+        "model": "Modelos.productos",
+        "pk": 45,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "Crema de cacao natural",
+            "empresa_id": 17,
+            "nombre": "Crema de cacao",
+            "precio_unitario": 1.5,
+            "ruta_foto": "Productos_Servicios/agro_soto_00002.jpeg",
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 46,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "Conserva de ají",
+            "empresa_id": 17,
+            "nombre": "Conserva de ají",
+            "precio_unitario": 1.5,
+            "ruta_foto": "Productos_Servicios/agro_soto_00003.jpeg",
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 47,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "Granola premiun AgroSoto de 250g",
+            "empresa_id": 17,
+            "nombre": "Granola Premiun",
+            "precio_unitario": 2.0,
+            "ruta_foto": "Productos_Servicios/agro_soto_00004.jpeg",
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 48,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "Cóctel de cacao ecológico de 400ml",
+            "empresa_id": 17,
+            "nombre": "Cóctel de cacao ecológico de 400ml",
+            "precio_unitario": 5.0,
+            "ruta_foto": "Productos_Servicios/agro_soto_00005.jpeg",
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 49,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "Mermelada de maracuyá con pectina de cacao ecológico",
+            "empresa_id": 17,
+            "nombre": "Mermelada de maracuyá pequeña",
+            "precio_unitario": 3.0,
+            "ruta_foto": "Productos_Servicios/agro_soto_00006.jpeg",
+            "visible": true
+        }
+    },
+    {
+        "model": "Modelos.productos",
+        "pk": 50,
+        "fields": {
+            "cantidad": 15,
+            "descripcion": "Mermelada de maracuyá con pectina de cacao ecológico",
+            "empresa_id": 17,
+            "nombre": "Mermelada de maracuyá grande",
+            "precio_unitario": 3.5,
+            "ruta_foto": "Productos_Servicios/agro_soto_00007.jpeg",
+            "visible": true
+        }
+    }
+]

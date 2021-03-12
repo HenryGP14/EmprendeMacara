@@ -1,0 +1,39 @@
+{% extends 'tplAdminMenu.html' %}
+{% load static%}
+
+{% block js %}
+<script>
+    getEmpresas();
+</script>
+{% endblock js %}
+
+{% block content %}
+<div class="nombre-opcion" id="title">Lista de empresas</div>
+
+<form id="formEmpresas" name="formEmpresas" class="form-inline">
+    {% csrf_token %}
+    <section class="input-group mb-2">
+        <label for="cmbEstados" class="col-form-label mx-2">Estado:</label>
+        <section class="input-group-prepend">
+            <select class="form-control" id="cmbEstados" name="cmbEstados"
+                onchange="javascript:filterEmpresas();">
+                <option value="Habilitada">Habilitada</option>
+                <option value="Deshabilitada">Deshabilitada</option>
+            </select>
+        </section>
+    </section>
+    <section class="input-group mb-2">
+        <input id="txtBuscador" name="txtBuscador" type="search" class="form-control rounded mx-2" size="50" maxlength="50"
+            placeholder="Por empresa o gerente" required>
+        <section class="input-group-prepend">
+            <button class="btn btn-primary rounded" id="btnBuscar" type="submit">Buscar</button>
+            <button class="btn bg-light rounded mx-2" type="button" id="btnRefrescar" onclick="javascript:filterEmpresas();"><i class="fas fa-sync-alt"></i></button>
+        </section>
+    </section>
+</form>
+<section id="mensaje">
+</section>
+<div class="grid-notificaciones" id="empresas">
+</div>
+{% endblock %}
+

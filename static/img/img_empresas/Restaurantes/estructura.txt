@@ -1,0 +1,24 @@
+La estructura del las imagenes va ser la siguiente
+
+static
+    img
+        img_empresas
+            categoria_empresa
+                idEmpresa_nombre.jpg
+                idEmpresa_nombre_num.jpg
+
+/////Ejemplo
+static
+    img
+        img_empresas
+            Restaurantes
+                01_portada.jpg
+                01_carucel_01.jpg
+                01_carucel_02.jpg
+                ................
+                ................
+                25_portada.jpg
+                25_carucel_01.jpg
+                25_carucel_02.jpg
+                ................
+                ................

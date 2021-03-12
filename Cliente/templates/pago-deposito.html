@@ -1,0 +1,63 @@
+{% load static %}
+<div id="pago-deposito">
+
+    {% if datos.cuentas_bancarias %}
+
+    <div class="informacion-bancaria">
+        <div><strong>Puedes depositar a las siguientes cuentas bancarias:</strong></div>
+        {% for cuenta in datos.cuentas_bancarias %}
+        <div class="alert alert-success m-0 text-center" style="width: 100%;">
+            {{ cuenta.entidad }} - {{ cuenta.tipo_cuenta }}
+            <p>
+                <strong>N° </strong>{{ cuenta.numero }} - <strong>Titular: </strong>{{ cuenta.razon_social }}
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="upload-imagen">
+        <div>Valor del depósito:</div>
+        <input type="text" name="valor-deposito" class="form-control input-requerido" value="{{ datos.total }}"
+            placeholder="00,00" maxlength="20" minlength="1" pattern="(?:- ?)?\d+(?:,\d{2})?">
+
+        <div class="mt-3">Banco donde realizó el depósito:</div>
+        <select name="entidad-bancaria" class="form-control" required>
+            <option value="default" disabled>Seleccione una opción</option>
+            {% for cuenta in datos.cuentas_bancarias %}
+            <option value="{{ cuenta.entidad }}">{{ cuenta.entidad }}</option>
+            {% endfor %}
+        </select>
+
+        <div class="mt-3">Número de documento o transacción bancaria:</div>
+        <input type="text" name="num-documento" class="form-control input-requerido" placeholder="00000" maxlength="10"
+            minlength="4" onkeypress="soloNumeros(event)">
+
+        <div class="mt-3">Suba la imagen del depósito realizado</div>
+        <input type="file" name="img-deposito" id="subir-deposito" class="descripcion input-requerido">
+
+        <div class="modal fade" id="imagen-erronea" data-backdrop="static" data-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Advertencia</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="mensaje">El archivo que intenta subir no es una imagen, por favor verifique que el
+                            archivo sea png, jpg ó jpeg.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Acertar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-pedir-producto" id="realizar-pedido-deposito">Pedir mi producto</button>
+    {% else %}
+    <div>Ups! Esta empresa no ha agregado cuentas bancarias, puedes elegir pagar en efectivo.</div>
+    {% endif %}
+</div>

@@ -1,0 +1,47 @@
+<div class="modal fade" id="modalEditProducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content formEditProducto">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar producto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formEditarProducto" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="EditNombreProducto" class="col-form-label">Nombre:</label>
+                        <input type="text" class="form-control form-control-sm" id="EditNombreProducto"
+                            name="EditNombreProducto" placeholder="Ingrese su nombre" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="EditDescripcionProducto" class="col-form-label">Descripción:</label>
+                        <input type="text" class="form-control form-control-sm" id="EditDescripcionProducto"
+                            name="EditDescripcionProducto" placeholder="Ingrese la descripción" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="EditCantidadProducto" class="col-form-label">Cantidad:</label>
+                        <input type="number" class="form-control form-control-sm" id="EditCantidadProducto"
+                            name="EditCantidadProducto" value="0" min="0" max="9999" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtPrecUnit" class="col-form-label">Precio unitario:</label>
+                        <input type="number" class="form-control form-control-sm" id="EditPrecUnitProducto"
+                            name="EditPrecUnitProducto" value="0" min="0" max="9999" step=".01" autocomplete="off">
+                    </div>
+                    <img name="foto" class="img-thumbnail img-fluid foto" id="fotoEditProducto" style="display: block;">
+                    <label for="inputeditproducto" class="btn btn-success btnsubir">Subir foto</label>
+                    <input class="btn btn-success subirfoto" id="inputeditproducto" style="display: none;"
+                        name="inputeditproducto" type="file" accept="image/jpeg"
+                        onchange="previewimagenEditProducto(this);">
+                    <div class="modal-footer" style="width: 100%; justify-content: flex-start;">
+                        <div id="alertaCamposVaciosEditProductos" style="width: 100%;"></div>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-agregar">Guardar cambios del producto</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

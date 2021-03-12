@@ -1,0 +1,164 @@
+:root {
+    --color_azul_circulo: #5794ef;
+    --color_verde_claro: #daedde;
+}
+
+.contenedor {
+    width: 75%;
+    margin: 2rem auto;
+}
+.titulo-pagina {
+    padding: 1rem;
+    text-align: center;
+}
+
+.titulo {
+    display: flex;
+    align-items: center;
+    padding: 0.6rem;
+    border-bottom: 1px solid #333333;
+}
+
+.numero-circulo {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: var(--color_azul_circulo);
+    color: var(--color_blanco);
+    padding: 0.5rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+.titulo h5 {
+    padding: 0px;
+    margin: 0rem 0rem 0rem 0.7rem;
+}
+
+.agrupacion-datos {
+    margin: 1rem 2rem;
+}
+
+.agrupacion-datos .dato {
+    display: flex;
+    align-items: center;
+    margin: 0.5rem 0rem;
+}
+
+.dato .etiqueta {
+    width: 82px;
+    text-align: end;
+    margin-right: 1rem;
+}
+
+.informacion-bancaria {
+    width: 100%;
+}
+
+.form-control {
+    width: 100%;
+}
+
+.productos,
+.resumen {
+    margin: 0.5rem 0rem;
+    max-width: 510px;
+}
+
+.tabla-detalle-items {
+    margin: 0.9rem 0rem;
+    width: 100%;
+}
+.tabla-detalle-items th,
+.tabla-detalle-items td {
+    padding: 0.3rem 0.6rem;
+    font-weight: normal;
+}
+
+.tabla-detalle-items th {
+    background-color: var(--color_verde_claro);
+}
+
+.tabla-detalle-items tr {
+    border-top: 1px solid var(--color_verde);
+    border-bottom: 1px solid var(--color_verde);
+}
+
+.resumen .valor {
+    text-align: end;
+}
+
+.opciones {
+    margin: 0 auto;
+    margin-bottom: 1.2rem;
+}
+
+.btn-naranja {
+    color: var(--color_blanco);
+    background-color: #ed811b;
+    text-align: center;
+}
+
+.with-form {
+    width: 500px;
+}
+
+#pago-deposito,
+#pago-efectivo {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#pago-deposito .upload-imagen {
+    width: 100%;
+    margin-bottom: 1.4rem;
+}
+
+.informacion-bancaria,
+.informacion-pago {
+    margin-bottom: 1.2rem;
+    text-align: left;
+}
+
+.upload-imagen .imagen {
+    background-color: #6c757d;
+    height: 300px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.upload-imagen .imagen img {
+    height: 200px;
+    width: 200px;
+}
+
+.upload-imagen .descripcion {
+    color: #525252;
+}
+
+.btn-pedir-producto {
+    color: var(--color_blanco);
+    background-color: var(--color_verde);
+    text-align: center;
+    width: 188px;
+}
+.btn-pedir-producto:hover {
+    color: #ffffff;
+    background-color: rgb(38, 97, 34);
+}
+
+@media screen and (min-width: 1090px) {
+    .contenedor {
+        width: 900px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .contenedor {
+        width: 100%;
+    }
+}

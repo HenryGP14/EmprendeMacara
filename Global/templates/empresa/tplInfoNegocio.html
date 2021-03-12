@@ -1,0 +1,92 @@
+{% extends 'components/base.html' %}
+{% load static%}
+
+{% block title %}Información - {% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/fanpage/fanpague_style.css' %}" />
+<link rel="stylesheet" href="{% static 'css/fanpage/owl.carousel.min.css' %}" />
+<link rel="stylesheet" href="{% static 'css/fanpage/owl.theme.default.min.css' %}" />
+{% endblock css %}
+
+{% block navbar %}
+{% include 'components/nav.html' %}
+{% endblock navbar %}
+
+{% block content %}
+<div class="container mb-4 mt-4">
+	<div>
+		{% if empresa.ruta_foto %}
+		<img src="{{ empresa.ruta_foto.url }}" alt="" class="img-width" />
+		{% else %}
+		<div class="img-width" style="background-color: gainsboro;"></div>
+		{% endif %}
+	</div>
+	<div class="mt-5 mb-5 text-center font-weight-bold h2">
+		<p>{{ empresa.nom_empresa|upper }}</p>
+	</div>
+	{% if empresa.fotos_empresa.all|length >= 3 %}
+	<div class="container pl-5 pr-5 mb-5">
+		<div class="owl-carousel owl-theme">
+			{% for fotos in empresa.fotos_empresa.all %}
+			{% if fotos.ruta_foto != "" %}
+			<div class="card ml-1 mr-1">
+				<img src="{{ fotos.ruta_foto.url }}" class="card-img-top img-overflow" />
+			</div>
+			{% endif %}
+			{% endfor %}
+		</div>
+	</div>
+	{% endif %}
+
+	<div class="card card-body card-verde">
+		<p class="h5"><strong>Detalles</strong></p>
+		<div>
+			<i class="far fa-file-alt"></i><strong> Descripción:</strong>
+			<p> {{ empresa.slogan }} </p>
+		</div>
+		<div>
+			<i class="far fa-clock"></i><strong> Horario de atención:</strong>
+			<p>
+				Abierto desde las <strong>{{ empresa.inicio_atencion|time:"H\h:i\m" }}</strong> hasta las
+				<strong>{{ empresa.fin_atencion|time:"H\h:i\m" }}</strong>
+			</p>
+		</div>
+	</div>
+
+	<div class="card card-body mt-5 card-verde">
+		<p class="h5"><strong>Ubicación e información de contacto</strong></p>
+		<div>
+			<div>
+				<i class="fas fa-map-marker-alt"></i><strong> Dirección: </strong>
+				<p>{{ empresa.direccion }}</p>
+			</div>
+
+			<div>
+				<i class="far fa-envelope"></i><strong> Email:</strong>
+				<p>{{ empresa.correo }}</p>
+			</div>
+
+			<div>
+				<i class="fas fa-user"></i><strong> Gerente o encargado: </strong>
+				<p>{{ empresa.gerente }}</p>
+			</div>
+
+			<div>
+				<i class="fas fa-phone"></i><strong> Teléfono: </strong>
+				<p>
+					{% for telefono in empresa.telefonos.all %}
+					{{ telefono.telefono }},
+					{% endfor %}
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}
+
+{% block js %}
+<!-- JS del FanPage -->
+<script src="{% static 'js/fanpage/owl.carousel.min.js' %}"></script>
+<script src="{% static 'js/fanpage/carousel.js' %}"></script>
+{% endblock js %}

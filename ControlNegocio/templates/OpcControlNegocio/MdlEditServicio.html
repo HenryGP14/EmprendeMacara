@@ -1,0 +1,39 @@
+<div class="modal fade" id="editmodalServicio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content formAnadirServicio">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar servicio</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formEditServicio" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group row">
+                        <label for="txtNombre" class="col-sm-3 col-form-label">Nombre:</label>
+                        <div class="col-sm-9"><input type="text" class="form-control form-control-sm"
+                                name="EditNombreServicio" id="EditNombreServicio" placeholder="Ingrese su nombre"
+                                autocomplete="off"></div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="txtDescripcion" class="col-sm-3 col-form-label">Descripción:</label>
+                        <div class="col-sm-9"><input type="text" class="form-control form-control-sm"
+                                name="EditDescripcionServicio" id="EditDescripcionServicio"
+                                placeholder="Ingrese la descripción" autocomplete="off"></div>
+                    </div>
+                    <img name="foto" id="fotoEditServicio" class="img-thumbnail img-fluid foto">
+                    <label for="inputeditservicio" class="btn btn-primary btnsubir">Subir foto</label>
+                    <input class="btn btn-success btn-sm subirfoto" id="inputeditservicio" name="inputeditservicio"
+                        type="file" accept="image/jpeg" onchange="previewimagenEditServicio(this);"
+                        style="display: none;">
+                    <div class="modal-footer" style="width: 100%; justify-content: flex-start;">
+                        <div id="alertaCamposVaciosEditServicio" style="width: 100%;"></div>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar servicio</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

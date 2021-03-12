@@ -1,0 +1,60 @@
+{% extends 'adminNegocioMenu.html' %}
+{% load static %}
+
+{% block title %}Pedidos entregados - {% endblock title %}
+
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/controlnegocio/panel-contenido.css' %}" />
+{% endblock css %}
+
+{% block content %}
+<div>
+    <div class="titulo">Lista de pedidos entregados</div>
+    <div>
+        <section class="contenido-num">
+            <div class="caja">
+                <h1>{{Monto}}</h1>
+                <h5>Montol total</h5>
+            </div>
+            <div class="caja">
+                <h1>{{cantidadTotal}}</h1>
+                <h5>N° de productos</h5>
+            </div>
+        </section>
+        <section class="table-responsive">
+            <table class="table table-hover mt-3">
+                <thead class="table-success">
+                    <tr>
+                        <th scope="col">Nombres</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Celular</th>
+                        <th scope="col">Tipo de pago</th>
+                        <th scope="col">Producto</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">P.Unitario</th>
+                        <th scope="col">Sub.Total</th>
+                        <th scope="col">P.Envio</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for unVenta in ltVentas %}
+                    <tr>
+                        <th scope="row">{{unVenta.nombre}}</th>
+                        <td>{{unVenta.direccion_entrega}}</td>
+                        <td>{{unVenta.telefono}}</td>
+                        <td>{{unVenta.tipoPago}}</td>
+                        <td>{{unVenta.producto}}</td>
+                        <td>{{unVenta.cantidad}}</td>
+                        <td>{{unVenta.precioU}}</td>
+                        <td>{{unVenta.precioSub}}</td>
+                        <td>{{unVenta.precioE}}</td>
+                        <td>{{unVenta.Montototal}}</td>
+                        {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </div>
+</div>
+{% endblock content %}

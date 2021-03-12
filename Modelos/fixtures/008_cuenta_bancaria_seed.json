@@ -1,0 +1,112 @@
+[
+    {
+        "model": "Modelos.cuentas_bancarias",
+        "pk": 1,
+        "fields": {
+            "entidad": "Banco del Pichincha",
+            "tipo_cuenta": "Ahorro",
+            "numero": "2204603808",
+            "razon_social": "Nombre Bancario",
+            "empresa_id": 1
+        }
+    },
+    {
+        "model": "Modelos.cuentas_bancarias",
+        "pk": 2,
+        "fields": {
+            "entidad": "Banco Bolivariano",
+            "tipo_cuenta": "Ahorro",
+            "numero": "2573168520",
+            "razon_social": "Nombre Bancario",
+            "empresa_id": 1
+        }
+    },
+    {
+        "model": "Modelos.cuentas_bancarias",
+        "pk": 3,
+        "fields": {
+            "entidad": "Banco Guayaquil",
+            "tipo_cuenta": "Ahorro",
+            "numero": "2204624536",
+            "razon_social": "Nombre Bancario",
+            "empresa_id": 2
+        }
+    },
+    {
+        "model": "Modelos.cuentas_bancarias",
+        "pk": 4,
+        "fields": {
+            "entidad": "BanEcuador",
+            "tipo_cuenta": "Ahorro",
+            "numero": "2243681502",
+            "razon_social": "Nombre Bancario",
+            "empresa_id": 3
+        }
+    },
+    {
+        "model": "Modelos.cuentas_bancarias",
+        "pk": 5,
+        "fields": {
+            "entidad": "Banco de Loja",
+            "tipo_cuenta": "Ahorro",
+            "numero": "2205128643",
+            "razon_social": "Nombre Bancario",
+            "empresa_id": 3
+        }
+    },
+    {
+        "model": "Modelos.cuentas_bancarias",
+        "pk": 6,
+        "fields": {
+            "entidad": "Banco Solidario",
+            "tipo_cuenta": "Ahorro",
+            "numero": "2245386129",
+            "razon_social": "Nombre Bancario",
+            "empresa_id": 3
+        }
+    },
+    {
+        "model": "Modelos.cuentas_bancarias",
+        "pk": 7,
+        "fields": {
+            "entidad": "Banco Finca",
+            "tipo_cuenta": "Ahorro",
+            "numero": "2261059802",
+            "razon_social": "Nombre Bancario",
+            "empresa_id": 4
+        }
+    },
+    {
+        "model": "Modelos.cuentas_bancarias",
+        "pk": 8,
+        "fields": {
+            "entidad": "Banco Internacional",
+            "tipo_cuenta": "Ahorro",
+            "numero": "2239434241",
+            "razon_social": "Nombre Bancario",
+            "empresa_id": 4
+        }
+    },
+    {
+        "model": "Modelos.cuentas_bancarias",
+        "pk": 9,
+        "fields": {
+            "entidad": "Banco Bolivariano",
+            "tipo_cuenta": "Ahorro",
+            "numero": "229189769",
+            "razon_social": "Nombre Bancario",
+            "empresa_id": 5
+        }
+    },
+    {
+        "model": "Modelos.cuentas_bancarias",
+        "pk": 10,
+        "fields": {
+            "entidad": "BanEcuador",
+            "tipo_cuenta": "Ahorro",
+            "numero": "2280488562",
+            "razon_social": "Nombre Bancario",
+            "empresa_id": 6
+        }
+    }
+]

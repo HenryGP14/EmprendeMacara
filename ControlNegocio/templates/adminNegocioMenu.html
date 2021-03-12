@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es-EC">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap_4.6.min.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'css/fontawesome-5.15.2/css/all.min.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'css/controlnegocio/perfil-box.css' %}">
+    <link rel="stylesheet" href="{% static 'css/controlnegocio/panel-contenido.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/controlnegocio/panel-contenido-responsive.css' %}" />
+    <!--Es necesario para que al momento de cargar el perfil pueda hacer uso de este recurso-->
+    <script src="{% static 'js/jquery-3.4.1.min.js'%}"></script> 
+    <title>{% block title %}{% endblock title %}Emprendimientos Macará</title>
+    {% block css %} {% endblock css %}
+</head>
+
+<body>
+    <div class="control-negocio">
+        <div class="barra-lateral">
+            <div class="perfil-box">
+                <div class="img-perfil">
+                    {% if request.session.usuario.perfil %}
+                    <img src="{{ request.session.usuario.perfil }}">
+                    {% else %}
+                    <img src="{% static 'img/img_macara/user.png' %}">
+                    {% endif %}
+                </div>
+                <p class="nombre-empresa">{{ request.session.usuario.nombre }}</p>
+                <p class="nombre-empresa">{{ unEmpresa.nom_empresa }}</p>
+                <div class="colores-macara" id="btn-colores-macara">
+                    <div class="color-amarillo"></div>
+                    <div class="color-verde"></div>
+                    <div class="color-rojo"></div>
+                </div>
+            </div>
+            <div class="opciones">
+                <a class="btn-opcion {{ pendientes }}" href="{% url 'PedidosPendientes' %}">
+                    <i class="fas fa-cart-arrow-down"></i>
+                    <span>Pedidos pendientes<span>
+                </a>
+                <a class="btn-opcion {{ entregados }}" href="{% url 'PedidosEntregados' %}">
+                    <i class="fas fa-people-carry"></i>
+                    <span>Pedidos entregados</span>
+                </a>
+                <a class="btn-opcion {{ productos }}" href="{% url 'ProductosServicios' %}">
+                    <i class="fas fa-store"></i>
+                    <span>Productos y servicios</span>
+                </a>
+                <a class="btn-opcion {{ perfil }}" href="{% url 'perfil' %}">
+                    <i class="fas fa-cog"></i>
+                    <span>Perfil empresa</span>
+                </a>
+                <a class="btn-opcion" href="{% url 'ConfiguracionEmpresa' %}">
+                    <i class="fas fa-user-cog"></i>
+                    <span>Configuraciones</span>
+                </a>
+                <a class="btn-opcion" href="{% url 'logout' %}">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Cerrar sesión</span>
+                </a>
+            </div>
+
+            <div class="nav-item dropdown">
+                <a class="dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-bars"></i>
+                </a>
+                <div class="dropdown-menu" id="btn-opciones" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item btn-opcion" href="{% url 'PedidosPendientes' %}">
+                        <i class="fas fa-cart-arrow-down"></i>
+                        <span>Pedidos pendientes<span>
+                    </a>
+                    <a class="dropdown-item btn-opcion" href="{% url 'PedidosEntregados' %}">
+                        <i class="fas fa-people-carry"></i>
+                        <span>Pedidos entregados</span>
+                    </a>
+                    <a class="dropdown-item btn-opcion" href="{% url 'ProductosServicios' %}">
+                        <i class="fas fa-store"></i>
+                        <span>Productos y servicios</span>
+                    </a>
+                    <a class="dropdown-item btn-opcion" href="{% url 'perfil' %}">
+                        <i class="fas fa-cog"></i>
+                        <span>Perfil empresa</span>
+                    </a>
+                    <a class="dropdown-item btn-opcion" href="{% url 'ConfiguracionEmpresa' %}">
+                        <i class="fas fa-user-cog"></i>
+                        <span>Configuraciones</span>
+                    </a>
+                    <a class="dropdown-item btn-opcion" href="{% url 'logout' %}">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Cerrar sesión</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="panel-contenido">
+        {% if unEmpresa.estado != "Habilitada"  %}
+                <div class="alert alert-danger">
+                    <p>!Su empresa esta inhabilitada¡.Por lo tanto, su empresa y productos no son visibles al público. Para habilitar su empresa contacte con Emprendimientos macara</p>
+                </div>
+            {% endif %}
+            {% block content %} {% endblock content %}
+        </div>
+    </div>
+
+    <script src="{% static 'js/jquery-3.4.1.min.js'%}"></script>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/global/sweetalert_2_v10.js'%}"></script>
+    <script src="{% static 'js/global/sweetalert.min.js'%}"></script>
+    <script src="{% static 'js/global/validaciones.js'%}"></script>
+
+    {% block js %}
+    {% endblock js %}
+
+    {% block js2 %}
+    {% endblock js2 %}
+
+</body>
+
+</html>

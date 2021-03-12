@@ -1,0 +1,647 @@
+[
+    {
+        "model": "Modelos.usuarios",
+        "pk": 1,
+        "fields": {
+            "nom_usuario": "Narcisa Pesantez",
+            "correo": "narcisa_pesantez@gmail.com",
+            "credenciales": "123456",
+            "ruta_foto": null,
+            "estado": true,
+            "correo_verificado": true,
+            "rol_id": 2
+        }
+    },
+    {
+        "model": "Modelos.empresas",
+        "pk": 1,
+        "fields": {
+            "activi_comercial_id": 1,
+            "correo": "narcisa_pesantez@gmail.com",
+            "descripcion": "Sin datos",
+            "dias_atencion": "Lunes - Domingo",
+            "direccion": "Barrio Velasco Ibarra y Amazonas",
+            "estado": "Habilitada",
+            "forma_pago": "Efectivo y depósitos bancarios",
+            "forma_venta": "Local y en la Web",
+            "gerente": "Narcisa Pesantez y Janina Tinoco",
+            "inicio_atencion": "08:00",
+            "fin_atencion": "17:00",
+            "nom_empresa": "Especias y Sabores JN",
+            "perfil_foto": null,
+            "politicas": "Sin datos",
+            "ruc": "0908070305021",
+            "ruta_foto": "Portadas/dg_diseños_gigan_00011.jpeg",
+            "slogan": "Realizamos entregas a domicilio sin recargo alguno",
+            "usuario_id": 1
+        }
+    },
+
+    {
+        "model": "Modelos.usuarios",
+        "pk": 2,
+        "fields": {
+            "nom_usuario": "Carmen Jumbo",
+            "correo": "carmen_jumbo@gmail.com",
+            "credenciales": "123456",
+            "ruta_foto": null,
+            "estado": true,
+            "correo_verificado": true,
+            "rol_id": 2
+        }
+    },
+    {
+        "model": "Modelos.empresas",
+        "pk": 2,
+        "fields": {
+            "activi_comercial_id": 1,
+            "correo": "carmen_jumbo@gmail.com",
+            "descripcion": "Sin datos",
+            "dias_atencion": "Lunes - Domingo",
+            "direccion": "Barrio Bello Horizonte, Calles Juan León Mera y Felipe Tamayo",
+            "estado": "Habilitada",
+            "forma_pago": "Efectivo y depósitos bancarios",
+            "forma_venta": "Local y en la Web",
+            "gerente": "Carmen Jumbo",
+            "inicio_atencion": "08:00",
+            "fin_atencion": "17:00",
+            "nom_empresa": "Aliños Doña Carmita",
+            "perfil_foto": "Perfiles/aliños_doña_carmita_00001.jpeg",
+            "politicas": "Ofrecemos servicio a domicilio sin recargo adicional. El tiempo de entrega depende del sector y la demanda de pedidos",
+            "ruc": "0908070305021",
+            "ruta_foto": null,
+            "slogan": "Sin datos",
+            "usuario_id": 2
+        }
+    },
+
+    {
+        "model": "Modelos.usuarios",
+        "pk": 3,
+        "fields": {
+            "nom_usuario": "Jorge Quezada",
+            "correo": "jorge_quezada@gmail.com",
+            "credenciales": "123456",
+            "ruta_foto": null,
+            "estado": true,
+            "correo_verificado": true,
+            "rol_id": 2
+        }
+    },
+    {
+        "model": "Modelos.empresas",
+        "pk": 3,
+        "fields": {
+            "activi_comercial_id": 4,
+            "correo": "jorge_quezada@gmail.com",
+            "descripcion": "Sin datos",
+            "dias_atencion": "Lunes - Domingo",
+            "direccion": "Carlos Veintimilla y Sucre (esq.)",
+            "estado": "Habilitada",
+            "forma_pago": "Efectivo y depósitos bancarios",
+            "forma_venta": "Local y en la Web",
+            "gerente": "Jorge Quezada",
+            "inicio_atencion": "08:00",
+            "fin_atencion": "17:00",
+            "nom_empresa": "Servicompu & Supercyber",
+            "perfil_foto": null,
+            "politicas": "Sin datos",
+            "ruc": "0908070305021",
+            "ruta_foto": null,
+            "slogan": "Sin datos",
+            "usuario_id": 3
+        }
+    },
+
+    {
+        "model": "Modelos.usuarios",
+        "pk": 4,
+        "fields": {
+            "nom_usuario": "David Galván",
+            "correo": "david_galvan@gmail.com",
+            "credenciales": "123456",
+            "ruta_foto": null,
+            "estado": true,
+            "correo_verificado": true,
+            "rol_id": 2
+        }
+    },
+    {
+        "model": "Modelos.empresas",
+        "pk": 4,
+        "fields": {
+            "activi_comercial_id": 5,
+            "correo": "david_galvan@gmail.com",
+            "descripcion": "Sin datos",
+            "dias_atencion": "Lunes - Domingo",
+            "direccion": "Calle de Daniel Mora y Amazonas",
+            "estado": "Habilitada",
+            "forma_pago": "Efectivo y depósitos bancarios",
+            "forma_venta": "Local y en la Web",
+            "gerente": "David Galván",
+            "inicio_atencion": "08:00",
+            "fin_atencion": "17:00",
+            "nom_empresa": "DG Diseño y Gigantografías",
+            "perfil_foto": "Perfiles/dg_diseños_gigan_00001.jpeg",
+            "politicas": "Sin datos",
+            "ruc": "0908070305021",
+            "ruta_foto": "Portadas/dg_diseños_gigan_00011.jpeg",
+            "slogan": "Marcando la diferencia en Macará",
+            "usuario_id": 4
+        }
+    },
+
+    {
+        "model": "Modelos.usuarios",
+        "pk": 5,
+        "fields": {
+            "nom_usuario": "Mercedes Solano",
+            "correo": "mercedes_solano@gmail.com",
+            "credenciales": "123456",
+            "ruta_foto": null,
+            "estado": true,
+            "correo_verificado": true,
+            "rol_id": 2
+        }
+    },
+    {
+        "model": "Modelos.empresas",
+        "pk": 5,
+        "fields": {
+            "activi_comercial_id": 5,
+            "correo": "mercedes_solano@gmail.com",
+            "descripcion": "Decoración de eventos",
+            "dias_atencion": "Lunes - Domingo",
+            "direccion": "Sin dato",
+            "estado": "Habilitada",
+            "forma_pago": "Efectivo y depósitos bancarios",
+            "forma_venta": "Local y en la Web",
+            "gerente": "Mercedes Solano",
+            "inicio_atencion": "08:00",
+            "fin_atencion": "17:00",
+            "nom_empresa": "MS Decoraciones",
+            "perfil_foto": "Perfiles/ms_decoraciones_00001.jpeg",
+            "politicas": "Sin datos",
+            "ruc": "0908070305021",
+            "ruta_foto": null,
+            "slogan": "Sin datos",
+            "usuario_id": 5
+        }
+    },
+
+    {
+        "model": "Modelos.usuarios",
+        "pk": 6,
+        "fields": {
+            "nom_usuario": "Sin datos",
+            "correo": "ejemplo@gmail.com",
+            "credenciales": "123456",
+            "ruta_foto": null,
+            "estado": true,
+            "correo_verificado": true,
+            "rol_id": 2
+        }
+    },
+    {
+        "model": "Modelos.empresas",
+        "pk": 6,
+        "fields": {
+            "activi_comercial_id": 7,
+            "correo": "ejemplo@gmail.com",
+            "descripcion": "Arreglos para todo compromiso social con flores naturales y artificiales",
+            "dias_atencion": "Lunes - Domingo",
+            "direccion": "Barrio Velasco Ibarra, Calle Juvenal Jaramillo y Lázaro Vaca, junto a la terminal de la Cooperativa Loja",
+            "estado": "Habilitada",
+            "forma_pago": "Efectivo y depósitos bancarios",
+            "forma_venta": "Local y en la Web",
+            "gerente": "Sin datos",
+            "inicio_atencion": "08:00",
+            "fin_atencion": "17:00",
+            "nom_empresa": "Detalles Floristería",
+            "perfil_foto": null,
+            "politicas": "Sin datos",
+            "ruc": "0908070305021",
+            "ruta_foto": null,
+            "slogan": "Sin datos",
+            "usuario_id": 6
+        }
+    },
+
+    {
+        "model": "Modelos.usuarios",
+        "pk": 7,
+        "fields": {
+            "nom_usuario": "Narcisa Salazar",
+            "correo": "narcisa_salazar@gmail.com",
+            "credenciales": "123456",
+            "ruta_foto": null,
+            "estado": true,
+            "correo_verificado": true,
+            "rol_id": 2
+        }
+    },
+    {
+        "model": "Modelos.empresas",
+        "pk": 7,
+        "fields": {
+            "activi_comercial_id": 8,
+            "correo": "narcisa_salazar@gmail.com",
+            "descripcion": "Sin datos",
+            "dias_atencion": "Lunes - Domingo",
+            "direccion": "Barrio alborada calle Arturo Román y Pedro Vidal",
+            "estado": "Habilitada",
+            "forma_pago": "Efectivo y depósitos bancarios",
+            "forma_venta": "Local y en la Web",
+            "gerente": "Narcisa Salazar",
+            "inicio_atencion": "08:00",
+            "fin_atencion": "17:00",
+            "nom_empresa": "Funeraria Camino de Luz",
+            "perfil_foto": null,
+            "politicas": "Sin datos",
+            "ruc": "0908070305021",
+            "ruta_foto": null,
+            "slogan": "Sin datos",
+            "usuario_id": 7
+        }
+    },
+
+    {
+        "model": "Modelos.usuarios",
+        "pk": 8,
+        "fields": {
+            "nom_usuario": "Jessica Ordóñez",
+            "correo": "jessica_ordonez@gmail.com",
+            "credenciales": "123456",
+            "ruta_foto": null,
+            "estado": true,
+            "correo_verificado": true,
+            "rol_id": 2
+        }
+    },
+    {
+        "model": "Modelos.empresas",
+        "pk": 8,
+        "fields": {
+            "activi_comercial_id": 9,
+            "correo": "jessica_ordonez@gmail.com",
+            "descripcion": "Sin datos",
+            "dias_atencion": "Lunes - Domingo",
+            "direccion": "Barrio Central en las calles Abdón Calderón y Carlos Veintimilla",
+            "estado": "Habilitada",
+            "forma_pago": "Efectivo y depósitos bancarios",
+            "forma_venta": "Local y en la Web",
+            "gerente": "Jessica Ordóñez",
+            "inicio_atencion": "08:00",
+            "fin_atencion": "17:00",
+            "nom_empresa": "Jess & Jess Heladería y Cafetería",
+            "perfil_foto": "Perfiles/jess_&_jess_00001.jpeg",
+            "politicas": "Realizamos entrega a domicilio sin recargo dentro de la Urbe",
+            "ruc": "0908070305021",
+            "ruta_foto": null,
+            "slogan": "Sin datos",
+            "usuario_id": 8
+        }
+    },
+
+    {
+        "model": "Modelos.usuarios",
+        "pk": 9,
+        "fields": {
+            "nom_usuario": "Tatiana Ramón",
+            "correo": "tatiana_ramon@gmail.com",
+            "credenciales": "123456",
+            "ruta_foto": null,
+            "estado": true,
+            "correo_verificado": true,
+            "rol_id": 2
+        }
+    },
+    {
+        "model": "Modelos.empresas",
+        "pk": 9,
+        "fields": {
+            "activi_comercial_id": 10,
+            "correo": "tatiana_ramon@gmail.com",
+            "descripcion": "Sin datos",
+            "dias_atencion": "Lunes - Domingo",
+            "direccion": "Macará/ Barrio Velasco Ibarra/junto al consultorio médico Dr. Ramón",
+            "estado": "Habilitada",
+            "forma_pago": "Efectivo y depósitos bancarios",
+            "forma_venta": "Local y en la Web",
+            "gerente": "Tatiana Ramón",
+            "inicio_atencion": "08:00",
+            "fin_atencion": "17:00",
+            "nom_empresa": "La papelería de Martina",
+            "perfil_foto": "Perfiles/la_papeleria_de_martina_00001.jpeg",
+            "politicas": "Una vez salida la mercadería no se acepta devolución de dinero y se aceptan cambios de mercadería entregado el producto en las mismas condiciones que se entregó",
+            "ruc": "0908070305021",
+            "ruta_foto": null,
+            "slogan": "Somos los mejores aliados para estudiantes y maestros.",
+            "usuario_id": 9
+        }
+    },
+
+    {
+        "model": "Modelos.usuarios",
+        "pk": 10,
+        "fields": {
+            "nom_usuario": "Karla Arevalo",
+            "correo": "karla_arevalo@gmail.com",
+            "credenciales": "123456",
+            "ruta_foto": null,
+            "estado": true,
+            "correo_verificado": true,
+            "rol_id": 2
+        }
+    },
+    {
+        "model": "Modelos.empresas",
+        "pk": 10,
+        "fields": {
+            "activi_comercial_id": 11,
+            "correo": "karla_arevalo@gmail.com",
+            "descripcion": "Comercializadora de Pescados, Mariscos, Moluscos, Crustáceos al por mayor y menor",
+            "dias_atencion": "Lunes - Domingo",
+            "direccion": "Mercado municipal segundo piso sección Mariscos local 111; Local Mayorista Barrio Alborada Alta. Calle Jorge Reyes Mendez y Sn. A 500 mtrs del camal municipal",
+            "estado": "Habilitada",
+            "forma_pago": "Efectivo y depósitos bancarios",
+            "forma_venta": "Local y en la Web",
+            "gerente": "Karla Arevalo",
+            "inicio_atencion": "08:00",
+            "fin_atencion": "17:00",
+            "nom_empresa": "La pescadería de Carlita",
+            "perfil_foto": "Perfiles/sucursal_del_mar_00001.jpeg",
+            "politicas": "Entregas a domicilio sin recargo. Tiempo de entrega varía según la demanda 10 min a 1 hora. No se aceptan devoluciones.",
+            "ruc": "0908070305021",
+            "ruta_foto": null,
+            "slogan": "La pescadería de Karlita, somos la sucursal del mar",
+            "usuario_id": 10
+        }
+    },
+
+    {
+        "model": "Modelos.usuarios",
+        "pk": 11,
+        "fields": {
+            "nom_usuario": "Gregory Jaya",
+            "correo": "gregory_jaya@gmail.com",
+            "credenciales": "123456",
+            "ruta_foto": null,
+            "estado": true,
+            "correo_verificado": true,
+            "rol_id": 2
+        }
+    },
+    {
+        "model": "Modelos.empresas",
+        "pk": 11,
+        "fields": {
+            "activi_comercial_id": 14,
+            "correo": "gregory_jaya@gmail.com",
+            "descripcion": "Sin datos",
+            "dias_atencion": "Lunes - Domingo",
+            "direccion": "Sin datos",
+            "estado": "Habilitada",
+            "forma_pago": "Efectivo y depósitos bancarios",
+            "forma_venta": "Sólo en la Web",
+            "gerente": "Gregory Jaya",
+            "inicio_atencion": "11:00",
+            "fin_atencion": "23:00",
+            "nom_empresa": "Chifa Taypa",
+            "perfil_foto": null,
+            "politicas": "Tomamos todas las medidas de bioseguridad y nos esmeramos en que la entrega sea inmediata y de forma responsable con prioridad al cliente y los productos más frescos para su paladar",
+            "ruc": "0908070305021",
+            "ruta_foto": null,
+            "slogan": "Sin datos",
+            "usuario_id": 11
+        }
+    },
+
+    {
+        "model": "Modelos.usuarios",
+        "pk": 12,
+        "fields": {
+            "nom_usuario": "Mayra Paladines",
+            "correo": "mayra_paladines@gmail.com",
+            "credenciales": "123456",
+            "ruta_foto": null,
+            "estado": true,
+            "correo_verificado": true,
+            "rol_id": 2
+        }
+    },
+    {
+        "model": "Modelos.empresas",
+        "pk": 12,
+        "fields": {
+            "activi_comercial_id": 14,
+            "correo": "mayra_paladines@gmail.com",
+            "descripcion": "Sin datos",
+            "dias_atencion": "Lunes - Domingo",
+            "direccion": "Antonio José de Sucre entre Carlos Veintimilla y Carlos Román Diagonal al GAD MACARÁ",
+            "estado": "Habilitada",
+            "forma_pago": "Efectivo y depósitos bancarios",
+            "forma_venta": "Local y en la Web",
+            "gerente": "Mayra Paladines",
+            "inicio_atencion": "08:00",
+            "fin_atencion": "17:00",
+            "nom_empresa": "Pinchos Macará",
+            "perfil_foto": null,
+            "politicas": "Servicio a domicilio sin recargo",
+            "ruc": "0908070305021",
+            "ruta_foto": null,
+            "slogan": "Sin datos",
+            "usuario_id": 12
+        }
+    },
+
+    {
+        "model": "Modelos.usuarios",
+        "pk": 13,
+        "fields": {
+            "nom_usuario": "Lourdes Álvarez",
+            "correo": "lourdes_alvarez@gmail.com",
+            "credenciales": "123456",
+            "ruta_foto": null,
+            "estado": true,
+            "correo_verificado": true,
+            "rol_id": 2
+        }
+    },
+    {
+        "model": "Modelos.empresas",
+        "pk": 13,
+        "fields": {
+            "activi_comercial_id": 15,
+            "correo": "lourdes_alvarez@gmail.com",
+            "descripcion": "Servicio de transporte y encomiendas",
+            "dias_atencion": "Lunes - Domingo",
+            "direccion": "Sin datos",
+            "estado": "Habilitada",
+            "forma_pago": "Efectivo y depósitos bancarios",
+            "forma_venta": "Local y en la Web",
+            "gerente": "Lourdes Álvarez",
+            "inicio_atencion": "08:00",
+            "fin_atencion": "17:00",
+            "nom_empresa": "Gianny's Express Delivery",
+            "perfil_foto": null,
+            "politicas": "Sin datos",
+            "ruc": "0908070305021",
+            "ruta_foto": null,
+            "slogan": "Sin datos",
+            "usuario_id": 13
+        }
+    },
+
+    {
+        "model": "Modelos.usuarios",
+        "pk": 14,
+        "fields": {
+            "nom_usuario": "Henry Orellana Sandoval",
+            "correo": "henry_orellana@gmail.com",
+            "credenciales": "123456",
+            "ruta_foto": null,
+            "estado": true,
+            "correo_verificado": true,
+            "rol_id": 2
+        }
+    },
+    {
+        "model": "Modelos.empresas",
+        "pk": 14,
+        "fields": {
+            "activi_comercial_id": 15,
+            "correo": "henry_orellana@gmail.com",
+            "descripcion": "Servicio de encargo y transporte privado. Atención inmediata.",
+            "dias_atencion": "Lunes - Domingo",
+            "direccion": "Sin datos",
+            "estado": "Habilitada",
+            "forma_pago": "Efectivo y depósitos bancarios",
+            "forma_venta": "Local y en la Web",
+            "gerente": "Henry Orellana Sandoval",
+            "inicio_atencion": "06:00",
+            "fin_atencion": "23:00",
+            "nom_empresa": "Henry Orellana Chofer Profesional",
+            "perfil_foto": "Perfiles/taxi_henry_orellana_00002.jpeg",
+            "politicas": "Transporte privado, seguro, confiable y responsable",
+            "ruc": "Sin datos",
+            "ruta_foto": null,
+            "slogan": "Quédate en casa, te llevo tus compras y encomiendas hasta la puerta de tu hogar.",
+            "usuario_id": 14
+        }
+    },
+
+    {
+        "model": "Modelos.usuarios",
+        "pk": 15,
+        "fields": {
+            "nom_usuario": "Sin datos",
+            "correo": "zentral_coffee@gmail.com",
+            "credenciales": "123456",
+            "ruta_foto": null,
+            "estado": true,
+            "correo_verificado": true,
+            "rol_id": 2
+        }
+    },
+    {
+        "model": "Modelos.empresas",
+        "pk": 15,
+        "fields": {
+            "activi_comercial_id": 14,
+            "correo": "zentral_coffee@gmail.com",
+            "descripcion": "Local de calidad con los mejores desayunos y piqueos de la localidad.",
+            "dias_atencion": "Lunes - Domingo",
+            "direccion": "Sin datos",
+            "estado": "Habilitada",
+            "forma_pago": "Efectivo y depósitos bancarios",
+            "forma_venta": "Local y en la Web",
+            "gerente": "Sin datos",
+            "inicio_atencion": "08:00",
+            "fin_atencion": "17:00",
+            "nom_empresa": "Zentral Coffee",
+            "perfil_foto": "Perfiles/zentral_coffee_00001.jpeg",
+            "politicas": "Servicio a domicilio sin recargo",
+            "ruc": "Sin datos",
+            "ruta_foto": null,
+            "slogan": "Sin datos",
+            "usuario_id": 15
+        }
+    },
+
+    {
+        "model": "Modelos.usuarios",
+        "pk": 16,
+        "fields": {
+            "nom_usuario": "Edwin Paucar Lapo",
+            "correo": "edwinpaucarlapo@gmail.com",
+            "credenciales": "123456",
+            "ruta_foto": null,
+            "estado": true,
+            "correo_verificado": true,
+            "rol_id": 2
+        }
+    },
+    {
+        "model": "Modelos.empresas",
+        "pk": 16,
+        "fields": {
+            "activi_comercial_id": 15,
+            "correo": "edwinpaucarlapo@gmail.com",
+            "descripcion": "Escuela de conducción de carros y motos, también disponemos de examen psicosensométricos para canje de licencia.",
+            "dias_atencion": "Lunes - Domingo",
+            "direccion": "Frente al Mercado Central de Macará",
+            "estado": "Habilitada",
+            "forma_pago": "Efectivo y depósitos bancarios",
+            "forma_venta": "Local y en la Web",
+            "gerente": "Edwin Paucar Lapo",
+            "inicio_atencion": "08:00",
+            "fin_atencion": "17:00",
+            "nom_empresa": "Sportmancar",
+            "perfil_foto": "Perfiles/sportmancar_00007.jpeg",
+            "politicas": "Trámites privados, legales y legítimos.",
+            "ruc": "Sin datos",
+            "ruta_foto": null,
+            "slogan": "Sin datos",
+            "usuario_id": 16
+        }
+    },
+
+    {
+        "model": "Modelos.usuarios",
+        "pk": 17,
+        "fields": {
+            "nom_usuario": "Carlos Soto",
+            "correo": "agro_soto@gmail.com",
+            "credenciales": "123456",
+            "ruta_foto": "Perfiles/agro_soto_00001.jpeg",
+            "estado": true,
+            "correo_verificado": true,
+            "rol_id": 2
+        }
+    },
+    {
+        "model": "Modelos.empresas",
+        "pk": 17,
+        "fields": {
+            "activi_comercial_id": 12,
+            "correo": "agro_soto@gmail.com",
+            "descripcion": "Elaboramos productos naturales, ecológicos y artesanales bajo los estándares de calidad. Aprovechamos al máximo la base productiva empleando la Pectina del Cacao y Maracuyá, aplicando el (I + D + I) generando un valor adicional al cultivo de los mismos.",
+            "dias_atencion": "Lunes - Domingo",
+            "direccion": "400mts de ERRSSA Macará",
+            "estado": "Habilitada",
+            "forma_pago": "Efectivo y depósitos bancarios",
+            "forma_venta": "Local y en la Web",
+            "gerente": "Carlos Soto",
+            "inicio_atencion": "08:00",
+            "fin_atencion": "20:00",
+            "nom_empresa": "Agro Soto",
+            "perfil_foto": "Perfiles/agro_soto_00001.jpeg",
+            "politicas": "Productos de calidad. No se aceptan devoluciones",
+            "ruc": "Sin datos",
+            "ruta_foto": null,
+            "slogan": "Natural, ecológico y artesanal",
+            "usuario_id": 17
+        }
+    }
+]

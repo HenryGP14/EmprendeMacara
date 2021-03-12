@@ -1,0 +1,214 @@
+{% extends 'adminNegocioMenu.html' %}
+{% load static %}
+
+{% block title %}Pedidos pendientes - {% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/controlnegocio/panel-contenido.css' %}" />
+{% endblock css %}
+
+{% block content %}
+<div>
+    <div class="titulo">Lista de pedidos pendientes</div>
+    <div>
+        <section class="contenido-num">
+            <div class="caja">
+                <h1>{{numPedidos}}</h1>
+                <h5>N° de pedidos</h5>
+            </div>
+            <div class="caja">
+                <h1>{{ numProductosTotales }}</h1>
+                <h5>N° de productos</h5>
+            </div>
+            <div class="caja">
+                <h1><span>$</span>{{ SumaMontoTotales }}</h1>
+                <h5>Monto total</h5>
+            </div>
+        </section>
+
+        <section class="table-responsive">
+            <table class="table table-hover mt-3">
+                <thead class="table-success">
+                    <tr>
+                        <th scope="col">Nombres</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Celular</th>
+                        <th scope="col" style="width: 150px;">N° productos</th>
+                        <th scope="col" style="width: 150px;">Precio Unitario</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for unVenta in ltVentas %}
+                    <tr>
+                        <th scope="row">{{ unVenta.nombre }}</th>
+                        <td>{{ unVenta.direccion_entrega }}</td>
+                        <td>{{ unVenta.telefono }}</td>
+                        <td>{{ unVenta.numproductos }}</td>
+                        <td>{{ unVenta.Montototal }}</td>
+                        <td>
+                            <button type="button" class="btn btn-outline-primary btn-sm btnDetallesVentas"
+                                pid="{{unVenta.idVenta}}" title="Ver detalle" data-toggle="modal"
+                                data-target="#verDetalle">
+                                <i class="fas fa-eye"></i>
+                            </button>
+
+                            {% if unVenta.tipoPago != 'Efectivo' %}
+                            <button type="button" class="btn btn-outline-dark btn-sm btnVerPago"
+                                pid="{{unVenta.idVenta}}" title="Ver pago">
+                                <i class="fas fa-dollar-sign"></i>
+                            </button>
+                            {% endif %}
+                            {% if unVenta.estado == 'Pendiente' %}
+                            <button type="button" class="btn btn-outline-success btn-sm btnEnviar"
+                                pid="{{unVenta.idVenta}}" title="Enviar pedido">
+                                <i class="fas fa-shipping-fast"></i>
+                            </button>
+                            {% endif %}
+
+                            {% if unVenta.estado == 'Enviado' %}
+                            <button type="button" class="btn btn-outline-dark btn-sm btnEntregar"
+                                pid="{{unVenta.idVenta}}" title="Entregar">
+                                <i class="fas fa-archive"></i>
+                            </button>
+                            {% endif %}
+
+                            <button type="button" class="btn btn-outline-danger btn-sm btnAnularPedido"
+                                pid="{{unVenta.idVenta}}" title="Anular pedido">
+                                <i class="fas fa-times-circle"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+        {% include "OpcControlNegocio/verDetalle.html" %} {% include "OpcControlNegocio/verPago.html" %}
+
+    </div>
+</div>
+{% endblock content %}
+
+{% block js2 %}
+<script>
+    $(".btnDetallesVentas").click(function () {
+        var pid = $(this).attr("pid");
+        $.ajax({
+                type: "POST",
+                url: '{% url "obtenerDetalleVenta" %}',
+                data: {
+                    idVenta: pid,
+                    csrfmiddlewaretoken: "{{ csrf_token }}",
+                },
+            })
+            .done(function (d) {
+                $(".card").remove();
+                for (var i = 0; i < d["ltDetalleVenta"].length; i++) {
+                    $("#detalleVenta").append(
+                        '<div class="card">' +
+                        '<div class="card-body">' +
+                        "<h5><strong>Producto: </strong>" +
+                        d["ltDetalleVenta"][i].producto +
+                        "</h5>" +
+                        "<p><strong>Cantidad: </strong>" +
+                        d["ltDetalleVenta"][i].cantidad +
+                        "</p>" +
+                        "<p><strong>Precio unitario: </strong>$ " +
+                        d["ltDetalleVenta"][i].precioUni +
+                        "</p>" +
+                        "<p><strong>Precio sub total: </strong>$ " +
+                        d["ltDetalleVenta"][i].precioSubT +
+                        "</p>" +
+                        "<p><strong>Precio de envio: </strong>$ " +
+                        d["ltDetalleVenta"][i].precioEnvio +
+                        "</p>" +
+                        "<p><strong>Total a pagar: </strong>$ " +
+                        d["ltDetalleVenta"][i].precioPagar +
+                        "</p>" +
+                        "<p><strong>Tipo de pago: </strong>" +
+                        d["ltDetalleVenta"][i].deposito_ban +
+                        "</p>" +
+                        "</div>" +
+                        "</div>"
+                    );
+                    console.log(d["ltDetalleVenta"][i].producto);
+                }
+            })
+            .fail(function (jqXHR, textStatus, errorThrown) {})
+            .always(function (data) {});
+    });
+
+    $(".btnEnviar").click(function () {
+        var pid = $(this).attr("pid");
+
+        $.ajax({
+                type: "POST",
+                url: '{% url "EnviarPedido" %}',
+                data: {
+                    idventa: pid,
+                    csrfmiddlewaretoken: "{{ csrf_token }}",
+                },
+            })
+            .done(function (d) {
+                location.href = '{% url "PedidosPendientes" %}';
+            })
+            .fail(function (jqXHR, textStatus, errorThrown) {})
+            .always(function (data) {});
+    });
+    $(".btnEntregar").click(function () {
+        var pid = $(this).attr("pid");
+
+        $.ajax({
+                type: "POST",
+                url: '{% url "entregarPedido" %}',
+                data: {
+                    idventa: pid,
+                    csrfmiddlewaretoken: "{{ csrf_token }}",
+                },
+            })
+            .done(function (d) {
+                location.href = '{% url "PedidosPendientes" %}';
+            })
+            .fail(function (jqXHR, textStatus, errorThrown) {})
+            .always(function (data) {});
+    });
+
+
+    $(".btnVerPago").click(function () {
+        var pid = $(this).attr("pid");
+        $.ajax({
+                type: "POST",
+                url: '{% url "obtenerPago" %}',
+                data: {
+                    idventa: pid,
+                    csrfmiddlewaretoken: "{{ csrf_token }}",
+                },
+            })
+            .done(function (d) {
+                $('#fotoPago').attr('src', d.foto);
+                $('#MetodoPago').text(d.metodoPago);
+                $('#numPago').text("$ " + d.precioPagar)
+                $('#numTranf').text(d.num_documento);
+                $("#verPago").modal("show");
+            })
+            .fail(function (jqXHR, textStatus, errorThrown) {})
+            .always(function (data) {});
+    });
+    $(".btnAnularPedido").click(function () {
+        var pid = $(this).attr("pid");
+        $.ajax({
+                type: "POST",
+                url: '{% url "anularPedido" %}',
+                data: {
+                    idventa: pid,
+                    csrfmiddlewaretoken: "{{ csrf_token }}",
+                },
+            })
+            .done(function (d) {
+                location.href = '{% url "PedidosPendientes" %}';
+            })
+            .fail(function (jqXHR, textStatus, errorThrown) {})
+            .always(function (data) {});
+    });
+</script>
+{% endblock js2 %}

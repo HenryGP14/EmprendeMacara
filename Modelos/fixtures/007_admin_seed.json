@@ -1,0 +1,15 @@
+[
+    {
+        "model": "Modelos.usuarios",
+        "pk": 18,
+        "fields": {
+            "nom_usuario": "Admin Web",
+            "correo": "ca884012@gmail.com",
+            "credenciales": "Admin123456",
+            "ruta_foto": null,
+            "estado": true,
+            "correo_verificado": true,
+            "rol_id": 3
+        }
+    }
+]

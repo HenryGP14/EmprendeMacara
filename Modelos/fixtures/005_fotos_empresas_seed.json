@@ -1,0 +1,101 @@
+[
+    {
+        "model": "Modelos.fotos_empresas",
+        "pk": 1,
+        "fields": {
+            "ruta_foto": "Carrusel/sportmancar_00001.jpeg",
+            "empresa_id": 13
+        }
+    },
+    {
+        "model": "Modelos.fotos_empresas",
+        "pk": 2,
+        "fields": {
+            "ruta_foto": "Carrusel/sportmancar_00003.jpeg",
+            "empresa_id": 13
+        }
+    },
+    {
+        "model": "Modelos.fotos_empresas",
+        "pk": 3,
+        "fields": {
+            "ruta_foto": "Carrusel/sportmancar_00005.jpeg",
+            "empresa_id": 13
+        }
+    },
+    {
+        "model": "Modelos.fotos_empresas",
+        "pk": 4,
+        "fields": {
+            "ruta_foto": "Carrusel/sportmancar_00006.jpeg",
+            "empresa_id": 13
+        }
+    },
+
+    {
+        "model": "Modelos.fotos_empresas",
+        "pk": 5,
+        "fields": {
+            "ruta_foto": "Carrusel/sportmancar_00007.jpeg",
+            "empresa_id": 13
+        }
+    },
+    {
+        "model": "Modelos.fotos_empresas",
+        "pk": 6,
+        "fields": {
+            "ruta_foto": "Carrusel/sportmancar_00008.jpeg",
+            "empresa_id": 13
+        }
+    },
+    {
+        "model": "Modelos.fotos_empresas",
+        "pk": 7,
+        "fields": {
+            "ruta_foto": "Carrusel/sportmancar_00009.jpeg",
+            "empresa_id": 13
+        }
+    },
+
+    {
+        "model": "Modelos.fotos_empresas",
+        "pk": 8,
+        "fields": {
+            "ruta_foto": "Carrusel/dg_disenos_gigan_00006.jpeg",
+            "empresa_id": 4
+        }
+    },
+
+    {
+        "model": "Modelos.fotos_empresas",
+        "pk": 9,
+        "fields": {
+            "ruta_foto": "Carrusel/dg_disenos_gigan_00008.jpeg",
+            "empresa_id": 4
+        }
+    },
+    {
+        "model": "Modelos.fotos_empresas",
+        "pk": 10,
+        "fields": {
+            "ruta_foto": "Carrusel/dg_disenos_gigan_00009.jpeg",
+            "empresa_id": 4
+        }
+    },
+    {
+        "model": "Modelos.fotos_empresas",
+        "pk": 11,
+        "fields": {
+            "ruta_foto": "Carrusel/dg_disenos_gigan_00010.jpeg",
+            "empresa_id": 4
+        }
+    },
+    {
+        "model": "Modelos.fotos_empresas",
+        "pk": 12,
+        "fields": {
+            "ruta_foto": "Carrusel/dg_disenos_gigan_00003.jpeg",
+            "empresa_id": 4
+        }
+    }
+]

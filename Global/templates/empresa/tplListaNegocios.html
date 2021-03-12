@@ -1,0 +1,57 @@
+{% extends 'components/base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/global/em_lista.css' %}">
+{% endblock css %}
+
+{% block title %}Negocios - {% endblock title %}
+
+{% block navbar %}
+{% include 'components/nav.html' %}
+{% endblock navbar %}
+
+{% block content %}
+<div>
+    <div class="subtitulo">
+        {% if empresas.count != 0 %}
+        <h5 class="ptb-4">{{ empresas.0.activi_comercial.nombre }}</h5>
+        {% else %}
+        <div class="ptb-4">
+            <div class="alert alert-danger" role="alert">
+                Ups! Parece que no hay empresas registradas para esta categoría...
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    <div class="card-flex">
+        {% for empresa in empresas %}
+        <div class="card card-hover">
+            <a href="{% url 'pr_sr_negocio' empresa.id %}" class="text-card">
+                {% if empresa.perfil_foto %}
+                <img src="{{ empresa.perfil_foto.url }}" class="card-img-top card-height">
+                {% else %}
+                <div class="card-height">
+                    <img src="{% static 'img/img_macara/tienda_color.png' %}"
+                        style="height: 100%; width: 85%; display: flex; margin: auto;" class="card-img-top">
+                </div>
+                {% endif %}
+                <div class="card-content">
+                    <div class="text-truncation-hu" title="{{ empresa.nom_empresa }}">
+                        <h5 class="card-title m-0 text-center">{{ empresa.nom_empresa }}</h5>
+                    </div>
+                    <div>
+                        <p class="m-0"><strong>Abre: </strong>{{ empresa.inicio_atencion|time:"H\h:i\m" }}</p>
+                        <p class="m-0"><strong>Cierra: </strong>{{ empresa.fin_atencion|time:"H\h:i\m" }}</p>
+                    </div>
+                    <div>
+                        <p class="m-0"><strong>Celular: </strong>{{ empresa.telefonos.all.first.telefono }}</p>
+                        <p class="m-0"><strong>Dirección: </strong>{{ empresa.direccion }}</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

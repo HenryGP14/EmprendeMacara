@@ -1,0 +1,134 @@
+{% extends 'tplAdminMenu.html' %}
+
+{% block content %}
+<div class="nombre-opcion">Perfil</div>
+<div id="bodyContenido">
+    <form id="formPerfil" name="formPerfil" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-sm-9">
+                <section class="card">
+                    <section class="card-body">
+                        <section class="form-group row justify-content-center">
+                            <section class="col-sm-3 text-center">
+                                <label for="txtAdministrador" class="col-form-label">Nombre: </label>
+                            </section>
+                            <section class="col-sm-6">
+                                <input type="text" class="form-control" id="txtAdministrador" name="txtAdministrador" value="{{datos.unUsuario.nom_usuario}}"
+                                    placeholder="Ingrese su nombre" autocomplete="off" maxlength="26"
+                                    onkeypress="javascript:soloLetras(event);" required />
+                            </section>
+                        </section>
+                        <section class="form-group row justify-content-center">
+                            <section class="col-sm-3 text-center">
+                                <label for="txtUsuario" class="col-form-label">Usuario: </label>
+                            </section>
+                            <section class="col-sm-6">
+                                <input type="email" class="form-control" id="txtUsuario" name="txtUsuario" value="{{datos.unUsuario.correo}}"
+                                    maxlength="75" placeholder="Ejemplo: usuario@gmail.com" autocomplete="off"
+                                    required />
+                            </section>
+                        </section>
+
+                        <section class="form-group row justify-content-center">
+                            <section class="col-sm-3 text-center">
+                                <label for="txtContraActul" class="col-form-label">Contraseña actual: </label>
+                            </section>
+                            <section class="col-sm-6">
+                                <input type="password" class="form-control" id="txtContraActul" name="txtContraActul"
+                                    placeholder="Ingrese la contraseña anterior" autocomplete="off"
+                                    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,}$"
+                                    title="La contraseña debe tener al menos 6 caracteres, un número, una mayúscula y minúscula"
+                                    />
+                            </section>
+                        </section>
+                        <section class="form-group row justify-content-center">
+                            <section class="col-sm-3 text-center">
+                                <label for="txtNewContra" class="col-form-label">Nueva contraseña: </label>
+                            </section>
+                            <section class="col-sm-6">
+                                <input type="password" class="form-control" id="txtNewContra" name="txtNewContra"
+                                    placeholder="Ingrese la nueva contraseña" autocomplete="off" />
+                            </section>
+                        </section>
+                        <section class="form-group row justify-content-center">
+                            <section class="col-sm-3 text-center">
+                                <label for="txtConfirContra" class="col-form-label">Confirme la contraseña:
+                                </label>
+                            </section>
+                            <section class="col-sm-6">
+                                <input type="password" class="form-control" id="txtConfirContra" name="txtConfirContra"
+                                    placeholder="Confirme la nueva contraseña" autocomplete="off" />
+                            </section>
+                        </section>
+                    </section>
+                </section>
+            </div>
+            <div class="col-sm-3 text-center">
+                <img id="foto" src="/media/{{datos.unUsuario.ruta_foto}}" class="img-thumbnail img-fluid" name="foto">
+                <label for="imgFoto" class="btn btn-primary">Subir foto</label>
+                <input class="btn btn-success btn-sm subirfoto" type="file" name="imgFoto" id="imgFoto"
+                    accept="image/jpeg,image/png" onchange="previewImagen(this);">
+            </div>
+        </div>
+        <section class="card">
+            <section class="card-body">
+                <section class="form-group justify-content-center">
+                    <section class="col-sm-12" style="text-align: center;">
+                        <button type="submit" class="btn btn-success" id="btnGuardar">
+                            <i class="fas fa-save" aria-hidden="true"></i> Guardar
+                        </button>
+                    </section>
+                </section>
+            </section>
+        </section>
+    </form>
+
+    <div class="modal fade" id="cambioUserContra" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Mensaje</h5>
+            </div>
+            <div class="modal-body">
+              Los cambios fueron realizados correctamente, su sesión se cerrará para que surgan efecto los cambios, el cual deberá inicar sesión nuevamente.
+            </div>
+            <div class="modal-footer">
+                <a href="{% url 'logout' %}" class="btn btn-primary">Aceptar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="mensaje_success" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Mensaje</h5>
+            </div>
+            <div class="modal-body">
+              Los cambios fueron realizados correctamente
+            </div>
+            <div class="modal-footer">
+                <a href="/administradorWeb/perfil-admin/" class="btn btn-primary">Aceptar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+{% endblock %}
+{% block js %}
+<script>
+    // Función para crear una vista previa de la foto seleccionada mediante el input file
+    function previewImagen(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#foto').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+{% endblock js %}

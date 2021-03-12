@@ -1,0 +1,216 @@
+{% extends 'adminNegocioMenu.html' %}
+{% load static %}
+
+{% block title %}Configuracion - {% endblock title %}
+
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/cliente/configuracion.css' %}">
+<link rel="stylesheet" href="{% static 'css/controlnegocio/panel-contenido.css' %}" />
+{% endblock css %}
+
+{% block content %}
+<div class="container pt-3">
+<div class="container-perfil">
+        <h2><strong>Perfil</strong></h2>
+        <div class="user-config-perfil">
+            <!--CAMBIAR FOTO DE PERFIL DE EMPRESA-->
+            <div class="user-config-img">
+                <div class="config">
+                    <!--VERIFICAR SI EEXISTE IMAGEN, CASO CONTRARIO MUESTRO UNA PRE-DETERMINADA-->
+                    {% if request.session.usuario.perfil %}
+                    <img src="{{ request.session.usuario.perfil }}" class="img-perfil" id="img-perfil">
+                    {% else %}
+                    <img src="{% static 'img/img_macara/user.png' %}" class="img-perfil" id="img-perfil">
+                    {% endif %}
+                    <form class="d-flex justify-content-center align-items-center" id="form-save-perfil"
+                        name="form-save-perfil" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="file" id="add-new-img" name="image" accept="image/png , image/jpg , image/jpeg"
+                            style="display: none;">
+                        <div class="mr-2 text-hu">Foto de perfil</div>
+                        <button type="button" class="config-button-edit" id="add-img">
+                            <i class="fas fa-pencil-alt"></i>
+                        </button>
+                        <button type="submit" class="config-button-check" id="check-img">
+                            <i class="fas fa-check"></i>
+                        </button>
+                        <button type="button" class="config-button-cancel cancel" id="cancel-img">
+                            <i class="fas fa-ban"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!--CAMBIAR NOMBRE DE USUARIO DE LA EMPRESA-->
+            <form class="user-config" name="form-save-nombre" id="form-save-nombre">
+                {% csrf_token %}
+                <h5 class="text-hu">Nombres:</h5>
+                <div class="user-name">
+                    <input type="text" value="{{ request.session.usuario.nombre }}" id="input-name" name="user_nombre"
+                        class="user-input" disabled>
+                    <button type="button" class="config-button-edit" id="edit-name">
+                        <i class="fas fa-pencil-alt"></i>
+                    </button>
+                    <button type="submit" class="config-button-check" id="check-name">
+                        <i class="fas fa-check"></i>
+                    </button>
+                    <button type="button" class="config-button-cancel cancel" id="cancel-name">
+                        <i class="fas fa-ban"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!--CAMBIAR CONTRASEÑA DE INGRESO AL CONTROL DE NEGOCIO-->
+        <h2><strong>Cambiar la contraseña</strong></h2>
+        <div class="user-config-pass">
+            <form name="formGuardar" id="formGuardar" method="POST" class="user-form-pass">
+                {% csrf_token %}
+                <label for="txtCredenciales">Contraseña Antigua:</label>
+                <input type="password" id="txtCredenciales" name="txtCredenciales" class="user-input">
+                <label for="txtCredenciales_new">Nueva contraseña:</label>
+                <input type="password" id="txtCredenciales_new" name="txtCredenciales_new" class="user-input">
+                <label for="txtCredenciales_conf">Confirmación de contraseña:</label>
+                <input type="password" id="txtCredenciales_conf" name="txtCredenciales_conf" class="user-input">
+                <div class="d-flex justify-content-center">
+                    <input type="submit" value="Cambiar contraseña" id="btnCambiar"
+                        class="btn btn-success user-new-pass">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+
+{% block js2 %}
+
+<!--CAMBIAR CONTRASEÑA DE LA EMPRESA-->
+<script>
+ $(document).ready(function () {
+        $("#formGuardar").submit(function (e) {
+            e.preventDefault();
+            var parametros = new FormData($(this)[0]);
+            if (validarContraseña("#txtCredenciales_new", "#txtCredenciales_conf")) {
+                document.querySelector("#btnCambiar").setAttribute("disabled", false);
+                document.body.style.cursor = 'wait';
+                $.ajax({
+                    url: '{% url "savepass" %}',
+                    type: 'POST',
+                    data: parametros,
+                    dataType: 'json',
+                    cache: false,
+                    contentType: false,
+                    processData: false
+                }).done(function (data) {
+                    document.body.style.cursor = 'default';
+                    document.querySelector("#btnCambiar").removeAttribute("disabled")
+                    location.href = data.redirect
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    document.body.style.cursor = 'default';
+                    document.querySelector("#btnCambiar").removeAttribute("disabled")
+                }).always(function (data) {
+
+                });
+            }
+        });
+ });
+</script>
+
+<!--CAMBIAR FOTO DE PERFIL DE LA EMPRESA-->
+<script>
+    $('#add-img').click(function () {
+        $("#add-new-img").click();
+    })
+    $('#add-new-img').change(function () {
+        var files = this.files;
+        var supportedImg = ["image/png", "image/jpg", "image/jpeg"];
+        var element_not_validos = false;
+        if (supportedImg.indexOf(files[0].type) != -1) {
+            createPreview(files[0]);
+        } else {
+            element_not_validos = true;
+        }
+    })
+
+    function createPreview(element) {
+        document.getElementById('img-perfil').setAttribute('src', URL.createObjectURL(element))
+        $('#check-img').show();
+        $('#cancel-img').show();
+    }
+
+    $("#form-save-perfil").submit(function (e) {
+            e.preventDefault();
+            var parametros = new FormData($(this)[0]);
+            document.querySelector("#check-img").setAttribute("disabled", false);
+            document.body.style.cursor = 'wait';
+            $.ajax({
+                url: '{% url "guardar-perfil-empresa" %}',
+                type: 'POST',
+                data: parametros,
+                dataType: 'json',
+                cache: false,
+                contentType: false,
+                processData: false
+            }).done(function (data) {
+                document.body.style.cursor = 'default';
+                document.querySelector("#check-img").removeAttribute("disabled")
+                location.href = data.redirect
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                document.body.style.cursor = 'default';
+                document.querySelector("#check-img").removeAttribute("disabled")
+            }).always(function (data) {
+
+            });
+        });
+
+
+</script>
+<!--CAMBIAR NOMBRE DE USUARIO DE LA EMPRESA-->
+<script>
+    $(document).ready(function () {
+        $("#form-save-nombre").submit(function (e) {
+            e.preventDefault();
+            var parametros = new FormData($(this)[0]);
+            document.querySelector("#check-name").setAttribute("disabled", false);
+            document.body.style.cursor = 'wait';
+            $.ajax({
+                url: '{% url "savename" %}',
+                type: 'POST',
+                data: parametros,
+                dataType: 'json',
+                cache: false,
+                contentType: false,
+                processData: false
+            }).done(function (data) {
+                document.body.style.cursor = 'default';
+                document.querySelector("#check-name").removeAttribute("disabled")
+                location.href = data.redirect
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                document.body.style.cursor = 'default';
+                document.querySelector("#check-name").removeAttribute("disabled")
+            }).always(function (data) {
+
+            });
+        });
+    });
+</script>
+
+<!--HABILITAR INPUT DE NOMBRE-->
+<script>
+    $('#edit-name').click(function () {
+        document.getElementById('input-name').disabled = false;
+        $('#check-name').show();
+        $('#cancel-name').show();
+        $('#edit-name').hide();
+    })
+</script>
+
+<!--CANCELAR CAMBIO DE UNA SECCION-->
+<script>
+    $('.cancel').click(function () {
+        location.reload();
+    })
+</script>
+{% endblock js2 %}
