@@ -5,7 +5,7 @@ SECRET_KEY = '&9(pkj4y-7$k2kuklpq43wxix9pbgrrr$mb3#s3b2v^x_vb#8s'
 
 DEBUG = False
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "https://emprendemacara.herokuapp.com/", "https://emprendimientosmacara.com"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -54,23 +54,15 @@ TEMPLATES = [
 WSGI_APPLICATION = 'EmprendeMacara.wsgi.application'
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'emprende_macara',
-#         'USER': 'postgres',
-#         'PASSWORD': '123456',
-#         'HOST': '127.0.0.1',
-#         'DATABASE_PORT': '5432',
-#     }
-# }
-
-import dj_database_url
-from decouple import config
 DATABASES = {
-    'default' : dj_database_url.config(
-        default=config('DATABASE_URL')
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'emprende_macara',
+        'USER': 'postgres',
+        'PASSWORD': '123456',
+        'HOST': '127.0.0.1',
+        'DATABASE_PORT': '5432',
+    }
 }
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -108,7 +100,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = 'smtp.gmail.com'
@@ -116,6 +107,3 @@ EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-
-import django_heroku
-django_heroku.settings(locals())
