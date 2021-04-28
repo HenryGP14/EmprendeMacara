@@ -4,7 +4,7 @@
         "pk": 18,
         "fields": {
             "nom_usuario": "Admin Web",
-            "correo": "ca884012@gmail.com",
+            "correo": "emprendimientosmacara@gmail.com",
             "credenciales": "Admin123456",
             "ruta_foto": null,
             "estado": true,
