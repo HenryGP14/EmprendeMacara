@@ -17,7 +17,7 @@ Y pueden ver como se desencripta, en el archivo Global/templates/components/erro
 Posdata ir a la carpeta Modelos/fixtures y lean las instrucciones.
 
 
-# --- # --- # --- # DEPLOY # --- # --- # --- #
+# --- # --- # --- # DEPLOY EN HEROKU # --- # --- # --- #
 
 PASOS:
 ##### Instalación de las librerías #####

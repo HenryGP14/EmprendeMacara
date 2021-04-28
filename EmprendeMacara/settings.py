@@ -5,7 +5,7 @@ SECRET_KEY = '&9(pkj4y-7$k2kuklpq43wxix9pbgrrr$mb3#s3b2v^x_vb#8s'
 
 DEBUG = False
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["72.167.36.69", "emprendimientosmacara.com", "www.emprendimientosmacara.com"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -30,7 +30,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'EmprendeMacara.urls'
@@ -60,7 +59,7 @@ DATABASES = {
         'NAME': 'emprende_macara',
         'USER': 'postgres',
         'PASSWORD': '123456',
-        'HOST': '127.0.0.1',
+        'HOST': 'localhost',
         'DATABASE_PORT': '5432',
     }
 }

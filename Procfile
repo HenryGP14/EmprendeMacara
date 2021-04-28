@@ -1,2 +1,0 @@
-web: gunicorn EmprendeMacara.wsgi
-release: echo "Felicidades, se creó y ejecutó correctamente el dyno (Dyno es como un hilo que ejecuta las peticiones HTTP y permite usar comandos python desde heroku). Este archivo es obligatorio en Heroku"
