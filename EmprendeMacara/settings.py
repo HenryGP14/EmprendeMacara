@@ -5,7 +5,7 @@ SECRET_KEY = '&9(pkj4y-7$k2kuklpq43wxix9pbgrrr$mb3#s3b2v^x_vb#8s'
 
 DEBUG = False
 
-ALLOWED_HOSTS = ["72.167.36.69", "emprendimientosmacara.com", "www.emprendimientosmacara.com"]
+ALLOWED_HOSTS = ["72.167.36.69", "emprendimientosmacara.com", "www.emprendimientosmacara.com", "localhost"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -90,8 +90,8 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+#STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
