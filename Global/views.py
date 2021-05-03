@@ -144,7 +144,7 @@ def vwTplListaNegocios(request, negocio_id):
 
     list_negocios = empresas.objects.filter(activi_comercial_id=negocio_id, estado="Habilitada")
 
-    return render(request, "empresa/TplListaNegocios.html", {"empresas": list_negocios})
+    return render(request, "empresa/tplListaNegocios.html", {"empresas": list_negocios})
 
 
 # Vista que carga la información del negocio según su id
@@ -157,7 +157,7 @@ def vwTplInfoNegocio(request, empresa_id):
         pass
 
     list_negocios = empresas.objects.get(pk=empresa_id, estado="Habilitada")
-    return render(request, "empresa/TplInfoNegocio.html", {"empresa": list_negocios})
+    return render(request, "empresa/tplInfoNegocio.html", {"empresa": list_negocios})
 
 
 # Vista que carga los productos y servicos de la empresa sefún su id
@@ -176,4 +176,4 @@ def vwTplPrSrNegocio(request, empresa_id):
 
     empresa = empresas.objects.get(pk=empresa_id, estado="Habilitada")
 
-    return render(request, "empresa/TplPrSrNegocio.html", {"empresa": empresa, "em_fotos_servicio": em_fotos_servicio, "em_fotos_producto": em_fotos_producto})
+    return render(request, "empresa/tplPrSrNegocio.html", {"empresa": empresa, "em_fotos_servicio": em_fotos_servicio, "em_fotos_producto": em_fotos_producto})
