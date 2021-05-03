@@ -3,7 +3,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '&9(pkj4y-7$k2kuklpq43wxix9pbgrrr$mb3#s3b2v^x_vb#8s'
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["72.167.36.69", "emprendimientosmacara.com", "www.emprendimientosmacara.com", "localhost"]
 
