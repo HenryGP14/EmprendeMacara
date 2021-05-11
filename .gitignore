@@ -53,5 +53,4 @@ Thumbs.db
 .vscode
 Pipfile
 Pipfile.lock
-settings.py
-Cliente/
+*settings.py
