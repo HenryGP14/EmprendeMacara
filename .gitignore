@@ -51,5 +51,6 @@ Thumbs.db
 
 # Archivo de configuración
 .vscode
-EmprendeMacara/Modelos/fixtures/007_admin_p.json
-EmprendeMacara/media/Perfiles/Henry_Perez_U_21.png
+Pipfile
+Pipfile.lock
+EmprendeMacara/settings.py

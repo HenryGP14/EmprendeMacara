@@ -5,8 +5,8 @@ SECRET_KEY = '&9(pkj4y-7$k2kuklpq43wxix9pbgrrr$mb3#s3b2v^x_vb#8s'
 
 DEBUG = True
 
-#ALLOWED_HOSTS = ["72.167.36.69", "emprendimientosmacara.com", "www.emprendimientosmacara.com", "localhost"] # "Descomentar en producción"
-ALLOWED_HOSTS = [] # Cuando esta en desarrollo "Elimnar cuando este en producción"
+ALLOWED_HOSTS = ["72.167.36.69", "emprendimientosmacara.com", "www.emprendimientosmacara.com", "localhost"] # "Descomentar en producción"
+#ALLOWED_HOSTS = [] # Cuando esta en desarrollo "Elimnar cuando este en producción"
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -59,7 +59,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'emprende_macara',
         'USER': 'postgres',
-        'PASSWORD': '310119hg',
+        'PASSWORD': '123456',
         'HOST': 'localhost',
         'DATABASE_PORT': '5432',
     }
@@ -91,8 +91,8 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-#STATIC_ROOT = os.path.join(BASE_DIR, 'static') # -- Aquí funciona solo para producción "Descomentar cuando este en producción" 
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),) # -- Aquí funciona solo en desarrollo "Comentar o eliminar cuando este en producción"
+STATIC_ROOT = os.path.join(BASE_DIR, 'static') # -- Aquí funciona solo para producción "Descomentar cuando este en producción" 
+#STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),) # -- Aquí funciona solo en desarrollo "Comentar o eliminar cuando este en producción"
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
