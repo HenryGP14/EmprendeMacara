@@ -53,4 +53,5 @@ Thumbs.db
 .vscode
 Pipfile
 Pipfile.lock
-EmprendeMacara/settings.py
+settings.py
+Cliente/
