@@ -21,22 +21,17 @@
         <form action="{% url 'logear' %}" method="POST" class="log-form">
             {% csrf_token %}
             <label for="validacion_usuario" class="log-f-label">Usuario</label>
-            <input type="email" id="validacion_usuario" name="txtUsuario" placeholder="ejemplo@gmail.com" autocomplete="off" class="log-f-input">
+            <input type="email" id="validacion_usuario" name="txtUsuario" placeholder="ejemplo@gmail.com"
+                autocomplete="off" class="log-f-input">
             <label for=" validacion_credenciales" class="log-f-label">Contraseña</label>
             <input type="password" id="validacion_credenciales" name="txtCredenciales" class="log-f-input">
             <input type="submit" value="Iniciar" class="log-f-enviar btn btn-success">
         </form>
         <div class="log-links">
-            <div>
-                Aun no tienes una cuenta con nosotros,
-                <a href="{% url 'registrar' %}">
-                    regístrate aquí
-                </a>
-            </div>
-            <div>
+            <div class="mt-1">
                 Si quieres formar parte de la comunidad de Emprendimientos Macará, registra tu
                 <a href="{% url 'solicitar-cuenta' %}">
-                    negocio aquí
+                    negocio aquí.
                 </a>
             </div>
         </div>

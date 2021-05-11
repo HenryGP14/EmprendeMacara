@@ -128,7 +128,7 @@ def vwTplRegistrar(request):
     except:
         pass
 
-    return render(request, "autenticacion/registrar_c.html")
+    return redirect("solicitar-cuenta")
 
 
 # Vista que retorna el html más la lista de empresas segun su id
