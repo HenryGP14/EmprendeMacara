@@ -8,6 +8,9 @@ class Carrito:
         carrito = self.session.get("carrito")
         if not carrito:
             carrito = self.session["carrito"] = {}
+        # Esta linea permite decirle a django que elimine las sessión del carrito cuando cierra el navegador
+        request.session.set_expiry(0)
+        # Fin
         self.carrito = carrito
 
     def add(self, producto):
