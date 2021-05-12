@@ -80,6 +80,16 @@
 					{% endfor %}
 				</p>
 			</div>
+
+			<div>
+				<i class=" fas fa-dollar-sign"></i><strong> Forma de pago: </strong>
+				<p>
+					Pago en efectivo
+					{% if empresa.cuentas_bancarias.all|length > 0 %}
+					y pago por transferencia.
+					{% endif %}
+				</p>
+			</div>
 		</div>
 	</div>
 </div>
