@@ -18,7 +18,14 @@
 
 .cart .btn-all {
     display: flex;
-    justify-content: flex-end;
+}
+
+.img-cart {
+    background-color: gainsboro;
+    width: 250px;
+    height: 200px;
+    margin-right: 25px;
+    border-style: groove;
 }
 
 .cart .content {
@@ -31,22 +38,13 @@
     margin-bottom: -2px;
 }
 
-.img-cart {
-    background-color: gainsboro;
-    width: 250px;
-    height: 200px;
-    margin-right: 25px;
-    border-style: groove;
-}
-
-.cart .content .description {
+.cart .description {
     display: flex;
 }
 
 .cart .content .options {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
 }
 
 .cart .options > div {
@@ -99,4 +97,40 @@
 
 .cart .handle {
     margin-right: 10px;
+}
+
+@media (max-width: 850px) {
+    .cart .content {
+        grid-template-columns: 100%;
+    }
+
+    .cart .description {
+        justify-content: center;
+    }
+
+    .cart .content .options {
+        margin-top: 5px;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 450px) {
+    .img-cart {
+        margin-right: 0;
+    }
+
+    .cart .content .description {
+        display: block;
+        margin: auto;
+    }
+
+    .cart .content .options {
+        display: block;
+        margin: auto;
+        padding-top: 5px;
+    }
+
+    .cart .content .options .btn-options {
+        margin-top: 10px;
+    }
 }

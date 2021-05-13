@@ -34,12 +34,12 @@
                 </div>
             </div>
             <div class="options">
-                <div>
-                    <div class="handle" id="handleCounter{{ carrito.producto_id }}">
-                        <button class="btn-decrementar" pid="{{ carrito.producto_id }}" type="button">-</button>
-                        <input type="text" value="{{ carrito.cantidad }}" class="cart-imput">
-                        <button class="btn-incrementar" pid="{{ carrito.producto_id }}" type="button">+</button>
-                    </div>
+                <div class="handle" id="handleCounter{{ carrito.producto_id }}">
+                    <button class="btn-decrementar" pid="{{ carrito.producto_id }}" type="button">-</button>
+                    <input type="text" value="{{ carrito.cantidad }}" class="cart-imput">
+                    <button class="btn-incrementar" pid="{{ carrito.producto_id }}" type="button">+</button>
+                </div>
+                <div class="btn-options">
                     <a href="{% url 'remove-producto' carrito.producto_id %}" class="btn btn-danger mr-1">
                         Quitar
                         <i class=" far fa-trash-alt"></i>

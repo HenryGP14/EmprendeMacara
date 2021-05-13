@@ -52,19 +52,23 @@
     transition: ease-in-out 0.4s;
 }
 
-.modal-body strong{
+.modal-body strong {
     font-weight: 645;
 }
-.modal-body table{
+.modal-body table {
     width: 100%;
 }
 .modal-body table tr,
-.modal-body .borde-inferior{
+.modal-body .borde-inferior {
     border-bottom: 1px solid #d2d2d2;
 }
 .modal-body table td,
-.modal-body .borde-inferior{
+.modal-body .borde-inferior {
     padding: 0.3rem 0rem;
+}
+
+.c-carts {
+    margin-right: 20px;
 }
 
 @media (min-width: 1660px) {

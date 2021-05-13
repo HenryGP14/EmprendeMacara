@@ -73,10 +73,7 @@ def vwLogin(request):
 
             # Guardar el usuario y carrito en una variable session
             user_session.add(usuario)
-            carrito = carritos.objects.filter(usuario_id=usuario.id)
             cart_session = Carrito(request)
-            for cart in carrito:
-                cart_session.add_cart(cart)
             return redirect("index")
         else:
             messages.error(request, "La contraseña es incorrecta " + usuario.nom_usuario)
@@ -98,16 +95,6 @@ def vwLogout(request):
     user_session = Usuario(request)
     if request.session["usuario"]["rol_id"] == 1:
         cart_session = Carrito(request)
-
-        # Guardar los productos que tenia en carrito sesion a una tabla para luego volverlos a cargar
-        for producto in request.session["carrito"].values():
-            carrito = carritos.objects.filter(usuario_id=request.session["usuario"]["id"], producto_id=producto["producto_id"])
-            if carrito:
-                carrito[0].cantidad = cantidad = producto["cantidad"]
-                carrito[0].save()
-            else:
-                carritos.objects.create(cantidad=producto["cantidad"], producto_id=producto["producto_id"], usuario_id=request.session["usuario"]["id"])
-
         # Eliminar los valores de carrito y usuario session
         cart_session.clear()
     user_session.clear()
