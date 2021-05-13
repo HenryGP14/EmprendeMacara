@@ -6,6 +6,10 @@ from django.db import transaction
 from django.contrib import messages
 from django.http import JsonResponse
 
+from django.conf import settings
+from django.template.loader import get_template
+from django.core.mail import EmailMultiAlternatives
+
 from Modelos.models import (
     usuarios,
     productos,
@@ -183,6 +187,14 @@ def vwRegPedido(request):
         detalle_venta.ruta_foto.name = "deposito_" + str(hoy.strftime("%y-%m-%d %H.%M.%S")) + "." + exten[-1]
 
     detalle_venta.save()
+
+    settings.EMAIL_HOST_USER = "ca884012@gmail.com"
+    settings.EMAIL_HOST_PASSWORD = ""
+    template = get_template("factura-correo.html")
+    content = template.render()
+    email = EmailMultiAlternatives("Asunto", " ", settings.EMAIL_HOST_USER, ["carlos.almeida2017@uteq.edu.ec"])
+    email.attach_alternative(content, "text/html")
+    email.send()
 
     carrito = Carrito(request)
     carrito.remove(producto_obj)

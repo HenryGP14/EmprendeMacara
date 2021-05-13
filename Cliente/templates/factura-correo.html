@@ -1,0 +1,210 @@
+<html>
+
+<head>
+    <style>
+
+        * {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        .card-header {
+            background-color: #5794ef;
+            height: 16% !important;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .header-titulo,
+        .header-sub-titulo {
+            color: white;
+            text-align: center;
+        }
+
+        .header-titulo {
+            padding-top: 10px;
+        }
+        .header-sub-titulo{
+            margin-bottom: 5px;
+        }
+
+        .body-titulo {
+            border-bottom: solid 1px black;
+        }
+
+        .agrupacion-datos {
+            margin: 1rem 2rem;
+        }
+
+        .agrupacion-datos .dato {
+            display: flex;
+            align-items: center;
+            margin: 0.5rem 0rem;
+        }
+
+        .card-body {
+            padding: 10px;
+            width: 65%;
+            margin: auto;
+        }
+
+        .body-datos {
+            margin-left: 18%;
+        }
+
+        .body-datos .dato{
+            margin-top: -14px;
+        }
+
+        .productos,
+        .resumen {
+            margin: 0.5rem 0rem;
+            max-width: 510px;
+        }
+
+        .tabla-detalle-items {
+            margin: 0.9rem 0rem;
+            width: 100%;
+        }
+
+        .tabla-detalle-items th,
+        .tabla-detalle-items td {
+            padding: 0.3rem 0.6rem;
+            font-weight: normal;
+        }
+
+        .tabla-detalle-items th {
+            background-color: #daedde;
+        }
+
+        .resumen .valor {
+            text-align: end;
+        }
+
+        .col1, .col2{
+            display: inline-block;
+        }
+        .col1{
+            text-align: right;
+            width: 15%;
+            margin-right: 30px;
+        }
+
+        .card-footer {
+            color: white;
+            text-align: center;
+            background-color: #5794ef;
+            margin-top: 2rem;
+            padding: 1rem;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        @media screen and (max-width: 600px) {
+            .card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <div class="card-header">
+            <h2 class="header-titulo">Facturación del pedido</h2>
+            <h5 class="header-sub-titulo">¡Genial! Hemos recibido tu pedido</h5>
+        </div>
+        <div class="card-body">
+            <div class="datos-facturacion">
+                <div class="body-titulo">
+                    <h3>Datos de facturación</h3>
+                </div>
+                <div class="body-datos"> 
+                    <br>
+                    <div class="dato">
+                        <div class="col1">
+                            <p><strong>Cliente:</strong> </p> 
+                        </div>
+                        <div class="col2">
+                            <p>Carlos Almeida</p>
+                        </div>
+                    </div>
+                    <div class="dato">
+                        <div class="col1">
+                            <p><strong>Cédula:</strong> </p> 
+                        </div>
+                        <div class="col2">
+                            <p>0929168581</p>
+                        </div>
+                    </div>
+                    <div class="dato">
+                        <div class="col1">
+                            <p><strong>Email:</strong> </p> 
+                        </div>
+                        <div class="col2">
+                            <p>ca884012@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="dato">
+                        <div class="col1">
+                            <p><strong>Celular:</strong> </p> 
+                        </div>
+                        <div class="col2">
+                            <p></label>0929168581</p>
+                        </div>
+                    </div>
+                    <div class="dato">
+                        <div class="col1">
+                            <p><strong>Dirección:</strong> </p> 
+                        </div>
+                        <div class="col2">
+                            <p>Av 24 de mayo, frente al banco Loja</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="detalles-facturacion">
+                <div class="body-titulo">
+                    <h3>Detalles de Facturación</h3>
+                </div>
+                <div class="body-datos">
+                    <div class="agrupacion-datos">
+                        <div class="productos">
+                            <table class="tabla-detalle-items">
+                                <thead>
+                                    <th><strong>#</strong></th>
+                                    <th><strong>Producto</strong></th>
+                                    <th class="text-center"><strong>Cantidad</strong></th>
+                                    <th class="text-right"><strong>Total</strong></th>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Flash memory 8 gb</td>
+                                        <td class="text-center"> 6 </td>
+                                        <td class="text-right">$ 2 </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="resumen">
+                            <div class="valor"><strong>SubTotal:</strong> $ 12.00 </div>
+                            <div class="valor"><strong>Costo de envío:</strong> $ 0.50</div>
+                            <div class="valor"><strong>Total:</strong> $ 12.50 </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="card-footer">
+            <p>
+                Emprendimientos Macará es la comunidad de empresas locales en la que los negocios pueden compartir o
+                publicar productos y servicios que ofrecen.
+            </p>
+        </div>
+    </footer>
+    </div>
+</body>
+
+</html>

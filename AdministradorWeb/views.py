@@ -94,17 +94,21 @@ def vwGrdPerfil(request):
                             unUsuario.credenciales = request.POST["txtNewContra"]
                             unUsuario.correo = request.POST["txtUsuario"]
                             unUsuario.nom_usuario = request.POST["txtAdministrador"]
-                            imgBorrar = "media\\" + unUsuario.ruta_foto.name
                             try:
+                                imgBorrar = "media\\" + unUsuario.ruta_foto.name
                                 unUsuario.ruta_foto = request.FILES["imgFoto"]
                                 a, b = os.path.splitext(unUsuario.ruta_foto.name)
                                 unUsuario.ruta_foto.name = "PerfilAdministrador" + str(unUsuario.id) + b
                                 os.remove(imgBorrar)
                             except Exception as e:
                                 pass
+
                             unUsuario.save()
                             user_session.edit_nombre(unUsuario.nom_usuario)
-                            user_session.edit_perfil(unUsuario.ruta_foto)
+                            try:
+                                user_session.edit_perfil(unUsuario.ruta_foto)
+                            except Exception as e:
+                                pass
                             # Se envia cambioUserContra = si, para mostrar un mensaje que se cerrará la sesión y al aceptar se cierra la sesión
                             return JsonResponse({"result": "1", "cambioUserContra": "si"})
                         else:
@@ -115,8 +119,8 @@ def vwGrdPerfil(request):
                 elif request.POST["txtUsuario"] != unUsuario.correo:
                     unUsuario.correo = request.POST["txtUsuario"]
                     unUsuario.nom_usuario = request.POST["txtAdministrador"]
-                    imgBorrar = "media\\" + unUsuario.ruta_foto.name
                     try:
+                        imgBorrar = "media\\" + unUsuario.ruta_foto.name
                         unUsuario.ruta_foto = request.FILES["imgFoto"]
                         a, b = os.path.splitext(unUsuario.ruta_foto.name)
                         unUsuario.ruta_foto.name = "PerfilAdministrador" + str(unUsuario.id) + b
@@ -125,14 +129,17 @@ def vwGrdPerfil(request):
                         pass
                     unUsuario.save()
                     user_session.edit_nombre(unUsuario.nom_usuario)
-                    user_session.edit_perfil(unUsuario.ruta_foto)
+                    try:
+                        user_session.edit_perfil(unUsuario.ruta_foto)
+                    except Exception as e:
+                        pass
                     # Se envia cambioUserContra = si, para mostrar un mensaje que se cerrará la sesión y al aceptar se cierra la sesión
                     return JsonResponse({"result": "1", "cambioUserContra": "si"})
                 # Ingresa si se cambio el nombre de usuario o foto de perfil
                 else:
                     unUsuario.nom_usuario = request.POST["txtAdministrador"]
-                    imgBorrar = "media\\" + unUsuario.ruta_foto.name
                     try:
+                        imgBorrar = "media\\" + unUsuario.ruta_foto.name
                         unUsuario.ruta_foto = request.FILES["imgFoto"]
                         a, b = os.path.splitext(unUsuario.ruta_foto.name)
                         unUsuario.ruta_foto.name = "PerfilAdministrador" + str(unUsuario.id) + b
@@ -141,7 +148,10 @@ def vwGrdPerfil(request):
                         pass
                     unUsuario.save()
                     user_session.edit_nombre(unUsuario.nom_usuario)
-                    user_session.edit_perfil(unUsuario.ruta_foto)
+                    try:
+                        user_session.edit_perfil(unUsuario.ruta_foto)
+                    except Exception as e:
+                        pass
                     return JsonResponse({"result": "1", "cambioUserContra": "no"})
 
         except Exception as e:
@@ -150,7 +160,6 @@ def vwGrdPerfil(request):
 
 # Vista que retorna las empresas de acuerdo a un estado seleccionado
 def vwgetEmpresas(request):
-    user_session = Usuario(request)
     try:
         if not request.session["usuario"] or request.session["usuario"]["rol_id"] == 1:
             return redirect("index")
@@ -174,7 +183,6 @@ def vwgetEmpresas(request):
 
 # Vista que busca empresas por nombre del gerente o nombre de la empresas en función de un estado
 def vwBusEmpresa(request):
-    user_session = Usuario(request)
     try:
         if not request.session["usuario"] or request.session["usuario"]["rol_id"] == 1:
             return redirect("index")
@@ -200,7 +208,6 @@ def vwBusEmpresa(request):
 
 # Vista que retorna las solicitudes de las empresas
 def vwgetSolicitudes(request):
-    user_session = Usuario(request)
     try:
         if not request.session["usuario"] or request.session["usuario"]["rol_id"] == 1:
             return redirect("index")
@@ -224,7 +231,6 @@ def vwgetSolicitudes(request):
 
 # Vista que busca solicitudes de empresas
 def vwBusSolicitud(request):
-    user_session = Usuario(request)
     try:
         if not request.session["usuario"] or request.session["usuario"]["rol_id"] == 1:
             return redirect("index")
@@ -272,7 +278,6 @@ def crearJson(request, jsonEmpresas, e, telefonos):
 
 # Vista que cambia el estado de una empresa: Habilitada o Deshabilitada
 def vwCambiarEstado(request):
-    user_session = Usuario(request)
     try:
         if not request.session["usuario"] or request.session["usuario"]["rol_id"] == 1:
             return redirect("index")
@@ -293,7 +298,6 @@ def vwCambiarEstado(request):
 
 # Vista acepta la solicitud de una empresa
 def vwAceptarSolici(request):
-    user_session = Usuario(request)
     try:
         if not request.session["usuario"] or request.session["usuario"]["rol_id"] == 1:
             return redirect("index")
@@ -335,7 +339,6 @@ def vwAceptarSolici(request):
 
 # Vista que rechaza la solicitud de una empresa
 def vwRechazarSolici(request):
-    user_session = Usuario(request)
     try:
         if not request.session["usuario"] or request.session["usuario"]["rol_id"] == 1:
             return redirect("index")
