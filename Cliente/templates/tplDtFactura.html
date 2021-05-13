@@ -29,23 +29,28 @@
                 <div class="with-form">
                     <div class="dato">
                         <div class="etiqueta">Nombres:</div>
-                        <input type="text" name="nombres" id="nombres" class="form-control" value="{{ datos.nombre }}"
+                        <input type="text" name="nombres" id="nombres" class="form-control" 
                             required onkeypress="soloLetras(event)">
                     </div>
                     <div class="dato">
-                        <div class="etiqueta">E-mail:</div>
-                        <input type="email" name="email" id="email" class="form-control" value="{{ datos.correo }}"
-                            required>
+                        <div class="etiqueta">Cédula:</div>
+                        <input type="text" name="cedula" id="cedula" class="form-control" maxlength="10"
+                            required onkeypress="soloNumeros(event)">
                     </div>
                     <div class="dato">
-                        <div class="etiqueta">Dirección:</div>
-                        <input type="text" name="direccion" id="direccion" class="form-control"
-                            value="{{ datos.direccion }}" required>
+                        <div class="etiqueta">E-mail:</div>
+                        <input type="email" name="email" id="email" class="form-control" 
+                            required>
                     </div>
                     <div class="dato">
                         <div class="etiqueta">Celular:</div>
                         <input type="text" name="celular" id="celular" class="form-control" value="{{ datos.telefono }}"
                             maxlength="10" minlength="7" onkeypress="soloNumeros(event)" required>
+                    </div>
+                    <div class="dato">
+                        <div class="etiqueta">Dirección:</div>
+                        <input type="text" name="direccion" id="direccion" class="form-control"
+                        required>
                     </div>
                 </div>
             </div>

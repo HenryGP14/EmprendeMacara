@@ -8,9 +8,7 @@ from django.http import JsonResponse
 
 from Modelos.models import (
     usuarios,
-    clientes,
     productos,
-    carritos,
     empresas,
     cuentas_bancarias,
     ventas,
@@ -104,42 +102,18 @@ def vwElmProductoCart(request, producto_id):
     messages.success(request, "El producto " + producto.nombre + "se elimino de tu carrito")
     return redirect("carrito")
 
-
-# Vista que retorna el html de los pedios, listando los pedidos que ha compado
-def vwTplPedidos(request):
-    user_session = Usuario(request)
-    try:
-        if not request.session["usuario"]:
-            messages.info(request, "Debes iniciar sessión para visualizar esta opción")
-            return redirect("login")
-        elif request.session["usuario"]["rol_id"] == 2:
-            return redirect("controlNegocio")
-        elif request.session["usuario"]["rol_id"] == 3:
-            return redirect("admin-web")
-    except:
-        pass
-    usuario = usuarios.objects.get(pk=request.session["usuario"]["id"])
-    cliente_id = usuario.cliente.id
-    pedidos = ventas.objects.filter(cliente_id=cliente_id)
-    return render(request, "tplPedidos.html", {"pedidos": pedidos})
-
 # Vista que retorna el html de detalle de facturación, es decir, culminar la compra
 def vwTplDtFactura(request, producto_id):
     user_session = Usuario(request)
     try:
-        if not request.session["usuario"]:
-            messages.info(request, "Debes iniciar sessión para añadir el producto al carrito")
-            return redirect("login")
-        elif request.session["usuario"]["rol_id"] == 2:
+        if request.session["usuario"]["rol_id"] == 2:
             return redirect("controlNegocio")
         elif request.session["usuario"]["rol_id"] == 3:
             return redirect("admin-web")
     except:
         pass
 
-    usuario = usuarios.objects.get(pk=request.session["usuario"]["id"])
     producto = request.session["carrito"][str(producto_id)]
-    cliente = clientes.objects.filter(usuario_id=request.session["usuario"]["id"])
 
     # Obtener cuentas bancarias
     producto_obj = productos.objects.get(pk=producto["producto_id"])
@@ -151,10 +125,6 @@ def vwTplDtFactura(request, producto_id):
 
     # Guardar los necesarios para enviarlos al html
     datos = {
-        "nombre": usuario.nom_usuario,
-        "correo": usuario.correo,
-        "direccion": cliente[0].direccion,
-        "telefono": cliente[0].telefono,
         "id_producto": producto_obj.id,
         "nombre_producto": producto["nom_producto"],
         "cantidad": producto["cantidad"],
@@ -171,20 +141,23 @@ def vwTplDtFactura(request, producto_id):
 # Vista que permite registrar el pedido a la base de datos
 def vwRegPedido(request):
     nombres = request.POST["nombres"]
+    cedula = request.POST["cedula"]
     email = request.POST["email"]
     direccion = request.POST["direccion"]
     celular = request.POST["celular"]
 
-    cliente = clientes.objects.filter(usuario_id=request.session["usuario"]["id"])
     producto_obj = productos.objects.get(pk=request.POST["id_producto"])
 
     # Tabla ventas
     venta = ventas()
     venta.fecha = datetime.now()
     venta.direccion_entrega = direccion
-    venta.celular = request.POST["celular"]
+    venta.cliente = nombres
+    venta.cedula = cedula
+    venta.celular = celular
+    venta.correo = email
     venta.estado = "Pendiente"
-    venta.cliente_id = cliente[0].id
+
     venta.empresa_id = producto_obj.empresa_id
     venta.tipo_de_pago = request.POST["metodo_pago"]
     venta.save()
@@ -211,11 +184,6 @@ def vwRegPedido(request):
 
     detalle_venta.save()
 
-    cart = carritos.objects.filter(
-        usuario_id=request.session["usuario"]["id"],
-        producto_id=producto_obj.id,
-    )
-    cart.delete()
     carrito = Carrito(request)
     carrito.remove(producto_obj)
 

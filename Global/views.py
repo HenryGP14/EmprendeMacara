@@ -9,7 +9,6 @@ from Modelos.models import (
     productos,
     servicios,
     usuarios,
-    carritos,
 )
 from Global.usuario import Usuario
 from Cliente.carrito import Carrito

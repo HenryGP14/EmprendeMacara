@@ -106,20 +106,14 @@ class productos(models.Model):
     visible = models.BooleanField()
 
 
-class clientes(models.Model):
-    usuario = models.OneToOneField(usuarios, on_delete=models.PROTECT, related_name="cliente")
-    nombres = models.CharField(max_length=50)
-    cedula = models.CharField(max_length=10)
-    direccion = models.TextField()
-    telefono = models.CharField(max_length=10)
-
-
 class ventas(models.Model):
     empresa = models.ForeignKey(empresas, on_delete=models.PROTECT, related_name="ventas")
-    cliente = models.ForeignKey(clientes, on_delete=models.PROTECT, related_name="ventas")
     fecha = models.DateField()
+    cliente = models.CharField(max_length=50)
+    cedula = models.CharField(max_length=10)
+    celular = models.CharField(max_length=10)
+    correo = models.EmailField(max_length=75)
     direccion_entrega = models.TextField()
-    celular = models.CharField(max_length=10, null=False, blank=True)
     tipo_de_pago = models.CharField(max_length=22, null=False, blank=True)
     estado = models.CharField(max_length=22, null=False, blank=True)
     # Entregado-Pendiente-Anulado-Enviado
@@ -136,9 +130,3 @@ class detalles_venta(models.Model):
     ruta_foto = models.ImageField(upload_to="Depositos", blank=True, null=True)
     venta = models.ForeignKey(ventas, on_delete=models.PROTECT, related_name="detalles_venta")
     producto = models.ForeignKey(productos, on_delete=models.PROTECT, related_name="detalles_venta")
-
-
-class carritos(models.Model):
-    cantidad = models.IntegerField()
-    usuario = models.ForeignKey(usuarios, on_delete=models.PROTECT, related_name="carritos")
-    producto = models.ForeignKey(productos, on_delete=models.PROTECT, related_name="carritos")
