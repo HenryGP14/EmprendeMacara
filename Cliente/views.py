@@ -21,6 +21,7 @@ from Modelos.models import (
 
 from Cliente.carrito import Carrito
 from Global.usuario import Usuario
+from Global.correo import Correo
 from datetime import datetime
 
 import os
@@ -144,59 +145,58 @@ def vwTplDtFactura(request, producto_id):
 
 # Vista que permite registrar el pedido a la base de datos
 def vwRegPedido(request):
-    nombres = request.POST["nombres"]
-    cedula = request.POST["cedula"]
-    email = request.POST["email"]
-    direccion = request.POST["direccion"]
-    celular = request.POST["celular"]
+    with transaction.atomic():
+        producto_obj = productos.objects.get(pk=request.POST["id_producto"])
 
-    producto_obj = productos.objects.get(pk=request.POST["id_producto"])
+        # Tabla ventas
+        venta = ventas()
+        venta.fecha = datetime.now()
+        venta.direccion_entrega = request.POST["direccion"]
+        venta.cliente = request.POST["nombres"]
+        venta.cedula = request.POST["cedula"]
+        venta.celular = request.POST["celular"]
+        venta.correo = request.POST["email"]
+        venta.estado = "Pendiente"
 
-    # Tabla ventas
-    venta = ventas()
-    venta.fecha = datetime.now()
-    venta.direccion_entrega = direccion
-    venta.cliente = nombres
-    venta.cedula = cedula
-    venta.celular = celular
-    venta.correo = email
-    venta.estado = "Pendiente"
+        venta.empresa_id = producto_obj.empresa_id
+        empresa = empresas.objects.get(id=venta.empresa_id)
+        venta.tipo_de_pago = request.POST["metodo_pago"]
+        venta.save()
 
-    venta.empresa_id = producto_obj.empresa_id
-    venta.tipo_de_pago = request.POST["metodo_pago"]
-    venta.save()
+        # tabla detalle de venta
+        detalle_venta = detalles_venta()
+        detalle_venta.venta_id = venta.id
+        detalle_venta.producto = producto_obj
+        detalle_venta.producto_id = producto_obj.id
+        detalle_venta.cantidad = int(request.POST["cantidad"])
+        detalle_venta.precio_unitario = producto_obj.precio_unitario
+        # Sacar el sub total del producto, sin el costo de envio
+        precio_subt_producto = float(str(request.POST["cantidad"]).replace(",", ".")) * float(producto_obj.precio_unitario)
+        detalle_venta.precio_sub_total = precio_subt_producto
+        detalle_venta.precio_envio = producto_obj.empresa.costo_envio
 
-    # tabla detalle de venta
-    detalle_venta = detalles_venta()
-    detalle_venta.venta_id = venta.id
-    detalle_venta.producto_id = producto_obj.id
-    detalle_venta.cantidad = int(request.POST["cantidad"])
-    detalle_venta.precio_unitario = producto_obj.precio_unitario
-    # Sacar el sub total del producto, sin el costo de envio
-    precio_subt_producto = float(str(request.POST["cantidad"]).replace(",", ".")) * float(producto_obj.precio_unitario)
-    detalle_venta.precio_sub_total = precio_subt_producto
-    detalle_venta.precio_envio = producto_obj.empresa.costo_envio
+        if request.POST["metodo_pago"] == "Depósito":
+            detalle_venta.monto_depositado = float(str(request.POST["valor-deposito"]).replace(",", "."))
+            detalle_venta.entidad_bancaria = request.POST["entidad-bancaria"]
+            detalle_venta.num_documento = request.POST["num-documento"]
+            detalle_venta.ruta_foto = request.FILES["img-deposito"]
+            hoy = datetime.now()
+            exten = str(detalle_venta.ruta_foto.name).split(".")
+            detalle_venta.ruta_foto.name = "deposito_" + str(hoy.strftime("%y-%m-%d %H.%M.%S")) + "." + exten[-1]
 
-    if request.POST["metodo_pago"] == "Depósito":
-        detalle_venta.monto_depositado = float(str(request.POST["valor-deposito"]).replace(",", "."))
-        detalle_venta.entidad_bancaria = request.POST["entidad-bancaria"]
-        detalle_venta.num_documento = request.POST["num-documento"]
-        detalle_venta.ruta_foto = request.FILES["img-deposito"]
-        hoy = datetime.now()
-        exten = str(detalle_venta.ruta_foto.name).split(".")
-        detalle_venta.ruta_foto.name = "deposito_" + str(hoy.strftime("%y-%m-%d %H.%M.%S")) + "." + exten[-1]
+        detalle_venta.save()
 
-    detalle_venta.save()
+        unCorreo = Correo(request)
+        context = {"tipoUsuario": "empresa", "venta": venta, "detalle_venta": detalle_venta, "costoEnvio": str("{0:.2f}".format(producto_obj.empresa.costo_envio)).replace(".", ","),"total": ("{0:.2f}".format(float(detalle_venta.precio_sub_total) + float(detalle_venta.precio_envio))).replace(".", ",")}
+        unUsuarioAdmin = usuarios.objects.filter(rol_id=3).first()
+        if(unCorreo.send(unUsuarioAdmin, empresa.correo, "Facturación del pedido - Emprendimientos Macará", "factura-correo.html", context)):
+            unCorreo = Correo(request)
+            context = {"tipoUsuario": "cliente", "venta": venta, "detalle_venta": detalle_venta, "costoEnvio": str("{0:.2f}".format(producto_obj.empresa.costo_envio)).replace(".", ","),"total": ("{0:.2f}".format(float(detalle_venta.precio_sub_total) + float(detalle_venta.precio_envio))).replace(".", ",")}
+            unUsuarioAdmin = usuarios.objects.filter(rol_id=3).first()
+            unCorreo.send(unUsuarioAdmin, venta.correo, "Facturación del pedido - Emprendimientos Macará", "factura-correo.html", context)
 
-    settings.EMAIL_HOST_USER = "ca884012@gmail.com"
-    settings.EMAIL_HOST_PASSWORD = ""
-    template = get_template("factura-correo.html")
-    content = template.render()
-    email = EmailMultiAlternatives("Asunto", " ", settings.EMAIL_HOST_USER, ["carlos.almeida2017@uteq.edu.ec"])
-    email.attach_alternative(content, "text/html")
-    email.send()
+        carrito = Carrito(request)
+        carrito.remove(producto_obj)
 
-    carrito = Carrito(request)
-    carrito.remove(producto_obj)
+        return redirect("index")
 
-    return redirect("index")

@@ -2,11 +2,9 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from Modelos.models import empresas, telefo_empresas, usuarios
 from django.db import transaction
-from django.conf import settings
-from django.template.loader import get_template
-from django.core.mail import EmailMultiAlternatives
 from django.contrib import messages
 from Global.usuario import Usuario
+from Global.correo import Correo
 import os
 
 # Vista que redirecciona a la plantilla de empresas
@@ -161,6 +159,7 @@ def vwGrdPerfil(request):
 # Vista que retorna las empresas de acuerdo a un estado seleccionado
 def vwgetEmpresas(request):
     try:
+        user_session = Usuario(request)
         if not request.session["usuario"] or request.session["usuario"]["rol_id"] == 1:
             return redirect("index")
         elif request.session["usuario"]["rol_id"] == 2:
@@ -184,6 +183,7 @@ def vwgetEmpresas(request):
 # Vista que busca empresas por nombre del gerente o nombre de la empresas en función de un estado
 def vwBusEmpresa(request):
     try:
+        user_session = Usuario(request)
         if not request.session["usuario"] or request.session["usuario"]["rol_id"] == 1:
             return redirect("index")
         elif request.session["usuario"]["rol_id"] == 2:
@@ -209,6 +209,7 @@ def vwBusEmpresa(request):
 # Vista que retorna las solicitudes de las empresas
 def vwgetSolicitudes(request):
     try:
+        user_session = Usuario(request)
         if not request.session["usuario"] or request.session["usuario"]["rol_id"] == 1:
             return redirect("index")
         elif request.session["usuario"]["rol_id"] == 2:
@@ -232,6 +233,7 @@ def vwgetSolicitudes(request):
 # Vista que busca solicitudes de empresas
 def vwBusSolicitud(request):
     try:
+        user_session = Usuario(request)
         if not request.session["usuario"] or request.session["usuario"]["rol_id"] == 1:
             return redirect("index")
         elif request.session["usuario"]["rol_id"] == 2:
@@ -279,6 +281,7 @@ def crearJson(request, jsonEmpresas, e, telefonos):
 # Vista que cambia el estado de una empresa: Habilitada o Deshabilitada
 def vwCambiarEstado(request):
     try:
+        user_session = Usuario(request)
         if not request.session["usuario"] or request.session["usuario"]["rol_id"] == 1:
             return redirect("index")
         elif request.session["usuario"]["rol_id"] == 2:
@@ -299,6 +302,7 @@ def vwCambiarEstado(request):
 # Vista acepta la solicitud de una empresa
 def vwAceptarSolici(request):
     try:
+        user_session = Usuario(request)
         if not request.session["usuario"] or request.session["usuario"]["rol_id"] == 1:
             return redirect("index")
         elif request.session["usuario"]["rol_id"] == 2:
@@ -321,13 +325,11 @@ def vwAceptarSolici(request):
                     + " es parte de Emprendimientos Macará , a continuación le recordamos su usuario y contraseña:"
                 )
                 usuario_id = int(request.session["usuario"]["id"])
-                context = {"mensaje": mensaje, "linea2": "Usuario: " + unaEmpresa.usuario.correo, "linea3": "Contrseña: " + unaEmpresa.usuario.credenciales}
-
-                usuario_id = int(request.session["usuario"]["id"])
                 unUsuarioAdmin = usuarios.objects.get(id=usuario_id)
-
+                unCorreo = Correo(request)
+                context = {"mensaje": mensaje, "linea2": "Usuario: " + unaEmpresa.usuario.correo, "linea3": "Contrseña: " + unaEmpresa.usuario.credenciales}
                 # La empresa y el usuario se habilita si el correo se envía correctamente
-                if enviarCorreo(unUsuarioAdmin, unaEmpresa, asunto, context):
+                if unCorreo.send(unUsuarioAdmin, unaEmpresa.correo, asunto, "components/correo.html", context):
                     unaEmpresa.save()
                     unUsuario.save()
                     return JsonResponse({"result": "1"})
@@ -340,6 +342,7 @@ def vwAceptarSolici(request):
 # Vista que rechaza la solicitud de una empresa
 def vwRechazarSolici(request):
     try:
+        user_session = Usuario(request)
         if not request.session["usuario"] or request.session["usuario"]["rol_id"] == 1:
             return redirect("index")
         elif request.session["usuario"]["rol_id"] == 2:
@@ -356,11 +359,11 @@ def vwRechazarSolici(request):
                 )
                 usuario_id = int(request.session["usuario"]["id"])
                 unUsuarioAdmin = usuarios.objects.get(id=usuario_id)
-
                 unUsuario = usuarios.objects.get(id=(unaEmpresa.usuario.id))
+                unCorreo = Correo(request)
                 context = {"mensaje": mensaje, "linea2": "Motivo", "linea3": request.POST["motivo"]}
                 # La empresa y el usuario se eliminan si el correo se envía correctamente
-                if enviarCorreo(unUsuarioAdmin, unaEmpresa, asunto, context):
+                if unCorreo.send(unUsuarioAdmin, unaEmpresa.correo, asunto, "components/correo.html", context):
                     lsTelefonos = telefo_empresas.objects.filter(empresa=unaEmpresa)
                     for t in lsTelefonos:
                         t.delete()
@@ -372,17 +375,3 @@ def vwRechazarSolici(request):
         except Exception as e:
             return JsonResponse({"result": "0"})
 
-
-# Vista que envía un correo electrónico
-def enviarCorreo(unUsuarioAdmin, unaEmpresa, asunto, context):
-    try:
-        settings.EMAIL_HOST_USER = unUsuarioAdmin.correo
-        settings.EMAIL_HOST_PASSWORD = unUsuarioAdmin.credenciales
-        template = get_template("components/correo.html")
-        content = template.render(context)
-        email = EmailMultiAlternatives(asunto, " ", settings.EMAIL_HOST_USER, [unaEmpresa.correo])
-        email.attach_alternative(content, "text/html")
-        email.send()
-        return True
-    except Exception as e:
-        return False

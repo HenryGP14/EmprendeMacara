@@ -1,64 +1,97 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="es-EC">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-
         * {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         }
 
         .card-header {
-            background-color: #5794ef;
-            height: 16% !important;
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
+            height: 15%;
         }
 
         .header-titulo,
         .header-sub-titulo {
-            color: white;
             text-align: center;
         }
 
-        .header-titulo {
-            padding-top: 10px;
-        }
-        .header-sub-titulo{
-            margin-bottom: 5px;
+        .header-sub-titulo {
+            margin-top: 32px;
         }
 
-        .body-titulo {
+        .header-titulo {
+            margin-top: -5px;
+            color: #1b8532;
+        }
+
+        .empresa-correo {
+            margin-top: -19px;
+        }
+
+        .titulo-seccion {
             border-bottom: solid 1px black;
         }
 
-        .agrupacion-datos {
-            margin: 1rem 2rem;
+        .empresa {
+            width: 45%;
         }
 
-        .agrupacion-datos .dato {
-            display: flex;
-            align-items: center;
-            margin: 0.5rem 0rem;
+        .empresa-correo,
+        .empresa-telefonos {
+            text-align: center;
         }
 
-        .card-body {
+        .factura {
+            background: #84e499e7;
+            margin-top: -1px;
+            float: right;
+            -moz-border-radius: 0 55% / 0 100%;
+            -webkit-border-radius: 0 55% / 0 100%;
+            border-radius: 0 30% / 0 100%;
+            height: 100%;
+            width: 45%;
+        }
+
+        .empresa,
+        .factura {
+            display: inline-block;
+        }
+
+        .card {
             padding: 10px;
-            width: 65%;
+            width: 80%;
             margin: auto;
         }
 
-        .body-datos {
-            margin-left: 18%;
+        .body-datos .campo {
+            margin-top: -3%;
+            margin-left: 20%;
         }
 
-        .body-datos .dato{
-            margin-top: -14px;
+        .body-datos {
+            overflow: hidden;
+        }
+
+        .etiqueta,
+        .dato {
+            display: inline-block;
+        }
+
+        .etiqueta {
+            text-align: right;
+            width: 23%;
+            margin-right: 19px;
         }
 
         .productos,
         .resumen {
+            width: 100%;
             margin: 0.5rem 0rem;
-            max-width: 510px;
+        }
+        .valor-resumen{
+            text-align: center;
         }
 
         .tabla-detalle-items {
@@ -70,38 +103,102 @@
         .tabla-detalle-items td {
             padding: 0.3rem 0.6rem;
             font-weight: normal;
+            text-align: center;
         }
 
         .tabla-detalle-items th {
-            background-color: #daedde;
+            background-color: #84e499e7;
         }
 
-        .resumen .valor {
+        .resumen {
             text-align: end;
         }
 
-        .col1, .col2{
-            display: inline-block;
+        .etiqueta-resumen,
+        .valor-resumen {
+            width: 18%;
         }
-        .col1{
-            text-align: right;
-            width: 15%;
-            margin-right: 30px;
+
+        .valor-resumen {
+            text-align: center;
+        }
+
+        .etiqueta-resumen,
+        .valor-resumen {
+            display: inline-block;
         }
 
         .card-footer {
-            color: white;
-            text-align: center;
-            background-color: #5794ef;
+            background: #84e499e7;
             margin-top: 2rem;
             padding: 1rem;
-            border-bottom-left-radius: 8px;
-            border-bottom-right-radius: 8px;
+            width: 55%;
+            height: 10%;
+            -moz-border-radius: 0 55% / 0 100%;
+            -webkit-border-radius: 0 55% / 0 100%;
+            border-radius: 0 20% / 0 100%;
+            text-align: center;
         }
 
-        @media screen and (max-width: 600px) {
-            .card {
+        .footer-contenido {
+            text-align: justify;
+            margin: 8px auto;
+            font-size: 14px;
+            width: 60%;
+        }
+
+        .productos {
+            min-height: .01%;
+            overflow-x: auto;
+        }
+
+        @media only screen and (max-width: 968px) {
+
+            .datos-facturacion {
                 width: 100%;
+            }
+
+            .etiqueta,
+            .dato {
+                display: block;
+                width: 100%;
+            }
+
+            .etiqueta {
+                text-align: left;
+            }
+
+            .card-footer {
+                width: 100%;
+            }
+
+            .card-header {
+                overflow: hidden;
+            }
+
+            .factura,
+            .empresa {
+                display: block;
+                width: 100%;
+            }
+
+            .header-sub-titulo {
+                margin-top: 10px;
+            }
+
+            .factura {
+                -moz-border-radius: 0 55% / 0 100%;
+                -webkit-border-radius: 0 55% / 0 100%;
+                border-radius: 0 15% / 0 100%;
+                margin-top: 10px;
+                font-size: 14px;
+                height: 55px;
+                width: 100%;
+            }
+
+            .etiqueta-resumen,
+            .valor-resumen {
+                width: 28%;
             }
         }
     </style>
@@ -110,100 +207,135 @@
 <body>
     <div class="card">
         <div class="card-header">
-            <h2 class="header-titulo">Facturación del pedido</h2>
-            <h5 class="header-sub-titulo">¡Genial! Hemos recibido tu pedido</h5>
+            {% if tipoUsuario == 'cliente'%}
+            <div class="empresa">
+                <h1 class="header-titulo">{{venta.empresa.nom_empresa}}</h1>
+                <div class="empresa-correo">{{venta.empresa.correo}}</div>
+                <div class="empresa-telefonos">
+                    {% for telefono in venta.empresa.telefonos.all %}
+					{{ telefono.telefono }}
+					{% endfor %}
+                </div>
+            </div>
+            {% else %}
+            <div class="empresa">
+                <h1 class="header-titulo">¡Genial! ¡Acabas de recibir un pedido en tu tienda online!</h1>
+            </div>
+            {% endif %}
+
+            <div class="factura">
+                <h2 class="header-sub-titulo">Factura #{{venta.id}}</h2>
+            </div>
         </div>
         <div class="card-body">
             <div class="datos-facturacion">
-                <div class="body-titulo">
+                <div class="titulo-seccion">
                     <h3>Datos de facturación</h3>
                 </div>
-                <div class="body-datos"> 
+                <div class="body-datos">
                     <br>
-                    <div class="dato">
-                        <div class="col1">
-                            <p><strong>Cliente:</strong> </p> 
+                    <div class="campo">
+                        <div class="etiqueta">
+                            <p><strong>Cliente:</strong> </p>
                         </div>
-                        <div class="col2">
-                            <p>Carlos Almeida</p>
-                        </div>
-                    </div>
-                    <div class="dato">
-                        <div class="col1">
-                            <p><strong>Cédula:</strong> </p> 
-                        </div>
-                        <div class="col2">
-                            <p>0929168581</p>
+                        <div class="dato">
+                            <p>{{venta.cliente}}</p>
                         </div>
                     </div>
-                    <div class="dato">
-                        <div class="col1">
-                            <p><strong>Email:</strong> </p> 
+                    <div class="campo">
+                        <div class="etiqueta">
+                            <p><strong>Cédula:</strong> </p>
                         </div>
-                        <div class="col2">
-                            <p>ca884012@gmail.com</p>
-                        </div>
-                    </div>
-                    <div class="dato">
-                        <div class="col1">
-                            <p><strong>Celular:</strong> </p> 
-                        </div>
-                        <div class="col2">
-                            <p></label>0929168581</p>
+                        <div class="dato">
+                            <p>{{venta.cedula}}</p>
                         </div>
                     </div>
-                    <div class="dato">
-                        <div class="col1">
-                            <p><strong>Dirección:</strong> </p> 
+                    <div class="campo">
+                        <div class="etiqueta">
+                            <p><strong>Celular:</strong> </p>
                         </div>
-                        <div class="col2">
-                            <p>Av 24 de mayo, frente al banco Loja</p>
+                        <div class="dato">
+                            <p></label>{{venta.celular}}</p>
+                        </div>
+                    </div>
+                    <div class="campo">
+                        <div class="etiqueta">
+                            <p><strong>Dirección:</strong> </p>
+                        </div>
+                        <div class="dato">
+                            <p>{{venta.direccion_entrega}}</p>
+                        </div>
+                    </div>
+
+                    <div class="campo">
+                        <div class="etiqueta">
+                            <p><strong>Email:</strong> </p>
+                        </div>
+                        <div class="dato">
+                            <p>{{venta.correo}}</p>
+                        </div>
+                    </div>
+                    <div class="campo">
+                        <div class="etiqueta">
+                            <p><strong>Forma de pago:</strong> </p>
+                        </div>
+                        <div class="dato">
+                            <p>{{venta.tipo_de_pago}}</p>
+                        </div>
+                    </div>
+                    <div class="campo">
+                        <div class="etiqueta">
+                            <p><strong>Fecha:</strong> </p>
+                        </div>
+                        <div class="dato">
+                            <p>{{venta.fecha}}</p>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="detalles-facturacion">
-                <div class="body-titulo">
+                <div class="titulo-seccion">
                     <h3>Detalles de Facturación</h3>
                 </div>
                 <div class="body-datos">
-                    <div class="agrupacion-datos">
-                        <div class="productos">
-                            <table class="tabla-detalle-items">
-                                <thead>
-                                    <th><strong>#</strong></th>
-                                    <th><strong>Producto</strong></th>
-                                    <th class="text-center"><strong>Cantidad</strong></th>
-                                    <th class="text-right"><strong>Total</strong></th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Flash memory 8 gb</td>
-                                        <td class="text-center"> 6 </td>
-                                        <td class="text-right">$ 2 </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="resumen">
-                            <div class="valor"><strong>SubTotal:</strong> $ 12.00 </div>
-                            <div class="valor"><strong>Costo de envío:</strong> $ 0.50</div>
-                            <div class="valor"><strong>Total:</strong> $ 12.50 </div>
-                        </div>
+                    <div class="productos">
+                        <table class="tabla-detalle-items">
+                            <thead>
+                                <th><strong>#</strong></th>
+                                <th><strong>Producto</strong></th>
+                                <th><strong>Cantidad</strong></th>
+                                <th><strong>Total</strong></th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>{{detalle_venta.producto.nombre}}</td>
+                                    <td>{{detalle_venta.cantidad}}</td>
+                                    <td>$ {{detalle_venta.precio_unitario}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="resumen">
+                        <div class="etiqueta-resumen"><strong>SubTotal:</strong></div>
+                        <div class="valor-resumen"> $ {{detalle_venta.precio_sub_total}}</div> <br>
+                        <div class="etiqueta-resumen"><strong>Costo de envío:</strong></div>
+                        <div class="valor-resumen"> $ {{costoEnvio}}</div> <br>
+                        <div class="etiqueta-resumen"><strong>Total:</strong></div>
+                        <div class="valor-resumen"> $ {{total}}</div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <footer>
-        <div class="card-footer">
-            <p>
-                Emprendimientos Macará es la comunidad de empresas locales en la que los negocios pueden compartir o
-                publicar productos y servicios que ofrecen.
-            </p>
-        </div>
-    </footer>
+        <footer>
+            <div class="card-footer">
+                <div class="footer-contenido">
+                    Emprendimientos Macará es la comunidad de empresas locales en la que los negocios pueden compartir o
+                    publicar productos y servicios que ofrecen. <a
+                        href="http://www.emprendimientosmacara.com/">Visitanos aquí</a>
+                </div>
+            </div>
+        </footer>
     </div>
 </body>
 

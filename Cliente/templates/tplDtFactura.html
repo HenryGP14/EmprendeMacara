@@ -29,27 +29,27 @@
                 <div class="with-form">
                     <div class="dato">
                         <div class="etiqueta">Nombres:</div>
-                        <input type="text" name="nombres" id="nombres" class="form-control" 
+                        <input type="text" name="nombres" id="nombres" class="form-control" value="fdfdf"
                             required onkeypress="soloLetras(event)">
                     </div>
                     <div class="dato">
                         <div class="etiqueta">Cédula:</div>
-                        <input type="text" name="cedula" id="cedula" class="form-control" maxlength="10"
+                        <input type="text" name="cedula" id="cedula" class="form-control" maxlength="10" value="0887874087"
                             required onkeypress="soloNumeros(event)">
                     </div>
                     <div class="dato">
                         <div class="etiqueta">E-mail:</div>
-                        <input type="email" name="email" id="email" class="form-control" 
+                        <input type="email" name="email" id="email" class="form-control" value="ca77@gmail.com"
                             required>
                     </div>
                     <div class="dato">
                         <div class="etiqueta">Celular:</div>
-                        <input type="text" name="celular" id="celular" class="form-control" value="{{ datos.telefono }}"
+                        <input type="text" name="celular" id="celular" class="form-control" value="0887874087"
                             maxlength="10" minlength="7" onkeypress="soloNumeros(event)" required>
                     </div>
                     <div class="dato">
                         <div class="etiqueta">Dirección:</div>
-                        <input type="text" name="direccion" id="direccion" class="form-control"
+                        <input type="text" name="direccion" id="direccion" class="form-control" value="fdefdf"
                         required>
                     </div>
                 </div>
@@ -98,7 +98,7 @@
             </div>
             <div class="agrupacion-datos d-flex justify-content-center">
                 <div class="with-form">
-                    <select id="metodo_pago" name="metodo_pago" class="form-control opciones" style="width: 100%;">
+                    <select id="metodo_pago" name="metodo_pago" class="form-control opciones" style="width: 100%; cursor: pointer;">
                         <option value="Default" selected disabled>Seleccione el método de pago</option>
                         <option value="Depósito" id="deposito">Depósito bancario</option>
                         <option value="Efectivo">Pago en efectivo</option>
