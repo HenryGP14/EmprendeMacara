@@ -41,11 +41,11 @@ def vwOpcPedidosPendientes(request):
 
     unEmpresa = empresas.objects.get(usuario__id=request.session["usuario"]["id"])
     ltVentas = []
-    for unVenta in ventas.objects.filter((Q(estado="Pendiente") | Q(estado="Enviado")) & Q(empresa__id=unEmpresa.id)).select_related("cliente"):
+    for unVenta in ventas.objects.filter((Q(estado="Pendiente") | Q(estado="Enviado")) & Q(empresa__id=unEmpresa.id)):
         ltVentas.append(
             {
                 "idVenta": unVenta.id,
-                "nombre": unVenta.cliente.nombres,
+                "nombre": unVenta.cliente,
                 "direccion_entrega": unVenta.direccion_entrega,
                 "telefono": unVenta.celular,
                 "tipoPago": unVenta.tipo_de_pago,
@@ -80,11 +80,11 @@ def vwOpcPedidosEntregados(request):
 
     unEmpresa = empresas.objects.get(usuario__id=request.session["usuario"]["id"])
     ltVentas = []
-    for unVenta in ventas.objects.filter(empresa__id=unEmpresa.id, estado="Entregado").select_related("cliente"):
+    for unVenta in ventas.objects.filter(empresa__id=unEmpresa.id, estado="Entregado"):
         detalle = detalles_venta.objects.filter(venta__id=unVenta.id).first()
         ltVentas.append(
             {
-                "nombre": unVenta.cliente.nombres,
+                "nombre": unVenta.cliente,
                 "direccion_entrega": unVenta.direccion_entrega,
                 "telefono": unVenta.celular,
                 "tipoPago": unVenta.tipo_de_pago,
