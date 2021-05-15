@@ -117,7 +117,7 @@
                         <h5 class="modal-title">¡Felicitaciones!</h5>
                     </div>
                     <div class="modal-body">
-                        <p>Gracias por preferirnos, revisaremos tu compra, tu producto te llegará en breve.</p>
+                        <p class="mensaje">Gracias por preferirnos, revisaremos tu compra, tu producto te llegará en breve.</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" id="btn-aceptar" class="btn btn-secondary">Aceptar</button>
@@ -187,6 +187,8 @@
 
         $('#frmPedidos').on('submit', function (e) {
             e.preventDefault();
+            $(".btn-pedir-producto").prop('disabled', true);
+            document.body.style.cursor = 'wait';
             let formulario = new FormData($('#frmPedidos').get(0));
             formulario.append('id_producto', '{{datos.id_producto}}')
             formulario.append('cantidad', '{{datos.cantidad}}')
@@ -198,13 +200,36 @@
                 contentType: false,
                 processData: false,
                 success: function (response) {
-                    $('#enviar_pedido').modal('show');
-                    $('#btn-aceptar').click(function () {
-                        window.location = "{% url 'index' %}";
-                    });
+                    document.body.style.cursor = 'default';
+                    if(response.result == '1'){
+                        $('#enviar_pedido').modal({backdrop: 'static', keyboard: false})
+                        $('.modal-title').text('¡Felicitaciones!')
+                        $('.mensaje').text('Gracias por preferirnos, revisaremos tu compra, tu producto te llegará en breve.')
+                        $('#enviar_pedido').modal('show');
+                        $('#btn-aceptar').click(function () {
+                            window.location = "{% url 'index' %}";
+                        });
+                    }
+                    else
+                    {
+                        $(".btn-pedir-producto").prop('disabled', false);
+                        $('.modal-title').text('Lo sentimos')
+                        $('.mensaje').text('Sucedió un error en realizar su pedido, por favor intente nuevamente.')
+                        $('#enviar_pedido').modal('show');
+                        $('#btn-aceptar').click(function () {
+                            $('#enviar_pedido').modal('hide');
+                        });
+                    }
                 },
                 error: function (response) {
-                    $('#enviar_pedido').modal('hide');
+                    document.body.style.cursor = 'default';
+                    $(".btn-pedir-producto").prop('disabled', false);
+                    $('.modal-title').text('Lo sentimos')
+                    $('.mensaje').text('Sucedió un error en realizar su pedido, por favor intente nuevamente.')
+                    $('#enviar_pedido').modal('show');
+                    $('#btn-aceptar').click(function () {
+                        $('#enviar_pedido').modal('hide');
+                    });
                 }
             });
         });
