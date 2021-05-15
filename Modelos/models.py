@@ -107,6 +107,7 @@ class productos(models.Model):
 
 
 class ventas(models.Model):
+    secuencial = models.CharField(max_length=11, unique=True)
     empresa = models.ForeignKey(empresas, on_delete=models.PROTECT, related_name="ventas")
     fecha = models.DateField()
     cliente = models.CharField(max_length=50)

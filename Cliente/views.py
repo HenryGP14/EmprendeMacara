@@ -158,13 +158,18 @@ def vwRegPedido(request):
             venta.celular = request.POST["celular"]
             venta.correo = request.POST["email"]
             venta.estado = "Pendiente"
-
-            venta.empresa_id = producto_obj.empresa_id
-            empresa = empresas.objects.get(id=venta.empresa_id)
             venta.tipo_de_pago = request.POST["metodo_pago"]
-            venta.save()
-            
-            # tabla detalle de venta
+            venta.empresa_id = producto_obj.empresa_id
+
+            # Elaboración del secuencial de la venta
+            secuencial_empresa = 10000 + (venta.empresa_id) # 10000 + 25 = 10025
+            secuencial_empresa = str(secuencial_empresa)
+            secuencial_empresa = secuencial_empresa[1:len(secuencial_empresa)] # 0025
+
+            # método recursivo, se ejecutará hasta que se logré guardar la venta con el secuencial único
+            crear_secuencial(venta, secuencial_empresa)
+
+            # Tabla detalle de venta
             detalle_venta = detalles_venta()
             detalle_venta.venta_id = venta.id
             detalle_venta.producto = producto_obj
@@ -190,7 +195,7 @@ def vwRegPedido(request):
             unCorreo = Correo(request)
             context = {"tipoUsuario": "empresa", "venta": venta, "detalle_venta": detalle_venta, "costoEnvio": str("{0:.2f}".format(producto_obj.empresa.costo_envio)).replace(".", ","),"total": ("{0:.2f}".format(float(detalle_venta.precio_sub_total) + float(detalle_venta.precio_envio))).replace(".", ",")}
             unUsuarioAdmin = usuarios.objects.filter(rol_id=3).first()
-            if(unCorreo.send(unUsuarioAdmin, empresa.correo, "Facturación del pedido - Emprendimientos Macará", "factura-correo.html", context)):
+            if(unCorreo.send(unUsuarioAdmin, producto_obj.empresa.correo, "Facturación del pedido - Emprendimientos Macará", "factura-correo.html", context)):
                 unCorreo = Correo(request)
                 context = {"tipoUsuario": "cliente", "venta": venta, "detalle_venta": detalle_venta, "costoEnvio": str("{0:.2f}".format(producto_obj.empresa.costo_envio)).replace(".", ","),"total": ("{0:.2f}".format(float(detalle_venta.precio_sub_total) + float(detalle_venta.precio_envio))).replace(".", ",")}
                 unUsuarioAdmin = usuarios.objects.filter(rol_id=3).first()
@@ -201,7 +206,22 @@ def vwRegPedido(request):
 
             return JsonResponse({"result": '1'})
     except Exception as e:
-        return JsonResponse({"result": '0'})
+        return JsonResponse({"result": str(e)})
+
+def crear_secuencial(venta, secuencial_empresa):
+    try:
+        # Se consulta el número de venta de la empresa y se le suma 1
+        num_ventas = (ventas.objects.filter(empresa_id=venta.empresa_id).count())+1
+        secuencial_ventas = 1000000 + num_ventas # 1000000 + 1 = 1000001
+        secuencial_ventas = str(secuencial_ventas)
+        secuencial_ventas = secuencial_ventas[1:len(secuencial_ventas)] # 000001 
+
+        secuencial = secuencial_empresa +'-'+ secuencial_ventas
+        venta.secuencial = secuencial
+        venta.save()
+    except Exception as e:
+        # Ya existe el secuencial, se vuelve a crear
+        crear_secuencial(venta, secuencial_empresa)
 
 
 

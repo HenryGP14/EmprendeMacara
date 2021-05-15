@@ -39,7 +39,7 @@
                     </div>
                     <div class="dato">
                         <div class="etiqueta">E-mail:</div>
-                        <input type="email" name="email" id="email" class="form-control" value="ca77@gmail.com"
+                        <input type="email" name="email" id="email" class="form-control" value="carlos.almeida2017@uteq.edu.ec"
                             required>
                     </div>
                     <div class="dato">
@@ -212,6 +212,7 @@
                     }
                     else
                     {
+                        alert(response.result)
                         $(".btn-pedir-producto").prop('disabled', false);
                         $('.modal-title').text('Lo sentimos')
                         $('.mensaje').text('Sucedió un error en realizar su pedido, por favor intente nuevamente.')
@@ -222,6 +223,7 @@
                     }
                 },
                 error: function (response) {
+                    alert(response.result)
                     document.body.style.cursor = 'default';
                     $(".btn-pedir-producto").prop('disabled', false);
                     $('.modal-title').text('Lo sentimos')
