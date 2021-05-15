@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factura</title>
+    <style>
+        * {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        .empresa-general {
+            position: absolute;
+            left: 0;
+            top: 0;
+            padding: 20px;
+            padding-right: 40px;
+            background-color: #327C45;
+            color: azure;
+            font-weight: bold;
+            font-size: 1.5em;
+            border-radius: 0 0 40px 0;
+        }
+
+        .container-factura {
+
+            width: 95%;
+            margin: auto;
+            padding-top: 75px;
+        }
+
+        .container-factura .encabezado {
+            margin-bottom: 10px;
+            display: grid;
+            grid-template-columns: auto 250px;
+        }
+
+        .container-factura .encabezado .nom-empresa {
+            color: #327C45;
+            font-size: 2em;
+            font-weight: bold;
+            width: 50%;
+        }
+
+        .container-factura .encabezado .num-factura {
+            padding: 10px;
+            font-weight: bold;
+            font-size: 1.2em;
+            background-color: #8FE6A2;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container-factura .detalles {
+            margin-top: 10px;
+        }
+
+        .container-factura .detalles .dt-facturacion {
+            font-size: 1.2em;
+            border-bottom: #76a381 solid;
+            padding-bottom: 2px;
+        }
+
+        .container-factura .detalles .dt-datos .columna {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .container-factura .detalles .dt-factura {
+            font-size: 1.2em;
+            border-bottom: #76a381 solid;
+            padding-bottom: 2px;
+        }
+
+        .container-factura .detalles .pr-tabla {
+            width: 100%;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .container-factura .detalles .pr-tabla thead {
+            background-color: #327C45;
+            color: azure;
+        }
+
+        .container-factura .detalles .pr-tabla thead tr th {
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .container-factura .detalles .pr-total {
+            margin-top: 10px;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .container-factura .detalles .pr-total table tr th {
+            width: 150px;
+            text-align: left;
+        }
+
+        .container-factura .detalles .pr-total table tr td {
+            width: 150px;
+            text-align: center;
+        }
+
+        .container-factura .pie {
+            margin-top: 30px;
+            background-color: #8FE6A2;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="empresa-general">
+        Emprendimientos Macara
+    </div>
+    <div class="container-factura">
+        <div class="encabezado">
+            <div>
+                <span class="nom-empresa">Zentral Coffe</span>
+                <div>
+                    <p>correoempresa@gmail.com</p>
+                    <p>09794826663, 0979482663, 0979482663</p>
+                </div>
+            </div>
+            <div class="num-factura">Factura # 0001-000001</div>
+        </div>
+        <div class="detalles">
+            <div>
+                <div class="dt-facturacion">
+                    <strong>Datos de facturación</strong>
+                </div>
+                <div class="dt-datos">
+                    <div class="columna">
+                        <div style="padding-right: 5px;">
+                            <p>
+                                <strong>Cliente: </strong>
+                            </p>
+                            <p>
+                                <strong>Cédula: </strong>
+                            </p>
+                            <p>
+                                <strong>Celular: </strong>
+                            </p>
+                        </div>
+                        <div>
+                            <p>
+                                <strong>Email: </strong>
+                            </p>
+                            <p>
+                                <strong>Forma de pago: </strong>
+                            </p>
+                            <p>
+                                <strong>Fecha: </strong>
+                            </p>
+                        </div>
+                    </div>
+                    <p style="margin-top: 2px;">
+                        <strong>Dirección: </strong>
+                    </p>
+                </div>
+            </div>
+            <div>
+                <div class="dt-factura">
+                    <strong>Detalles de facturación</strong>
+                </div>
+                <div>
+                    <table class="pr-tabla">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Producto</th>
+                                <th style="width: 150px;">Cantidad</th>
+                                <th style="width: 150px;">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Producto</td>
+                                <td>5</td>
+                                <td>$ 2,50</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="pr-total">
+                        <table>
+                            <tr>
+                                <th>Sub Total:</th>
+                                <td>$ 2,50</td>
+                            </tr>
+                            <tr>
+                                <th>Costo de envío:</th>
+                                <td>$ 0,00</td>
+                            </tr>
+                            <tr>
+                                <th>Total:</th>
+                                <td>$ 2,50</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pie">
+            Emprendimientos Macará es la comunidad de empresas locales en la que los negocios pueden compartir o
+            publicar productos y servicios que ofrecen. Visitanos en
+            <a href="http://www.emprendimientosmacara.com/" style="text-decoration: none;">
+                <strong>
+                    www.emprendimientosmacara.com
+                </strong>
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>
