@@ -33,8 +33,8 @@
 
         .container-factura .encabezado {
             margin-bottom: 10px;
-            display: grid;
-            grid-template-columns: auto 250px;
+            display: flex;
+            justify-content: space-between;
         }
 
         .container-factura .encabezado .nom-empresa {
@@ -45,7 +45,7 @@
         }
 
         .container-factura .encabezado .num-factura {
-            padding: 10px;
+            padding: 10px 30px;
             font-weight: bold;
             font-size: 1.2em;
             background-color: #8FE6A2;
@@ -66,8 +66,12 @@
         }
 
         .container-factura .detalles .dt-datos .columna {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .container-factura .detalles .dt-datos .columna .col {
+            width: 50%;
         }
 
         .container-factura .detalles .dt-factura {
@@ -113,6 +117,16 @@
             background-color: #8FE6A2;
             padding: 10px;
         }
+
+        @media (max-width: 595px) {
+            .container-factura .encabezado {
+                display: block;
+            }
+
+            .container-factura .detalles .dt-datos .columna {
+                display: block;
+            }
+        }
     </style>
 </head>
 
@@ -123,11 +137,15 @@
     <div class="container-factura">
         <div class="encabezado">
             <div>
+                {% if tipoUsuario == 'cliente'%}
                 <span class="nom-empresa">Zentral Coffe</span>
                 <div>
                     <p>correoempresa@gmail.com</p>
                     <p>09794826663, 0979482663, 0979482663</p>
                 </div>
+                {% else %}
+                <span class="nom-empresa">¡Genial! ¡Acabas de recibir un pedido en tu tienda online!</span>
+                {% endif %}
             </div>
             <div class="num-factura">Factura # 0001-000001</div>
         </div>
@@ -138,31 +156,38 @@
                 </div>
                 <div class="dt-datos">
                     <div class="columna">
-                        <div style="padding-right: 5px;">
+                        <div class="col" style="padding-right: 5px;">
                             <p>
                                 <strong>Cliente: </strong>
+                                {{venta.cliente}}
                             </p>
                             <p>
                                 <strong>Cédula: </strong>
+                                {{venta.cedula}}
                             </p>
                             <p>
                                 <strong>Celular: </strong>
+                                {{venta.celular}}
                             </p>
                         </div>
-                        <div>
+                        <div class="col">
                             <p>
                                 <strong>Email: </strong>
+                                {{venta.correo}}
                             </p>
                             <p>
                                 <strong>Forma de pago: </strong>
+                                {{venta.tipo_de_pago}}
                             </p>
                             <p>
                                 <strong>Fecha: </strong>
+                                {{venta.fecha}}
                             </p>
                         </div>
                     </div>
                     <p style="margin-top: 2px;">
                         <strong>Dirección: </strong>
+                        {{venta.direccion_entrega}}
                     </p>
                 </div>
             </div>
@@ -183,9 +208,9 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>Producto</td>
-                                <td>5</td>
-                                <td>$ 2,50</td>
+                                <td>{{detalle_venta.producto.nombre}}</td>
+                                <td>{{detalle_venta.cantidad}}</td>
+                                <td>$ {{detalle_venta.precio_unitario}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -193,15 +218,15 @@
                         <table>
                             <tr>
                                 <th>Sub Total:</th>
-                                <td>$ 2,50</td>
+                                <td>$ {{detalle_venta.precio_sub_total}}</td>
                             </tr>
                             <tr>
                                 <th>Costo de envío:</th>
-                                <td>$ 0,00</td>
+                                <td>$ {{costoEnvio}}</td>
                             </tr>
                             <tr>
                                 <th>Total:</th>
-                                <td>$ 2,50</td>
+                                <td>$ {{total}}</td>
                             </tr>
                         </table>
                     </div>
