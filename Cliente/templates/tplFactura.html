@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -12,9 +11,10 @@
         }
 
         .empresa-general {
-            position: absolute;
-            left: 0;
-            top: 0;
+            margin-top: -8px;
+            margin-left: -8px;
+            margin-bottom: 20px;
+            width: 300px;
             padding: 20px;
             padding-right: 40px;
             background-color: #327C45;
@@ -25,16 +25,21 @@
         }
 
         .container-factura {
-
             width: 95%;
             margin: auto;
-            padding-top: 75px;
         }
 
         .container-factura .encabezado {
-            margin-bottom: 10px;
             display: flex;
-            justify-content: space-between;
+        }
+
+        .container-factura .encabezado .fact-col {
+            width: 50%;
+            display: flex;
+        }
+
+        .container-factura .encabezado .fact-col>div {
+            width: 100%;
         }
 
         .container-factura .encabezado .nom-empresa {
@@ -50,9 +55,8 @@
             font-size: 1.2em;
             background-color: #8FE6A2;
             border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            text-align: center;
+            padding-top: 50px;
         }
 
         .container-factura .detalles {
@@ -99,7 +103,6 @@
         .container-factura .detalles .pr-total {
             margin-top: 10px;
             display: flex;
-            justify-content: flex-end;
         }
 
         .container-factura .detalles .pr-total table tr th {
@@ -118,6 +121,10 @@
             padding: 10px;
         }
 
+        .esquinero {
+            width: 90%;
+        }
+
         @media (max-width: 595px) {
             .container-factura .encabezado {
                 display: block;
@@ -125,6 +132,15 @@
 
             .container-factura .detalles .dt-datos .columna {
                 display: block;
+            }
+
+            .container-factura .encabezado .fact-col {
+                width: 100%;
+                display: flex;
+            }
+
+            .container-factura .encabezado .num-factura {
+                padding-top: 10px;
             }
         }
     </style>
@@ -136,18 +152,26 @@
     </div>
     <div class="container-factura">
         <div class="encabezado">
-            <div>
-                {% if tipoUsuario == 'cliente'%}
-                <span class="nom-empresa">Zentral Coffe</span>
+            <div class="fact-col one">
                 <div>
-                    <p>correoempresa@gmail.com</p>
-                    <p>09794826663, 0979482663, 0979482663</p>
+                    {% if tipoUsuario == 'cliente'%}
+                    <span class="nom-empresa">{{ venta.empresa.nom_empresa }}</span>
+                    <div>
+                        <p>{{venta.empresa.correo}}</p>
+                        <p>
+                            {% for telefono in venta.empresa.telefonos.all %}
+                            {{ telefono.telefono }},&nbsp
+                            {% endfor %}
+                        </p>
+                    </div>
+                    {% else %}
+                    <span class="nom-empresa">¡Genial! ¡Acabas de recibir un pedido en tu tienda online!</span>
+                    {% endif %}
                 </div>
-                {% else %}
-                <span class="nom-empresa">¡Genial! ¡Acabas de recibir un pedido en tu tienda online!</span>
-                {% endif %}
             </div>
-            <div class="num-factura">Factura # 0001-000001</div>
+            <div class="fact-col two">
+                <div class="num-factura">Factura # {{venta.id}}</div>
+            </div>
         </div>
         <div class="detalles">
             <div>
@@ -202,7 +226,7 @@
                                 <th>#</th>
                                 <th>Producto</th>
                                 <th style="width: 150px;">Cantidad</th>
-                                <th style="width: 150px;">Total</th>
+                                <th style="width: 150px;">Precio unitario</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -215,19 +239,22 @@
                         </tbody>
                     </table>
                     <div class="pr-total">
+                        <div class="esquinero"></div>
                         <table>
-                            <tr>
-                                <th>Sub Total:</th>
-                                <td>$ {{detalle_venta.precio_sub_total}}</td>
-                            </tr>
-                            <tr>
-                                <th>Costo de envío:</th>
-                                <td>$ {{costoEnvio}}</td>
-                            </tr>
-                            <tr>
-                                <th>Total:</th>
-                                <td>$ {{total}}</td>
-                            </tr>
+                            <tbody>
+                                <tr>
+                                    <th>Sub Total:</th>
+                                    <td>$ {{detalle_venta.precio_sub_total}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Costo de envío:</th>
+                                    <td>$ {{costoEnvio}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Total:</th>
+                                    <td>$ {{total}}</td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -243,6 +270,8 @@
             </a>
         </div>
     </div>
+
+
 </body>
 
 </html>

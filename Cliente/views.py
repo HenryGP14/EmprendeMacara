@@ -195,11 +195,11 @@ def vwRegPedido(request):
             unCorreo = Correo(request)
             context = {"tipoUsuario": "empresa", "venta": venta, "detalle_venta": detalle_venta, "costoEnvio": str("{0:.2f}".format(producto_obj.empresa.costo_envio)).replace(".", ","),"total": ("{0:.2f}".format(float(detalle_venta.precio_sub_total) + float(detalle_venta.precio_envio))).replace(".", ",")}
             unUsuarioAdmin = usuarios.objects.filter(rol_id=3).first()
-            if(unCorreo.send(unUsuarioAdmin, producto_obj.empresa.correo, "Facturación del pedido - Emprendimientos Macará", "factura-correo.html", context)):
+            if(unCorreo.send(unUsuarioAdmin, producto_obj.empresa.correo, "Facturación del pedido - Emprendimientos Macará", "tplFactura.html", context)):
                 unCorreo = Correo(request)
                 context = {"tipoUsuario": "cliente", "venta": venta, "detalle_venta": detalle_venta, "costoEnvio": str("{0:.2f}".format(producto_obj.empresa.costo_envio)).replace(".", ","),"total": ("{0:.2f}".format(float(detalle_venta.precio_sub_total) + float(detalle_venta.precio_envio))).replace(".", ",")}
                 unUsuarioAdmin = usuarios.objects.filter(rol_id=3).first()
-                unCorreo.send(unUsuarioAdmin, venta.correo, "Facturación del pedido - Emprendimientos Macará", "factura-correo.html", context)
+                unCorreo.send(unUsuarioAdmin, venta.correo, "Facturación del pedido - Emprendimientos Macará", "tplFactura.html", context)
 
             carrito = Carrito(request)
             carrito.remove(producto_obj)
