@@ -29,28 +29,26 @@
                 <div class="with-form">
                     <div class="dato">
                         <div class="etiqueta">Nombres:</div>
-                        <input type="text" name="nombres" id="nombres" class="form-control" value="fdfdf"
-                            required onkeypress="soloLetras(event)">
+                        <input type="text" name="nombres" id="nombres" class="form-control" required
+                            onkeypress="soloLetras(event)">
                     </div>
                     <div class="dato">
                         <div class="etiqueta">Cédula:</div>
-                        <input type="text" name="cedula" id="cedula" class="form-control" maxlength="10" value="0887874087"
-                            required onkeypress="soloNumeros(event)">
+                        <input type="text" name="cedula" id="cedula" class="form-control" maxlength="10" required
+                            onkeypress="soloNumeros(event)">
                     </div>
                     <div class="dato">
                         <div class="etiqueta">E-mail:</div>
-                        <input type="email" name="email" id="email" class="form-control" value="carlos.almeida2017@uteq.edu.ec"
-                            required>
+                        <input type="email" name="email" id="email" class="form-control" required>
                     </div>
                     <div class="dato">
                         <div class="etiqueta">Celular:</div>
-                        <input type="text" name="celular" id="celular" class="form-control" value="0887874087"
-                            maxlength="10" minlength="7" onkeypress="soloNumeros(event)" required>
+                        <input type="text" name="celular" id="celular" class="form-control" maxlength="10" minlength="7"
+                            onkeypress="soloNumeros(event)" required>
                     </div>
                     <div class="dato">
                         <div class="etiqueta">Dirección:</div>
-                        <input type="text" name="direccion" id="direccion" class="form-control" value="fdefdf"
-                        required>
+                        <input type="text" name="direccion" id="direccion" class="form-control" required>
                     </div>
                 </div>
             </div>
@@ -98,7 +96,8 @@
             </div>
             <div class="agrupacion-datos d-flex justify-content-center">
                 <div class="with-form">
-                    <select id="metodo_pago" name="metodo_pago" class="form-control opciones" style="width: 100%; cursor: pointer;">
+                    <select id="metodo_pago" name="metodo_pago" class="form-control opciones"
+                        style="width: 100%; cursor: pointer;">
                         <option value="Default" selected disabled>Seleccione el método de pago</option>
                         <option value="Depósito" id="deposito">Depósito bancario</option>
                         <option value="Efectivo">Pago en efectivo</option>
@@ -117,7 +116,8 @@
                         <h5 class="modal-title">¡Felicitaciones!</h5>
                     </div>
                     <div class="modal-body">
-                        <p class="mensaje">Gracias por preferirnos, revisaremos tu compra, tu producto te llegará en breve.</p>
+                        <p class="mensaje">Gracias por preferirnos, revisaremos tu compra, tu producto te llegará en
+                            breve.</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" id="btn-aceptar" class="btn btn-secondary">Aceptar</button>
@@ -201,21 +201,26 @@
                 processData: false,
                 success: function (response) {
                     document.body.style.cursor = 'default';
-                    if(response.result == '1'){
-                        $('#enviar_pedido').modal({backdrop: 'static', keyboard: false})
+                    if (response.result == '1') {
+                        $('#enviar_pedido').modal({
+                            backdrop: 'static',
+                            keyboard: false
+                        })
                         $('.modal-title').text('¡Felicitaciones!')
-                        $('.mensaje').text('Gracias por preferirnos, revisaremos tu compra, tu producto te llegará en breve.')
+                        $('.mensaje').text(
+                            'Gracias por preferirnos, revisaremos tu compra, tu producto te llegará en breve.'
+                            )
                         $('#enviar_pedido').modal('show');
                         $('#btn-aceptar').click(function () {
                             window.location = "{% url 'index' %}";
                         });
-                    }
-                    else
-                    {
+                    } else {
                         alert(response.result)
                         $(".btn-pedir-producto").prop('disabled', false);
                         $('.modal-title').text('Lo sentimos')
-                        $('.mensaje').text('Sucedió un error en realizar su pedido, por favor intente nuevamente.')
+                        $('.mensaje').text(
+                            'Sucedió un error en realizar su pedido, por favor intente nuevamente.'
+                            )
                         $('#enviar_pedido').modal('show');
                         $('#btn-aceptar').click(function () {
                             $('#enviar_pedido').modal('hide');
@@ -227,7 +232,9 @@
                     document.body.style.cursor = 'default';
                     $(".btn-pedir-producto").prop('disabled', false);
                     $('.modal-title').text('Lo sentimos')
-                    $('.mensaje').text('Sucedió un error en realizar su pedido, por favor intente nuevamente.')
+                    $('.mensaje').text(
+                        'Sucedió un error en realizar su pedido, por favor intente nuevamente.'
+                        )
                     $('#enviar_pedido').modal('show');
                     $('#btn-aceptar').click(function () {
                         $('#enviar_pedido').modal('hide');
