@@ -5,7 +5,7 @@
         "fields": {
             "nom_usuario": "Admin Web",
             "correo": "emprendimientosmacara@gmail.com",
-            "credenciales": "Admin123456",
+            "credenciales": "123456",
             "ruta_foto": null,
             "estado": true,
             "correo_verificado": true,
