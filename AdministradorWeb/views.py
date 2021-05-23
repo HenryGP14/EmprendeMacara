@@ -324,12 +324,10 @@ def vwAceptarSolici(request):
                     + unaEmpresa.nom_empresa.upper()
                     + " es parte de Emprendimientos Macará , a continuación le recordamos su usuario y contraseña:"
                 )
-                usuario_id = int(request.session["usuario"]["id"])
-                unUsuarioAdmin = usuarios.objects.get(id=usuario_id)
                 unCorreo = Correo(request)
                 context = {"mensaje": mensaje, "linea2": "Usuario: " + unaEmpresa.usuario.correo, "linea3": "Contrseña: " + unaEmpresa.usuario.credenciales}
                 # La empresa y el usuario se habilita si el correo se envía correctamente
-                if unCorreo.send(unUsuarioAdmin, unaEmpresa.correo, asunto, "components/correo.html", context):
+                if unCorreo.send(unaEmpresa.correo, asunto, "components/correo.html", context):
                     unaEmpresa.save()
                     unUsuario.save()
                     return JsonResponse({"result": "1"})
@@ -357,13 +355,11 @@ def vwRechazarSolici(request):
                 mensaje = (
                     "Estimado(a) " + unaEmpresa.gerente.upper() + " su solicitud para que su empresa " + unaEmpresa.nom_empresa.upper() + " pueda ser parte de Emprendimientos Macará fue rechazada."
                 )
-                usuario_id = int(request.session["usuario"]["id"])
-                unUsuarioAdmin = usuarios.objects.get(id=usuario_id)
                 unUsuario = usuarios.objects.get(id=(unaEmpresa.usuario.id))
                 unCorreo = Correo(request)
                 context = {"mensaje": mensaje, "linea2": "Motivo", "linea3": request.POST["motivo"]}
                 # La empresa y el usuario se eliminan si el correo se envía correctamente
-                if unCorreo.send(unUsuarioAdmin, unaEmpresa.correo, asunto, "components/correo.html", context):
+                if unCorreo.send(unaEmpresa.correo, asunto, "components/correo.html", context):
                     lsTelefonos = telefo_empresas.objects.filter(empresa=unaEmpresa)
                     for t in lsTelefonos:
                         t.delete()

@@ -7,10 +7,10 @@ class Correo:
     def __init__(self, request):
         self.request = request
     
-    def send(self, unUsuarioAdmin, destinatario, asunto, template, context):
+    def send(self, destinatario, asunto, template, context):
         try:
-            settings.EMAIL_HOST_USER = unUsuarioAdmin.correo
-            settings.EMAIL_HOST_PASSWORD = unUsuarioAdmin.credenciales
+            settings.EMAIL_HOST_USER = 'emprendimientosmacara03@gmail.com'
+            settings.EMAIL_HOST_PASSWORD = '$Macara2021'
             tplCorreo = get_template(template)
             content = tplCorreo.render(context)
             email = EmailMultiAlternatives(asunto, " ", settings.EMAIL_HOST_USER, [destinatario])

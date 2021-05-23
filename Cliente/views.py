@@ -191,19 +191,24 @@ def vwRegPedido(request):
                 detalle_venta.ruta_foto.name = "deposito_" + str(hoy.strftime("%y-%m-%d %H.%M.%S")) + "." + exten[-1]
 
             detalle_venta.save()
-
-            # Se escoge el correo del primer administrador
-            unUsuarioAdmin = usuarios.objects.filter(rol_id=3).first()
-
+            
+            # Instancea de la correo
             unCorreo = Correo(request)
+
+            # Se envía el correo al administrador
+            unUsuarioAdmin = usuarios.objects.filter(rol_id=3).first()
+            context = {"tipoUsuario": "administrador", "venta": venta, "detalle_venta": detalle_venta, "subTotal": str("{0:.2f}".format(detalle_venta.precio_sub_total)).replace(".", ","),"costoEnvio": str("{0:.2f}".format(producto_obj.empresa.costo_envio)).replace(".", ","),"total": ("{0:.2f}".format(float(detalle_venta.precio_sub_total) + float(detalle_venta.precio_envio))).replace(".", ",")}
+            unCorreo.send(unUsuarioAdmin.correo, "Facturación del pedido - Emprendimientos Macará", "tplFactura.html", context)
+
             # Se envía el correo a la empresa
             context = {"tipoUsuario": "empresa", "venta": venta, "detalle_venta": detalle_venta, "subTotal": str("{0:.2f}".format(detalle_venta.precio_sub_total)).replace(".", ","),"costoEnvio": str("{0:.2f}".format(producto_obj.empresa.costo_envio)).replace(".", ","),"total": ("{0:.2f}".format(float(detalle_venta.precio_sub_total) + float(detalle_venta.precio_envio))).replace(".", ",")}
-            unCorreo.send(unUsuarioAdmin, producto_obj.empresa.correo, "Facturación del pedido - Emprendimientos Macará", "tplFactura.html", context)
+            unCorreo.send(producto_obj.empresa.correo, "Facturación del pedido - Emprendimientos Macará", "tplFactura.html", context)
         
             # El correo al cliente 
             context = {"tipoUsuario": "cliente", "venta": venta, "detalle_venta": detalle_venta, "subTotal": str("{0:.2f}".format(detalle_venta.precio_sub_total)).replace(".", ","), "costoEnvio": str("{0:.2f}".format(producto_obj.empresa.costo_envio)).replace(".", ","),"total": ("{0:.2f}".format(float(detalle_venta.precio_sub_total) + float(detalle_venta.precio_envio))).replace(".", ",")}
-            unCorreo.send(unUsuarioAdmin, venta.correo, "Facturación del pedido - Emprendimientos Macará", "tplFactura.html", context)
+            unCorreo.send(venta.correo, "Facturación del pedido - Emprendimientos Macará", "tplFactura.html", context)
 
+            # Se elimina el producto del carrito
             carrito = Carrito(request)
             carrito.remove(producto_obj)
 
