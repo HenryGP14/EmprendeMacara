@@ -30,7 +30,7 @@
             "nom_empresa": "Especias y Sabores JN",
             "perfil_foto": null,
             "politicas": "Sin datos",
-            "ruc": "0908070305021",
+            "ruc": "0999999999001",
             "ruta_foto": "Portadas/dg_diseños_gigan_00011.jpeg",
             "slogan": "Realizamos entregas a domicilio sin recargo alguno",
             "usuario_id": 1
@@ -68,7 +68,7 @@
             "nom_empresa": "Aliños Doña Carmita",
             "perfil_foto": "Perfiles/aliños_doña_carmita_00001.jpeg",
             "politicas": "Ofrecemos servicio a domicilio sin recargo adicional. El tiempo de entrega depende del sector y la demanda de pedidos",
-            "ruc": "0908070305021",
+            "ruc": "0999999999001",
             "ruta_foto": null,
             "slogan": "Sin datos",
             "usuario_id": 2
@@ -93,7 +93,7 @@
         "pk": 3,
         "fields": {
             "activi_comercial_id": 4,
-            "correo": "jorge_quezada@gmail.com",
+            "correo": "jvqonline@gmail.com",
             "descripcion": "Sin datos",
             "dias_atencion": "Lunes - Domingo",
             "direccion": "Carlos Veintimilla y Sucre (esq.)",
@@ -106,7 +106,7 @@
             "nom_empresa": "Servicompu & Supercyber",
             "perfil_foto": null,
             "politicas": "Sin datos",
-            "ruc": "0908070305021",
+            "ruc": "0999999999001",
             "ruta_foto": null,
             "slogan": "Sin datos",
             "usuario_id": 3
@@ -144,7 +144,7 @@
             "nom_empresa": "DG Diseño y Gigantografías",
             "perfil_foto": "Perfiles/dg_diseños_gigan_00001.jpeg",
             "politicas": "Sin datos",
-            "ruc": "0908070305021",
+            "ruc": "0999999999001",
             "ruta_foto": "Portadas/dg_diseños_gigan_00011.jpeg",
             "slogan": "Marcando la diferencia en Macará",
             "usuario_id": 4
@@ -182,7 +182,7 @@
             "nom_empresa": "MS Decoraciones",
             "perfil_foto": "Perfiles/ms_decoraciones_00001.jpeg",
             "politicas": "Sin datos",
-            "ruc": "0908070305021",
+            "ruc": "0999999999001",
             "ruta_foto": null,
             "slogan": "Sin datos",
             "usuario_id": 5
@@ -194,7 +194,7 @@
         "pk": 6,
         "fields": {
             "nom_usuario": "Sin datos",
-            "correo": "ejemplo@gmail.com",
+            "correo": "nanchy_salazar@gmail.com",
             "credenciales": "123456",
             "ruta_foto": null,
             "estado": true,
@@ -207,20 +207,20 @@
         "pk": 6,
         "fields": {
             "activi_comercial_id": 7,
-            "correo": "ejemplo@gmail.com",
+            "correo": "nachysalazarf@gmail.com",
             "descripcion": "Arreglos para todo compromiso social con flores naturales y artificiales",
             "dias_atencion": "Lunes - Domingo",
             "direccion": "Barrio Velasco Ibarra, Calle Juvenal Jaramillo y Lázaro Vaca, junto a la terminal de la Cooperativa Loja",
             "estado": "Habilitada",
             "forma_pago": "Efectivo y depósitos bancarios",
             "forma_venta": "Local y en la Web",
-            "gerente": "Sin datos",
+            "gerente": "Nanchy Salazar",
             "inicio_atencion": "08:00",
             "fin_atencion": "17:00",
             "nom_empresa": "Detalles Floristería",
             "perfil_foto": null,
             "politicas": "Sin datos",
-            "ruc": "0908070305021",
+            "ruc": "0999999999001",
             "ruta_foto": null,
             "slogan": "Sin datos",
             "usuario_id": 6
@@ -258,7 +258,7 @@
             "nom_empresa": "Funeraria Camino de Luz",
             "perfil_foto": null,
             "politicas": "Sin datos",
-            "ruc": "0908070305021",
+            "ruc": "0999999999001",
             "ruta_foto": null,
             "slogan": "Sin datos",
             "usuario_id": 7
@@ -296,7 +296,7 @@
             "nom_empresa": "Jess & Jess Heladería y Cafetería",
             "perfil_foto": "Perfiles/jess_&_jess_00001.jpeg",
             "politicas": "Realizamos entrega a domicilio sin recargo dentro de la Urbe",
-            "ruc": "0908070305021",
+            "ruc": "0999999999001",
             "ruta_foto": null,
             "slogan": "Sin datos",
             "usuario_id": 8
@@ -321,7 +321,7 @@
         "pk": 9,
         "fields": {
             "activi_comercial_id": 10,
-            "correo": "tatiana_ramon@gmail.com",
+            "correo": "lapapeleriademartina@gmail.com",
             "descripcion": "Sin datos",
             "dias_atencion": "Lunes - Domingo",
             "direccion": "Macará/ Barrio Velasco Ibarra/junto al consultorio médico Dr. Ramón",
@@ -334,7 +334,7 @@
             "nom_empresa": "La papelería de Martina",
             "perfil_foto": "Perfiles/la_papeleria_de_martina_00001.jpeg",
             "politicas": "Una vez salida la mercadería no se acepta devolución de dinero y se aceptan cambios de mercadería entregado el producto en las mismas condiciones que se entregó",
-            "ruc": "0908070305021",
+            "ruc": "0999999999001",
             "ruta_foto": null,
             "slogan": "Somos los mejores aliados para estudiantes y maestros.",
             "usuario_id": 9
@@ -372,7 +372,7 @@
             "nom_empresa": "La pescadería de Carlita",
             "perfil_foto": "Perfiles/sucursal_del_mar_00001.jpeg",
             "politicas": "Entregas a domicilio sin recargo. Tiempo de entrega varía según la demanda 10 min a 1 hora. No se aceptan devoluciones.",
-            "ruc": "0908070305021",
+            "ruc": "0999999999001",
             "ruta_foto": null,
             "slogan": "La pescadería de Karlita, somos la sucursal del mar",
             "usuario_id": 10
@@ -410,7 +410,7 @@
             "nom_empresa": "Chifa Taypa",
             "perfil_foto": null,
             "politicas": "Tomamos todas las medidas de bioseguridad y nos esmeramos en que la entrega sea inmediata y de forma responsable con prioridad al cliente y los productos más frescos para su paladar",
-            "ruc": "0908070305021",
+            "ruc": "0999999999001",
             "ruta_foto": null,
             "slogan": "Sin datos",
             "usuario_id": 11
@@ -448,7 +448,7 @@
             "nom_empresa": "Pinchos Macará",
             "perfil_foto": null,
             "politicas": "Servicio a domicilio sin recargo",
-            "ruc": "0908070305021",
+            "ruc": "0999999999001",
             "ruta_foto": null,
             "slogan": "Sin datos",
             "usuario_id": 12
@@ -486,7 +486,7 @@
             "nom_empresa": "Gianny's Express Delivery",
             "perfil_foto": null,
             "politicas": "Sin datos",
-            "ruc": "0908070305021",
+            "ruc": "0999999999001",
             "ruta_foto": null,
             "slogan": "Sin datos",
             "usuario_id": 13
@@ -642,6 +642,44 @@
             "ruta_foto": null,
             "slogan": "Natural, ecológico y artesanal",
             "usuario_id": 17
+        }
+    },
+
+    {
+        "model": "Modelos.usuarios",
+        "pk": 18,
+        "fields": {
+            "nom_usuario": "Juan Carlos Campoverde",
+            "correo": "juan_campoverde@gmail.com",
+            "credenciales": "123456",
+            "ruta_foto": null,
+            "estado": true,
+            "correo_verificado": true,
+            "rol_id": 2
+        }
+    },
+    {
+        "model": "Modelos.empresas",
+        "pk": 18,
+        "fields": {
+            "activi_comercial_id": 13,
+            "correo": "jcnutrida7@hotmail.com",
+            "descripcion": "Sin datos",
+            "dias_atencion": "Lunes - Domingo",
+            "direccion": "Sin datos",
+            "estado": "Habilitada",
+            "forma_pago": "Efectivo y depósitos bancarios",
+            "forma_venta": "Local y en la Web",
+            "gerente": "Juan Carlos Campoverde",
+            "inicio_atencion": "08:00",
+            "fin_atencion": "20:00",
+            "nom_empresa": "Empresa Nutrida 7",
+            "perfil_foto": null,
+            "politicas": "Productos de calidad. No se aceptan devoluciones",
+            "ruc": "Sin datos",
+            "ruta_foto": null,
+            "slogan": "Sin datos",
+            "usuario_id": 18
         }
     }
 ]
