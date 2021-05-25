@@ -68,7 +68,7 @@
                 {% if request.session.usuario.perfil %}
                 <img id="foto" src="/media/{{datos.unUsuario.ruta_foto}}" class="img-thumbnail img-fluid" name="foto">
                 {% else %}
-                <img id="foto" src="{% static 'img/img_macara/user.png' %}" class="img-thumbnail img-fluid" name="foto">
+                <img id="foto" src="{% static 'img/user.png' %}" class="img-thumbnail img-fluid" name="foto">
                 {% endif %}
                 <label for="imgFoto" class="btn btn-primary">Subir foto</label>
                 <input class="btn btn-success btn-sm subirfoto" type="file" name="imgFoto" id="imgFoto"

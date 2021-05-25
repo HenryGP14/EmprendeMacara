@@ -21,7 +21,7 @@
                     {% if request.session.usuario.perfil %}
                     <img src="{{ request.session.usuario.perfil }}" class="img-perfil" id="img-perfil">
                     {% else %}
-                    <img src="{% static 'img/img_macara/user.png' %}" class="img-perfil" id="img-perfil">
+                    <img src="{% static 'img/user.png' %}" class="img-perfil" id="img-perfil">
                     {% endif %}
                     <form class="d-flex justify-content-center align-items-center" id="form-save-perfil"
                         name="form-save-perfil" method="POST" enctype="multipart/form-data">
