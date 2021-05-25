@@ -10,8 +10,10 @@
     <link rel="stylesheet" href="{% static 'css/controlnegocio/perfil-box.css' %}">
     <link rel="stylesheet" href="{% static 'css/controlnegocio/panel-contenido.css' %}" />
     <link rel="stylesheet" href="{% static 'css/controlnegocio/panel-contenido-responsive.css' %}" />
+    <link rel="icon" href="{% static 'img/img_macara/logo_em_macara.png' %}" type="image/png" />
+
     <!--Es necesario para que al momento de cargar el perfil pueda hacer uso de este recurso-->
-    <script src="{% static 'js/jquery-3.4.1.min.js'%}"></script> 
+    <script src="{% static 'js/jquery-3.4.1.min.js'%}"></script>
     <title>{% block title %}{% endblock title %}Emprendimientos Macará</title>
     {% block css %} {% endblock css %}
 </head>
@@ -96,10 +98,11 @@
             </div>
         </div>
         <div class="panel-contenido">
-        {% if unEmpresa.estado != "Habilitada"  %}
-                <div class="alert alert-danger">
-                    <p>!Su empresa esta inhabilitada¡.Por lo tanto, su empresa y productos no son visibles al público. Para habilitar su empresa contacte con Emprendimientos macara</p>
-                </div>
+            {% if unEmpresa.estado != "Habilitada"  %}
+            <div class="alert alert-danger">
+                <p>!Su empresa esta inhabilitada¡.Por lo tanto, su empresa y productos no son visibles al público. Para
+                    habilitar su empresa contacte con Emprendimientos macara</p>
+            </div>
             {% endif %}
             {% block content %} {% endblock content %}
         </div>
