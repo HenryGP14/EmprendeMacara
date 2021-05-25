@@ -536,7 +536,7 @@
         "pk": 15,
         "fields": {
             "nom_usuario": "Sin datos",
-            "correo": "perezh010@gmail.com",
+            "correo": "zentral-coffe@gmail.com",
             "credenciales": "123456",
             "ruta_foto": null,
             "estado": true,
@@ -549,7 +549,7 @@
         "pk": 15,
         "fields": {
             "activi_comercial_id": 14,
-            "correo": "perezh010@gmail.com",
+            "correo": "zentral-coffe@gmail.com",
             "descripcion": "Local de calidad con los mejores desayunos y piqueos de la localidad.",
             "dias_atencion": "Lunes - Domingo",
             "direccion": "Sin datos",
