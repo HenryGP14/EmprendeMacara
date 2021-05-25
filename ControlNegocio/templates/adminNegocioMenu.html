@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{% static 'css/controlnegocio/perfil-box.css' %}">
     <link rel="stylesheet" href="{% static 'css/controlnegocio/panel-contenido.css' %}" />
     <link rel="stylesheet" href="{% static 'css/controlnegocio/panel-contenido-responsive.css' %}" />
-    <link rel="icon" href="{% static 'img/img_macara/logo_em_macara.png' %}" type="image/png" />
+    <link rel="icon" href="{% static 'img/logo_em_macara.png' %}" type="image/png" />
 
     <!--Es necesario para que al momento de cargar el perfil pueda hacer uso de este recurso-->
     <script src="{% static 'js/jquery-3.4.1.min.js'%}"></script>
@@ -26,7 +26,7 @@
                     {% if request.session.usuario.perfil %}
                     <img src="{{ request.session.usuario.perfil }}">
                     {% else %}
-                    <img src="{% static 'img/img_macara/user.png' %}">
+                    <img src="{% static 'img/user.png' %}">
                     {% endif %}
                 </div>
                 <p class="nombre-empresa">{{ request.session.usuario.nombre }}</p>

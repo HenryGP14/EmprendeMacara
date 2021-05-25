@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{% static 'css/fontawesome-5.15.2/css/all.min.css' %}" type="text/css" />
     <link rel="stylesheet" href="{% static 'css/controlnegocio/perfil-box.css' %}" type="text/css" />
     <link rel="stylesheet" href="{% static 'css/administradorweb/admin-web.css' %}" type="text/css" />
-    <link rel="icon" href="{% static 'img/img_macara/logo_em_macara.png' %}" type="image/png" />
+    <link rel="icon" href="{% static 'img/logo_em_macara.png' %}" type="image/png" />
     <title>{% block title %}{% endblock title %}Administrador Web</title>
 </head>
 
@@ -22,7 +22,7 @@
                     {% if request.session.usuario.perfil %}
                     <img src="{{ request.session.usuario.perfil }}">
                     {% else %}
-                    <img src="{% static 'img/img_macara/user.png' %}" class="user-perfil">
+                    <img src="{% static 'img/user.png' %}" class="user-perfil">
                     {% endif %}
                 </div>
                 <p class="nombre-empresa">{{ request.session.usuario.nombre }}</p>
