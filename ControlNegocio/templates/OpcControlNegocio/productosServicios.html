@@ -49,7 +49,7 @@
                         </button>
                         <section class="group-cards">
                             {% for unProducto in ltProductos %}
-                            {% if unProducto.visible is True %}
+                            {% if unProducto.visible is True and unProducto.Eliminado is False %}
                             <div class="cards card">
                                 {% if unProducto.ruta_foto %}
                                 <img src="{{ unProducto.ruta_foto.url }}" class="img-card">
@@ -64,8 +64,12 @@
                                         ${{unProducto.precio_unitario}}
                                     </h5>
                                     <div>
+                                        <a href="{% url 'eliminarProducto' id=unProducto.id %}"
+                                            class="btn btn-light" title="Eliminar producto">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
                                         <a href="{% url 'deshabilitarProducto' id=unProducto.id %}"
-                                            class="btn btn-light">
+                                            class="btn btn-light" title="Deshabilitar producto">
                                             <i class="fas fa-ban"></i>
                                         </a>
                                         <button type="submit" class="btn btn-light btnEditProducto"
@@ -88,7 +92,7 @@
                             Agregar servicio</button>
                         <section class="group-cards">
                             {% for unServicio in ltServicios %}
-                            {% if unServicio.visible is True %}
+                            {% if unServicio.visible is True and unServicio.Eliminado is False %}
                             <div class="cards card">
                                 {% if unServicio.ruta_foto %}
                                 <img src="{{ unServicio.ruta_foto.url }}" class="img-card">
@@ -102,13 +106,17 @@
                                 <div class="card-action">
                                     <div style="display:inline-block"></div>
                                     <div>
+                                        <a href="{% url 'eliminarServicio' id=unServicio.id %}"
+                                            class="btn btn-light" title="Eliminar servicio">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
                                         <a href="{% url 'deshabilitarServicio' id=unServicio.id %}"
-                                            class="btn btn-light">
+                                            class="btn btn-light" title="Deshabilitar servicio">
                                             <i class="fas fa-ban"></i>
                                         </a>
                                         <button type="button" class="btn btn-light btnEditServicio"
                                             pid="{{unServicio.id}}" data-toggle="modal"
-                                            data-target="#editmodalServicio">
+                                            data-target="#editmodalServicio" title="Editar servicio">
                                             <i class="fas fa-cog"></i>
                                         </button>
                                     </div>

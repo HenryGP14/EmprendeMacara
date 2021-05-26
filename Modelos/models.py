@@ -89,6 +89,7 @@ class servicios(models.Model):
     # media/Productos_Servicios
     ruta_foto = models.ImageField(upload_to="Productos_Servicios", null=True, blank=False)
     visible = models.BooleanField()
+    Eliminado = models.BooleanField(default=False)
 
 
 class productos(models.Model):
@@ -104,7 +105,7 @@ class productos(models.Model):
     # media/Productos_Servicios
     ruta_foto = models.ImageField(upload_to="Productos_Servicios", null=True, blank=False)
     visible = models.BooleanField()
-
+    Eliminado = models.BooleanField(default=False)
 
 class ventas(models.Model):
     secuencial = models.CharField(max_length=11, unique=True)

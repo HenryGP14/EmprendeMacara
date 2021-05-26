@@ -12,6 +12,9 @@ urlpatterns = [
     path('ProductosServicios/', views.vwOpcProductosServicios, name="ProductosServicios"),
     path('perfil', views.vwTplPerfil, name="perfil"),
     path('ConfiguracionEmpresa', views.vwConfiguracionEmpresa, name="ConfiguracionEmpresa"),
+    #==============URL  ELIMINAR==============
+    path('eliminarProducto/<int:id>', views.vwEliminarProducto, name="eliminarProducto"),
+    path('eliminarServicio/<int:id>', views.vwEliminarServicio, name="eliminarServicio"),
     #==============URL HABILITAR==============
     path('habilitarProducto/<int:id>', views.vwHabilitarProducto, name="habilitarProducto"),
     path('habilitarServicio/<int:id>', views.vwHabilitarServicio, name="habilitarServicio"),
