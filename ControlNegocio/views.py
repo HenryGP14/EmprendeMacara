@@ -128,6 +128,70 @@ def vwOpcProductosServicios(request):
         {"ltProductos": ltProductos, "ltServicios": ltServicios, "unEmpresa": unEmpresa, "productos": "activado"},
     )
 
+#========VISTA HABILITAR=======
+def vwHabilitarServicio(request,id):
+    user_session = Usuario(request)
+    try:
+        if not request.session["usuario"] or request.session["usuario"]["rol_id"] == 1:
+            return redirect("index")
+        elif request.session["usuario"]["rol_id"] == 3:
+            return redirect("admin-web")
+    except:
+        pass
+
+    unServicio = servicios()
+    unServicio = servicios.objects.get(id=id)
+    unServicio.visible = True
+    unServicio.save()
+    return redirect('ProductosServicios')
+
+def vwHabilitarProducto(request,id):
+    user_session = Usuario(request)
+    try:
+        if not request.session["usuario"] or request.session["usuario"]["rol_id"] == 1:
+            return redirect("index")
+        elif request.session["usuario"]["rol_id"] == 3:
+            return redirect("admin-web")
+    except:
+        pass
+
+    unProducto = productos()
+    unProducto = productos.objects.get(id=id)
+    unProducto.visible = True
+    unProducto.save()
+    return redirect('ProductosServicios')
+#========VISTAS DESHABILITAR=======
+def vwDeshabilitarProducto(request,id):
+    user_session = Usuario(request)
+    try:
+        if not request.session["usuario"] or request.session["usuario"]["rol_id"] == 1:
+            return redirect("index")
+        elif request.session["usuario"]["rol_id"] == 3:
+            return redirect("admin-web")
+    except:
+        pass
+
+    unProducto = productos()
+    unProducto = productos.objects.get(id=id)
+    unProducto.visible = False
+    unProducto.save()
+    return redirect('ProductosServicios')
+
+def vwDeshabilitarServicio(request,id):
+    user_session = Usuario(request)
+    try:
+        if not request.session["usuario"] or request.session["usuario"]["rol_id"] == 1:
+            return redirect("index")
+        elif request.session["usuario"]["rol_id"] == 3:
+            return redirect("admin-web")
+    except:
+        pass
+
+    unServicio = servicios()
+    unServicio = servicios.objects.get(id=id)
+    unServicio.visible = False
+    unServicio.save()
+    return redirect('ProductosServicios')
 
 # =========VISTAS GUARDAR============
 def vwAnadirProducto(request):

@@ -33,6 +33,12 @@
                         Servicios
                     </a>
                 </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="bloq-tab" data-toggle="tab" href="#bloq" role="tab" aria-controls="profile"
+                        aria-selected="false">
+                        Productos y servicios deshabilitados
+                    </a>
+                </li>
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active pb-2" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -43,6 +49,7 @@
                         </button>
                         <section class="group-cards">
                             {% for unProducto in ltProductos %}
+                            {% if unProducto.visible is True %}
                             <div class="cards card">
                                 {% if unProducto.ruta_foto %}
                                 <img src="{{ unProducto.ruta_foto.url }}" class="img-card">
@@ -57,14 +64,19 @@
                                         ${{unProducto.precio_unitario}}
                                     </h5>
                                     <div>
+                                        <a href="{% url 'deshabilitarProducto' id=unProducto.id %}"
+                                            class="btn btn-light">
+                                            <i class="fas fa-ban"></i>
+                                        </a>
                                         <button type="submit" class="btn btn-light btnEditProducto"
-                                            pid="{{unProducto.id}}" data-toggle="modal"
-                                            data-target="#modalEditProducto">
+                                            pid="{{unProducto.id}}" data-toggle="modal" data-target="#modalEditProducto"
+                                            title="Editar producto">
                                             <i class="fas fa-cog"></i>
                                         </button>
                                     </div>
                                 </div>
                             </div>
+                            {% endif %}
                             {% endfor %}
                         </section>
                     </section>
@@ -76,6 +88,75 @@
                             Agregar servicio</button>
                         <section class="group-cards">
                             {% for unServicio in ltServicios %}
+                            {% if unServicio.visible is True %}
+                            <div class="cards card">
+                                {% if unServicio.ruta_foto %}
+                                <img src="{{ unServicio.ruta_foto.url }}" class="img-card">
+                                {% else %}
+                                <div class="img-card"></div>
+                                {% endif %}
+                                <div class="card-content">
+                                    <p class="card-title">{{unServicio.nombre}}</p>
+                                </div>
+
+                                <div class="card-action">
+                                    <div style="display:inline-block"></div>
+                                    <div>
+                                        <a href="{% url 'deshabilitarServicio' id=unServicio.id %}"
+                                            class="btn btn-light">
+                                            <i class="fas fa-ban"></i>
+                                        </a>
+                                        <button type="button" class="btn btn-light btnEditServicio"
+                                            pid="{{unServicio.id}}" data-toggle="modal"
+                                            data-target="#editmodalServicio">
+                                            <i class="fas fa-cog"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </section>
+                    </section>
+                </div>
+                <div class="tab-pane fade pb-3" id="bloq" role="tabpanel" aria-labelledby="bloq-tab">
+                    <h3>Productos deshabilitados</h3>
+                    <hr>
+                    <section>
+                        <section class="group-cards">
+                            {% for unProducto in ltProductos %}
+                            {% if unProducto.visible is False %}
+                            <div class="cards card">
+                                {% if unProducto.ruta_foto %}
+                                <img src="{{ unProducto.ruta_foto.url }}" class="img-card">
+                                {% else %}
+                                <div class="img-card"></div>
+                                {% endif %}
+                                <div class="card-content">
+                                    <p class="card-title">{{unProducto.nombre}}</p>
+                                </div>
+                                <div class="card-action">
+                                    <h5 style="color: red;display:inline-block">
+                                        ${{unProducto.precio_unitario}}
+                                    </h5>
+                                    <div>
+                                        <a href="{% url 'habilitarProducto' id=unProducto.id %}" class="btn btn-light">
+                                            <i class="fas fa-undo"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </section>
+                    </section>
+                    <h3>Servicios deshabilitados</h3>
+                    <hr>
+                    <section>
+
+                        <section class="group-cards">
+                            {% for unServicio in ltServicios %}
+                            {% if unServicio.visible is False %}
                             <div class="cards card">
                                 {% if unServicio.ruta_foto %}
                                 <img src="{{ unServicio.ruta_foto.url }}" class="img-card">
@@ -87,14 +168,17 @@
                                 </div>
                                 <div class="card-action">
                                     <div style="display:inline-block"></div>
-                                    <button type="button" class="btn btn-light btnEditServicio" pid="{{unServicio.id}}"
-                                        data-toggle="modal" data-target="#editmodalServicio">
-                                        <i class="fas fa-cog"></i>
-                                    </button>
+                                    <div>
+                                        <a href="{% url 'habilitarServicio' id=unServicio.id %}" class="btn btn-light">
+                                            <i class="fas fa-undo"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
+                            {% endif %}
                             {% endfor %}
                         </section>
+
                     </section>
                 </div>
             </div>
@@ -352,6 +436,6 @@
     });
 
     //======VALIDAR FOTO
-    function validarinput(idInput) {}
+    function validarinput(idInput) { }
 </script>
 {% endblock js2 %}
