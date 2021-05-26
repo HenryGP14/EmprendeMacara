@@ -10,6 +10,7 @@
             <div class="modal-body">
                 <form id="formEditarProducto" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
+                    <div id="id_producto" style="display: none;"></div>
                     <div class="form-group">
                         <label for="EditNombreProducto" class="col-form-label">Nombre:</label>
                         <input type="text" class="form-control form-control-sm" id="EditNombreProducto"

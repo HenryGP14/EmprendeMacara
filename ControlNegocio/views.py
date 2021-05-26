@@ -30,7 +30,8 @@ def vwOpcPedidosPendientes(request):
     user_session = Usuario(request)
     try:
         if not request.session["usuario"]:
-            messages.info(request, "Debes iniciar sessión para ingresar a la página")
+            messages.info(
+                request, "Debes iniciar sessión para ingresar a la página")
             return redirect("login")
         elif request.session["usuario"]["rol_id"] == 3:
             return redirect("admin-web")
@@ -39,7 +40,8 @@ def vwOpcPedidosPendientes(request):
     except:
         pass
 
-    unEmpresa = empresas.objects.get(usuario_id=request.session["usuario"]["id"])
+    unEmpresa = empresas.objects.get(
+        usuario_id=request.session["usuario"]["id"])
     ltVentas = []
     for unVenta in ventas.objects.filter((Q(estado="Pendiente") | Q(estado="Enviado")) & Q(empresa_id=unEmpresa.id)):
         ltVentas.append(
@@ -78,7 +80,8 @@ def vwOpcPedidosEntregados(request):
     except:
         pass
 
-    unEmpresa = empresas.objects.get(usuario_id=request.session["usuario"]["id"])
+    unEmpresa = empresas.objects.get(
+        usuario_id=request.session["usuario"]["id"])
     ltVentas = []
     for unVenta in ventas.objects.filter(empresa_id=unEmpresa.id, estado="Entregado"):
         detalle = detalles_venta.objects.filter(venta_id=unVenta.id).first()
@@ -119,17 +122,21 @@ def vwOpcProductosServicios(request):
     except:
         pass
 
-    unEmpresa = empresas.objects.get(usuario_id=request.session["usuario"]["id"])
+    unEmpresa = empresas.objects.get(
+        usuario_id=request.session["usuario"]["id"])
     ltProductos = productos.objects.filter(empresa_id=unEmpresa.id)
     ltServicios = servicios.objects.filter(empresa_id=unEmpresa.id)
     return render(
         request,
         "OpcControlNegocio/productosServicios.html",
-        {"ltProductos": ltProductos, "ltServicios": ltServicios, "unEmpresa": unEmpresa, "productos": "activado", "empresa_id": unEmpresa.id},
+        {"ltProductos": ltProductos, "ltServicios": ltServicios,
+            "unEmpresa": unEmpresa, "productos": "activado", "empresa_id": unEmpresa.id},
     )
 
-#========VISTA ELIMINAR=======
-def vwEliminarProducto(request,id):
+# ========VISTA ELIMINAR=======
+
+
+def vwEliminarProducto(request, id):
     user_session = Usuario(request)
     try:
         if not request.session["usuario"] or request.session["usuario"]["rol_id"] == 1:
@@ -146,7 +153,7 @@ def vwEliminarProducto(request,id):
     return redirect('ProductosServicios')
 
 
-def vwEliminarServicio(request,id):
+def vwEliminarServicio(request, id):
     user_session = Usuario(request)
     try:
         if not request.session["usuario"] or request.session["usuario"]["rol_id"] == 1:
@@ -162,8 +169,10 @@ def vwEliminarServicio(request,id):
     unServicio.save()
     return redirect('ProductosServicios')
 
-#========VISTA HABILITAR=======
-def vwHabilitarServicio(request,id):
+# ========VISTA HABILITAR=======
+
+
+def vwHabilitarServicio(request, id):
     user_session = Usuario(request)
     try:
         if not request.session["usuario"] or request.session["usuario"]["rol_id"] == 1:
@@ -179,7 +188,8 @@ def vwHabilitarServicio(request,id):
     unServicio.save()
     return redirect('ProductosServicios')
 
-def vwHabilitarProducto(request,id):
+
+def vwHabilitarProducto(request, id):
     user_session = Usuario(request)
     try:
         if not request.session["usuario"] or request.session["usuario"]["rol_id"] == 1:
@@ -194,8 +204,10 @@ def vwHabilitarProducto(request,id):
     unProducto.visible = True
     unProducto.save()
     return redirect('ProductosServicios')
-#========VISTAS DESHABILITAR=======
-def vwDeshabilitarProducto(request,id):
+# ========VISTAS DESHABILITAR=======
+
+
+def vwDeshabilitarProducto(request, id):
     user_session = Usuario(request)
     try:
         if not request.session["usuario"] or request.session["usuario"]["rol_id"] == 1:
@@ -211,7 +223,8 @@ def vwDeshabilitarProducto(request,id):
     unProducto.save()
     return redirect('ProductosServicios')
 
-def vwDeshabilitarServicio(request,id):
+
+def vwDeshabilitarServicio(request, id):
     user_session = Usuario(request)
     try:
         if not request.session["usuario"] or request.session["usuario"]["rol_id"] == 1:
@@ -228,6 +241,8 @@ def vwDeshabilitarServicio(request,id):
     return redirect('ProductosServicios')
 
 # =========VISTAS GUARDAR============
+
+
 def vwAnadirProducto(request):
     user_session = Usuario(request)
     try:
@@ -239,7 +254,8 @@ def vwAnadirProducto(request):
         pass
 
     if request.method == "POST":
-        unEmpresa = empresas.objects.get(usuario_id=request.session["usuario"]["id"])
+        unEmpresa = empresas.objects.get(
+            usuario_id=request.session["usuario"]["id"])
 
         unProducto = productos()
         unProducto.empresa = unEmpresa
@@ -267,7 +283,8 @@ def vwAnadirServicio(request):
         pass
 
     if request.method == "POST":
-        unEmpresa = empresas.objects.get(usuario_id=request.session["usuario"]["id"])
+        unEmpresa = empresas.objects.get(
+            usuario_id=request.session["usuario"]["id"])
 
         unServicio = servicios()
         unServicio.empresa = unEmpresa
@@ -326,7 +343,14 @@ def vwObtenerServicio(request):
     unServicio = servicios.objects.get(id=request.POST["idServicio"])
     editServicio.id = unServicio.id
     return JsonResponse(
-        {"empresa": unServicio.empresa.id, "nombre": unServicio.nombre, "descripcion": unServicio.descripcion, "ruta_foto": "/media/" + unServicio.ruta_foto.name, "visible": unServicio.visible}
+        {
+        "empresa": unServicio.empresa.id, 
+        "nombre": unServicio.nombre, 
+        "descripcion": unServicio.descripcion,
+        "ruta_foto": "/media/" + unServicio.ruta_foto.name, 
+        "visible": unServicio.visible,
+        "servicio_id": unServicio.id
+        }
     )
 
 
@@ -340,9 +364,7 @@ def vwObtenerProducto(request):
     except:
         pass
 
-    unProducto = productos()
     unProducto = productos.objects.get(id=request.POST["idProducto"])
-    editProducto.id = unProducto.id
     return JsonResponse(
         {
             "empresa": unProducto.empresa.id,
@@ -352,6 +374,7 @@ def vwObtenerProducto(request):
             "precio_unitario": unProducto.precio_unitario,
             "ruta_foto": "/media/" + unProducto.ruta_foto.name,
             "visible": unProducto.visible,
+            "producto_id": unProducto.id,
         }
     )
 
@@ -392,10 +415,10 @@ def vwEditarProducto(request):
     except:
         pass
 
-    unProducto = productos()
-    unProducto = productos.objects.get(id=editProducto.id)
+    unProducto = productos.objects.get(id=request.POST['producto_id'])
 
-    unEmpresa = empresas.objects.get(usuario_id=request.session["usuario"]["id"])
+    unEmpresa = empresas.objects.get(
+        usuario_id=request.session["usuario"]["id"])
 
     unProducto.empresa = unEmpresa
     unProducto.nombre = request.POST["EditNombreProducto"]
@@ -426,11 +449,10 @@ def vwEditarServicio(request):
     except:
         pass
 
-    unServicio = servicios()
-    print(editServicio.id)
-    unServicio = servicios.objects.get(id=editServicio.id)
+    unServicio = servicios.objects.get(id=request.POST['id_servicio'])
 
-    unEmpresa = empresas.objects.get(usuario_id=request.session["usuario"]["id"])
+    unEmpresa = empresas.objects.get(
+        usuario_id=request.session["usuario"]["id"])
 
     unServicio.empresa = unEmpresa
     unServicio.nombre = request.POST["EditNombreServicio"]
@@ -510,7 +532,8 @@ def vwConfiguracionEmpresa(request):
     except:
         pass
 
-    unEmpresa = empresas.objects.get(usuario_id=request.session["usuario"]["id"])
+    unEmpresa = empresas.objects.get(
+        usuario_id=request.session["usuario"]["id"])
     return render(request, "OpcControlNegocio/ConfiguracionEmpresa.html", {"unEmpresa": unEmpresa})
 
 
@@ -549,12 +572,15 @@ def vwsavepass(request):
             usuario.credenciales = request.POST["txtCredenciales_new"]
             usuario.save()
         else:
-            messages.error(request, "!Ups¡ La contraseña antigua que ingresaste no es la correcta")
+            messages.error(
+                request, "!Ups¡ La contraseña antigua que ingresaste no es la correcta")
             return JsonResponse({"redirect": "ConfiguracionEmpresa"})
     except:
-        messages.error(request, "!Ups¡ Tuvimos problemas al cambiar la contraseña")
+        messages.error(
+            request, "!Ups¡ Tuvimos problemas al cambiar la contraseña")
         return JsonResponse({"redirect": "ConfiguracionEmpresa"})
-    messages.success(request, "Felicitaciones. Tu contraseña se cambio correctamente, inicia sessión para confirmar")
+    messages.success(
+        request, "Felicitaciones. Tu contraseña se cambio correctamente, inicia sessión para confirmar")
     return JsonResponse({"redirect": "\logout"})
 
 
@@ -575,7 +601,8 @@ def vwSaveFotoEmpresa(request):
 
     usuario.ruta_foto = request.FILES.get("image")
     nom_foto, tipo_foto = os.path.splitext(usuario.ruta_foto.name)
-    usuario.ruta_foto.name = "empre_perfil_" + str(request.session["usuario"]["id"]) + tipo_foto
+    usuario.ruta_foto.name = "empre_perfil_" + \
+        str(request.session["usuario"]["id"]) + tipo_foto
     usuario.save()
     try:
         if request.session["usuario"]["perfil"]:
@@ -599,7 +626,8 @@ def vwTplPerfil(request):
     except:
         pass
 
-    unEmpresa = empresas.objects.get(usuario_id=request.session["usuario"]["id"])
+    unEmpresa = empresas.objects.get(
+        usuario_id=request.session["usuario"]["id"])
     fotos = fotos_empresas.objects.filter(empresa=unEmpresa)
     actividadesCom = activi_comerciales.objects.all()
     unEmpresa.costo_envio = str(unEmpresa.costo_envio).replace(",", ".")
@@ -619,12 +647,14 @@ def vwEdtPerfil(request):
 
     try:
         with transaction.atomic():
-            correoEmpresa = empresas.objects.filter(correo=request.POST["txtCorreo"])
+            correoEmpresa = empresas.objects.filter(
+                correo=request.POST["txtCorreo"])
             if len(correoEmpresa) > 1:
                 return JsonResponse({"result": "El correo de la empresa ya encuentra registrado, por favor ingrese otro usuario"})
             else:
                 # Se obtienen los datos de la empresa logeada
-                unaEmpresa = empresas.objects.get(usuario_id=request.session["usuario"]["id"])
+                unaEmpresa = empresas.objects.get(
+                    usuario_id=request.session["usuario"]["id"])
                 # Se modifican los datos de la empresa
                 unaEmpresa.ruc = request.POST["txtRuc_ci"]
                 unaEmpresa.nom_empresa = request.POST["txtEmpresa"]
@@ -643,13 +673,14 @@ def vwEdtPerfil(request):
                 unaActividad.id = int(request.POST["cmbActComerc"])
                 unaEmpresa.activi_comercial = unaActividad
                 # Se obtiene el directorio en donde se encuentran guardadas las imágenes
-                imgPortada = "media/"+ unaEmpresa.ruta_foto.name
-                imgPerfil = "media/"+ unaEmpresa.perfil_foto.name
-                
+                imgPortada = "media/" + unaEmpresa.ruta_foto.name
+                imgPerfil = "media/" + unaEmpresa.perfil_foto.name
+
                 try:
                     unaEmpresa.ruta_foto = request.FILES["imgFoto"]
                     a, b = os.path.splitext(unaEmpresa.ruta_foto.name)
-                    unaEmpresa.ruta_foto.name = "portada_empresa_" + str(unaEmpresa.id) + b
+                    unaEmpresa.ruta_foto.name = "portada_empresa_" + \
+                        str(unaEmpresa.id) + b
                     # Elimina la foto guardada en el directorio media del servidor
                     os.remove(imgPortada)
                 except Exception as e:
@@ -658,12 +689,13 @@ def vwEdtPerfil(request):
                 try:
                     unaEmpresa.perfil_foto = request.FILES["imgFotoPerfil"]
                     a, b = os.path.splitext(unaEmpresa.perfil_foto.name)
-                    unaEmpresa.perfil_foto.name = "perfil_empresa_" + str(unaEmpresa.id) + b
+                    unaEmpresa.perfil_foto.name = "perfil_empresa_" + \
+                        str(unaEmpresa.id) + b
                     # Elimina la foto guardada en el directorio media del servidor
                     os.remove(imgPerfil)
                 except Exception as e:
                     pass
-               
+
                 unaEmpresa.save()
                 telefonos = telefo_empresas.objects.filter(empresa=unaEmpresa)
                 for t in telefonos:
@@ -713,7 +745,8 @@ def vwElmFoto(request):
         pass
 
     try:
-        unaEmpresa = empresas.objects.get(usuario_id=request.session["usuario"]["id"])
+        unaEmpresa = empresas.objects.get(
+            usuario_id=request.session["usuario"]["id"])
         idFoto = int(request.POST["id_foto"])
         foto = fotos_empresas.objects.get(id=idFoto)
         # Elimina la foto guardada en la carpeta media del servidor
@@ -738,11 +771,13 @@ def vwGrdFoto(request):
 
     try:
         with transaction.atomic():
-            unaEmpresa = empresas.objects.get(usuario_id=request.session["usuario"]["id"])
+            unaEmpresa = empresas.objects.get(
+                usuario_id=request.session["usuario"]["id"])
             unaFoto = fotos_empresas()
             unaFoto.empresa = unaEmpresa
             unaFoto.ruta_foto = request.FILES["imgFotoCarousel"]
-            unaFoto.ruta_foto.name = "foto_carousel_empresa_" + str(unaEmpresa.id) + ".jpeg"
+            unaFoto.ruta_foto.name = "foto_carousel_empresa_" + \
+                str(unaEmpresa.id) + ".jpeg"
             # Se guarda la foto en el servidor y se almacena el directorio de la foto en la base de datos
             unaFoto.save()
             return JsonResponse({"result": "1"})

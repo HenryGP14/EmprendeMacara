@@ -344,6 +344,7 @@
             $('#EditNombreServicio').val(d.nombre);
             $('#EditDescripcionServicio').val(d.descripcion);
             $('#fotoEditServicio').attr('src', d.ruta_foto);
+            $('#id_servicio').text(d.servicio_id);
         }).fail(function (jqXHR, textStatus, errorThrown) {
 
         }).always(function (data) {
@@ -368,6 +369,7 @@
             $('#EditCantidadProducto').val(d.cantidad);
             $('#EditPrecUnitProducto').val(d.precio_unitario);
             $('#fotoEditProducto').attr('src', d.ruta_foto);
+            $('#id_producto').text(d.producto_id);
         }).fail(function (jqXHR, textStatus, errorThrown) {
 
         }).always(function (data) {
@@ -382,6 +384,7 @@
             $.trim($('#EditCantidadProducto').val()).length > 0 &
             $.trim($('#EditPrecUnitProducto').val()).length > 0) {
             var data = new FormData(this);
+            data.append('producto_id', $('#id_producto').text());
             $.ajax({
                 type: 'POST',
                 url: '{% url "editarProducto" %}',
@@ -415,6 +418,7 @@
         if ($.trim($('#EditNombreServicio').val()).length > 0 &
             $.trim($('#EditDescripcionServicio').val()).length > 0) {
             var data = new FormData(this);
+            data.append('id_servicio', $('#id_servicio').text());
             $.ajax({
                 type: 'POST',
                 url: '{% url "editarServicio" %}',
