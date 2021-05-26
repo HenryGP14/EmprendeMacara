@@ -39,9 +39,9 @@ def vwOpcPedidosPendientes(request):
     except:
         pass
 
-    unEmpresa = empresas.objects.get(usuario__id=request.session["usuario"]["id"])
+    unEmpresa = empresas.objects.get(usuario_id=request.session["usuario"]["id"])
     ltVentas = []
-    for unVenta in ventas.objects.filter((Q(estado="Pendiente") | Q(estado="Enviado")) & Q(empresa__id=unEmpresa.id)):
+    for unVenta in ventas.objects.filter((Q(estado="Pendiente") | Q(estado="Enviado")) & Q(empresa_id=unEmpresa.id)):
         ltVentas.append(
             {
                 "idVenta": unVenta.id,
@@ -50,8 +50,8 @@ def vwOpcPedidosPendientes(request):
                 "telefono": unVenta.celular,
                 "tipoPago": unVenta.tipo_de_pago,
                 "estado": unVenta.estado,
-                "numproductos": detalles_venta.objects.filter(venta__id=unVenta.id).aggregate(Sum("cantidad"))["cantidad__sum"],
-                "Montototal": detalles_venta.objects.filter(venta__id=unVenta.id).aggregate(Sum("precio_unitario"))["precio_unitario__sum"],
+                "numproductos": detalles_venta.objects.filter(venta_id=unVenta.id).aggregate(Sum("cantidad"))["cantidad_sum"],
+                "Montototal": detalles_venta.objects.filter(venta_id=unVenta.id).aggregate(Sum("precio_unitario"))["precio_unitario_sum"],
             }
         )
     return render(
@@ -78,10 +78,10 @@ def vwOpcPedidosEntregados(request):
     except:
         pass
 
-    unEmpresa = empresas.objects.get(usuario__id=request.session["usuario"]["id"])
+    unEmpresa = empresas.objects.get(usuario_id=request.session["usuario"]["id"])
     ltVentas = []
-    for unVenta in ventas.objects.filter(empresa__id=unEmpresa.id, estado="Entregado"):
-        detalle = detalles_venta.objects.filter(venta__id=unVenta.id).first()
+    for unVenta in ventas.objects.filter(empresa_id=unEmpresa.id, estado="Entregado"):
+        detalle = detalles_venta.objects.filter(venta_id=unVenta.id).first()
         ltVentas.append(
             {
                 "nombre": unVenta.cliente,
@@ -119,13 +119,13 @@ def vwOpcProductosServicios(request):
     except:
         pass
 
-    unEmpresa = empresas.objects.get(usuario__id=request.session["usuario"]["id"])
-    ltProductos = productos.objects.filter(empresa__id=unEmpresa.id)
-    ltServicios = servicios.objects.filter(empresa__id=unEmpresa.id)
+    unEmpresa = empresas.objects.get(usuario_id=request.session["usuario"]["id"])
+    ltProductos = productos.objects.filter(empresa_id=unEmpresa.id)
+    ltServicios = servicios.objects.filter(empresa_id=unEmpresa.id)
     return render(
         request,
         "OpcControlNegocio/productosServicios.html",
-        {"ltProductos": ltProductos, "ltServicios": ltServicios, "unEmpresa": unEmpresa, "productos": "activado"},
+        {"ltProductos": ltProductos, "ltServicios": ltServicios, "unEmpresa": unEmpresa, "productos": "activado", "empresa_id": unEmpresa.id},
     )
 
 #========VISTA ELIMINAR=======
@@ -141,7 +141,7 @@ def vwEliminarProducto(request,id):
 
     unProducto = productos()
     unProducto = productos.objects.get(id=id)
-    unProducto.Eliminado = True
+    unProducto.eliminado = True
     unProducto.save()
     return redirect('ProductosServicios')
 
@@ -158,7 +158,7 @@ def vwEliminarServicio(request,id):
 
     unServicio = servicios()
     unServicio = servicios.objects.get(id=id)
-    unServicio.Eliminado = True
+    unServicio.eliminado = True
     unServicio.save()
     return redirect('ProductosServicios')
 
@@ -239,7 +239,7 @@ def vwAnadirProducto(request):
         pass
 
     if request.method == "POST":
-        unEmpresa = empresas.objects.get(usuario__id=request.session["usuario"]["id"])
+        unEmpresa = empresas.objects.get(usuario_id=request.session["usuario"]["id"])
 
         unProducto = productos()
         unProducto.empresa = unEmpresa
@@ -267,7 +267,7 @@ def vwAnadirServicio(request):
         pass
 
     if request.method == "POST":
-        unEmpresa = empresas.objects.get(usuario__id=request.session["usuario"]["id"])
+        unEmpresa = empresas.objects.get(usuario_id=request.session["usuario"]["id"])
 
         unServicio = servicios()
         unServicio.empresa = unEmpresa
@@ -296,7 +296,7 @@ def vwObtenerDetalleVenta(request):
         pass
 
     ltDetalleVenta = []
-    for item in detalles_venta.objects.filter(venta__id=request.POST["idVenta"]).select_related("producto"):
+    for item in detalles_venta.objects.filter(venta_id=request.POST["idVenta"]).select_related("producto"):
         ltDetalleVenta.append(
             {
                 "producto": item.producto.nombre,
@@ -368,7 +368,7 @@ def vwObtenerPago(request):
 
     idventa = request.POST["idventa"]
     pago = detalles_venta()
-    pago = detalles_venta.objects.filter(venta__id=idventa).first()
+    pago = detalles_venta.objects.filter(venta_id=idventa).first()
     return JsonResponse(
         {
             "precioPagar": pago.precio_sub_total + pago.precio_envio,
@@ -395,7 +395,7 @@ def vwEditarProducto(request):
     unProducto = productos()
     unProducto = productos.objects.get(id=editProducto.id)
 
-    unEmpresa = empresas.objects.get(usuario__id=request.session["usuario"]["id"])
+    unEmpresa = empresas.objects.get(usuario_id=request.session["usuario"]["id"])
 
     unProducto.empresa = unEmpresa
     unProducto.nombre = request.POST["EditNombreProducto"]
@@ -430,7 +430,7 @@ def vwEditarServicio(request):
     print(editServicio.id)
     unServicio = servicios.objects.get(id=editServicio.id)
 
-    unEmpresa = empresas.objects.get(usuario__id=request.session["usuario"]["id"])
+    unEmpresa = empresas.objects.get(usuario_id=request.session["usuario"]["id"])
 
     unServicio.empresa = unEmpresa
     unServicio.nombre = request.POST["EditNombreServicio"]
@@ -510,7 +510,7 @@ def vwConfiguracionEmpresa(request):
     except:
         pass
 
-    unEmpresa = empresas.objects.get(usuario__id=request.session["usuario"]["id"])
+    unEmpresa = empresas.objects.get(usuario_id=request.session["usuario"]["id"])
     return render(request, "OpcControlNegocio/ConfiguracionEmpresa.html", {"unEmpresa": unEmpresa})
 
 
@@ -599,7 +599,7 @@ def vwTplPerfil(request):
     except:
         pass
 
-    unEmpresa = empresas.objects.get(usuario__id=request.session["usuario"]["id"])
+    unEmpresa = empresas.objects.get(usuario_id=request.session["usuario"]["id"])
     fotos = fotos_empresas.objects.filter(empresa=unEmpresa)
     actividadesCom = activi_comerciales.objects.all()
     unEmpresa.costo_envio = str(unEmpresa.costo_envio).replace(",", ".")
@@ -624,7 +624,7 @@ def vwEdtPerfil(request):
                 return JsonResponse({"result": "El correo de la empresa ya encuentra registrado, por favor ingrese otro usuario"})
             else:
                 # Se obtienen los datos de la empresa logeada
-                unaEmpresa = empresas.objects.get(usuario__id=request.session["usuario"]["id"])
+                unaEmpresa = empresas.objects.get(usuario_id=request.session["usuario"]["id"])
                 # Se modifican los datos de la empresa
                 unaEmpresa.ruc = request.POST["txtRuc_ci"]
                 unaEmpresa.nom_empresa = request.POST["txtEmpresa"]
@@ -713,7 +713,7 @@ def vwElmFoto(request):
         pass
 
     try:
-        unaEmpresa = empresas.objects.get(usuario__id=request.session["usuario"]["id"])
+        unaEmpresa = empresas.objects.get(usuario_id=request.session["usuario"]["id"])
         idFoto = int(request.POST["id_foto"])
         foto = fotos_empresas.objects.get(id=idFoto)
         # Elimina la foto guardada en la carpeta media del servidor
@@ -738,7 +738,7 @@ def vwGrdFoto(request):
 
     try:
         with transaction.atomic():
-            unaEmpresa = empresas.objects.get(usuario__id=request.session["usuario"]["id"])
+            unaEmpresa = empresas.objects.get(usuario_id=request.session["usuario"]["id"])
             unaFoto = fotos_empresas()
             unaFoto.empresa = unaEmpresa
             unaFoto.ruta_foto = request.FILES["imgFotoCarousel"]

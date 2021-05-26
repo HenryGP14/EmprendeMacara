@@ -146,7 +146,7 @@ def vwTplInfoNegocio(request, empresa_id):
     return render(request, "empresa/tplInfoNegocio.html", {"empresa": list_negocios})
 
 
-# Vista que carga los productos y servicos de la empresa sefún su id
+# Vista que carga los productos y servicos de la empresa según su id
 def vwTplPrSrNegocio(request, empresa_id):
     user_session = Usuario(request)
     try:
@@ -156,9 +156,9 @@ def vwTplPrSrNegocio(request, empresa_id):
             return redirect("admin-web")
     except:
         pass
-    em_fotos_servicio = servicios.objects.filter(empresa_id=empresa_id, visible=True)
+    em_fotos_servicio = servicios.objects.filter(empresa_id=empresa_id, visible=True, eliminado=False)
 
-    em_fotos_producto = productos.objects.filter(empresa_id=empresa_id, visible=True)
+    em_fotos_producto = productos.objects.filter(empresa_id=empresa_id, visible=True, eliminado=False)
 
     empresa = empresas.objects.get(pk=empresa_id, estado="Habilitada")
 
