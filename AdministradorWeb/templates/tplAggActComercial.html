@@ -27,6 +27,7 @@
         <div class="tab-pane fade show active pb-2" id="home" role="tabpanel" aria-labelledby="home-tab">
             <div class="carts-actcomercial">
                 {% for act_comercial in list_act_comercial %}
+                {% if act_comercial.visible %}
                 <div class="cart-actcomercial">
                     <div class="descripcion">
                         <div class="imagen">
@@ -39,8 +40,8 @@
                     <div class="cont-opciones">
                         <div class="opciones">
                             <div>
-                                <a href="#" class="btn btn-light" title="Deshabilitar producto">
-                                    <i class="fas fa-ban"></i>
+                                <a href="#" class="btn btn-light" title="Deshabilitar actividad comercial">
+                                    <i class="fas fa-trash"></i>
                                 </a>
                                 <button class="btn btn-light" type="submit">
                                     <i class="fas fa-cog"></i>
@@ -49,12 +50,14 @@
                         </div>
                     </div>
                 </div>
+                {% endif %}
                 {% endfor %}
             </div>
         </div>
         <div class="tab-pane fade pb-2" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <div class="carts-actcomercial">
                 {% for act_comercial in list_act_comercial %}
+                {% if not act_comercial.visible %}
                 <div class="cart-actcomercial">
                     <div class="descripcion">
                         <div class="imagen">
@@ -67,16 +70,14 @@
                     <div class="cont-opciones">
                         <div class="opciones">
                             <div>
-                                <a href="#" class="btn btn-light" title="Deshabilitar producto">
-                                    <i class="fas fa-ban"></i>
+                                <a href="#" class="btn btn-light" title="Habilitar actividad comercial">
+                                    <i class="fas fa-undo"></i>
                                 </a>
-                                <button class="btn btn-light" type="submit">
-                                    <i class="fas fa-cog"></i>
-                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
+                {% endif %}
                 {% endfor %}
             </div>
         </div>
