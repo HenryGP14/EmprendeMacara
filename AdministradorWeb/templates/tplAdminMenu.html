@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{% static 'css/fontawesome-5.15.2/css/all.min.css' %}" type="text/css" />
     <link rel="stylesheet" href="{% static 'css/controlnegocio/perfil-box.css' %}" type="text/css" />
     <link rel="stylesheet" href="{% static 'css/administradorweb/admin-web.css' %}" type="text/css" />
+    {% block css %} {% endblock css %}
     <link rel="icon" href="{% static 'img/logo_em_macara.png' %}" type="image/png" />
     <title>{% block title %}{% endblock title %}Administrador Web</title>
 </head>
@@ -41,6 +42,12 @@
                     <i class="fa fa-envelope"></i>
                     <div>Solicitudes de empresas</div>
                 </a>
+
+                <a href="{% url 'act-comerciales' %}" class="btn-opcion {{datos.act_comercial_active}}">
+                    <i class="fas fa-info-circle"></i>
+                    <div>Actividades comerciales</div>
+                </a>
+
                 <a href="{% url 'perfil-admin' %}" class="btn-opcion {{datos.perfil_active}}">
                     <i class="fas fa-user"></i>
                     <div>Perfil del administrador</div>

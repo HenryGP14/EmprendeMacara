@@ -1,3 +1,85 @@
-<div>
+{% extends 'tplAdminMenu.html' %}
+{% load static%}
 
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/administradorweb/actividad-comercial.css' %}">
+{% endblock css %}
+
+{% block content %}
+<div class="nombre-opcion" id="title">Actividades comerciales</div>
+
+<div>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+                aria-selected="true">
+                Habilitadas
+            </a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+                aria-selected="false">
+                Deshabilitadas
+            </a>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active pb-2" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="carts-actcomercial">
+                {% for act_comercial in list_act_comercial %}
+                <div class="cart-actcomercial">
+                    <div class="descripcion">
+                        <div class="imagen">
+                            <img src="{{ act_comercial.ruta_foto.url }}" alt="">
+                        </div>
+                        <div class="titulo">
+                            <span>{{ act_comercial.nombre }}</span>
+                        </div>
+                    </div>
+                    <div class="cont-opciones">
+                        <div class="opciones">
+                            <div>
+                                <a href="#" class="btn btn-light" title="Deshabilitar producto">
+                                    <i class="fas fa-ban"></i>
+                                </a>
+                                <button class="btn btn-light" type="submit">
+                                    <i class="fas fa-cog"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="tab-pane fade pb-2" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="carts-actcomercial">
+                {% for act_comercial in list_act_comercial %}
+                <div class="cart-actcomercial">
+                    <div class="descripcion">
+                        <div class="imagen">
+                            <img src="{{ act_comercial.ruta_foto.url }}" alt="">
+                        </div>
+                        <div class="titulo">
+                            <span>{{ act_comercial.nombre }}</span>
+                        </div>
+                    </div>
+                    <div class="cont-opciones">
+                        <div class="opciones">
+                            <div>
+                                <a href="#" class="btn btn-light" title="Deshabilitar producto">
+                                    <i class="fas fa-ban"></i>
+                                </a>
+                                <button class="btn btn-light" type="submit">
+                                    <i class="fas fa-cog"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </div>
+{% endblock content %}

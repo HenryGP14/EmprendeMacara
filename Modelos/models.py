@@ -23,6 +23,7 @@ class usuarios(models.Model):
 
 class activi_comerciales(models.Model):
     nombre = models.CharField(max_length=50, unique=True)
+    visible = models.BooleanField(default=True)
     # media/ActividadC
     ruta_foto = models.ImageField(upload_to="ActividadC", null=True, blank=False)
 

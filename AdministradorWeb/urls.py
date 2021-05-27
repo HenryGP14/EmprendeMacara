@@ -8,6 +8,7 @@ urlpatterns = [
     path('empresas/', views.vwTplEmpresas, name="empresas"),
     path('solicitudes/', views.vwTplSolicitudes, name="solicitudes"),
     path('perfil-admin/', views.vwTplPerfil, name="perfil-admin"),
+    path('act-comercial', views.vwTplActComercial, name="act-comerciales"),
     # URL DE ACCIONES
     path('save-perfil/', views.vwGrdPerfil, name="save-perfil"),
     path('get-empresas/', views.vwgetEmpresas, name="get-empresas"),

@@ -20,9 +20,6 @@ from django.contrib import messages
 from Global.usuario import Usuario
 from django.db.models import Q
 
-# Atributos globales
-editProducto = productos()
-editServicio = servicios()
 # =========VISTAS MOSTRAR PLANILLA============
 
 

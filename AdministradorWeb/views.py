@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
-from Modelos.models import empresas, telefo_empresas, usuarios
+from Modelos.models import empresas, telefo_empresas, usuarios, activi_comerciales
 from django.db import transaction
 from django.contrib import messages
 from Global.usuario import Usuario
@@ -22,6 +22,22 @@ def vwTplMenuAdmin(request):
         pass
     return redirect("empresas")
 
+def vwTplActComercial(request):
+    user_session = Usuario(request)
+    try:
+        if not request.session["usuario"]:
+            messages.info(request, "Debes iniciar sessión para administrar la página")
+            return redirect("login")
+        elif request.session["usuario"]["rol_id"] == 2:
+            return redirect("controlNegocio")
+        elif request.session["usuario"]["rol_id"] == 1:
+            return redirect("index")
+    except:
+        pass
+
+    actividades = activi_comerciales.objects.all()
+    datos = {"act_comercial_active": "activado"}
+    return render(request, "tplAggActComercial.html", {"list_act_comercial": actividades, "datos": datos})
 
 # Vista que renderiza la plantilla de lista de empresas
 def vwTplEmpresas(request):
