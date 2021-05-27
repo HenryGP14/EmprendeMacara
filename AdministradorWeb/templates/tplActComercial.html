@@ -8,6 +8,11 @@
 {% block content %}
 <div class="nombre-opcion" id="title">Actividades comerciales</div>
 
+<button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#modalAddActividad">
+    <i class="fas fa-plus"></i>
+    Agregar actividad
+</button>
+
 <div>
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
@@ -40,12 +45,20 @@
                     <div class="cont-opciones">
                         <div class="opciones">
                             <div>
-                                <a href="#" class="btn btn-light" title="Deshabilitar actividad comercial">
-                                    <i class="fas fa-trash"></i>
+                                <a href="javascript:deshabiliActivi({{act_comercial.id}}, '{{act_comercial.nombre}}')" 
+                                class="btn btn-light" title="Deshabilitar actividad comercial">
+                                    <i class="fas fa-ban"></i>
                                 </a>
-                                <button class="btn btn-light" type="submit">
-                                    <i class="fas fa-cog"></i>
-                                </button>
+                                {% if act_comercial.count_empresas == 0 %}
+                                    <a href="javascript:eliminarActivi({{act_comercial.id}}, '{{act_comercial.nombre}}')" 
+                                    class="btn btn-light" title="Eliminar actividad comercial">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                {% endif %}
+                                <a onClick="javascript:modificarActivi({{act_comercial.id}}, '{{act_comercial.nombre}}', '{{act_comercial.ruta_foto}}')" 
+                                    class="btn btn-light" title="Modificar actividad comercial" >
+                                        <i class="fas fa-cog"></i>
+                                    </a>
                             </div>
                         </div>
                     </div>
@@ -70,7 +83,8 @@
                     <div class="cont-opciones">
                         <div class="opciones">
                             <div>
-                                <a href="#" class="btn btn-light" title="Habilitar actividad comercial">
+                                <a href="javascript:habilitarActivi({{act_comercial.id}}, '{{act_comercial.nombre}}')" 
+                                class="btn btn-light" title="Habilitar actividad comercial">
                                     <i class="fas fa-undo"></i>
                                 </a>
                             </div>
@@ -82,5 +96,8 @@
             </div>
         </div>
     </div>
+    {% include 'mdlAddActividad.html' %}
+    {% include 'mdlEditActividad.html' %}
 </div>
+
 {% endblock content %}

@@ -445,7 +445,7 @@ def vwEditarProducto(request):
         unProducto.ruta_foto.name = "Pro_E" + str(unEmpresa.id) + b
         os.remove("media\\" + ruta)
     except:
-        print("no existe foto")
+        pass
     unProducto.visible = True
     unProducto.save()
     return JsonResponse({"result": "1"})

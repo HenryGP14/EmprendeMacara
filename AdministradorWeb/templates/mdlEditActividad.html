@@ -1,0 +1,33 @@
+<div class="modal fade" id="modalEdiActividad" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content formEdiActividad">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modificar actividad comercial</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formEdiActividad" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div id="actividad_id" style="display: none;"></div>
+                    <div class="form-group">
+                        <label for="txtActNombre" class="col-form-label">Nombre:</label>
+                        <input type="text" class="form-control form-control-sm" name="txtActNombre"
+                            placeholder="Ingrese su nombre" id="txtActNombre" autocomplete="off" onkeypress="javascript:soloLetras(event)" maxlength="50" required>
+                    </div>
+                    <img name="foto" id="fotoModificar" class="img-thumbnail img-fluid foto" style="display: block;">
+                    <label for="inputEditar" class="btn btn-primary btnsubir">Subir foto</label>
+                    <input class="btn btn-success btn-sm subirfoto" style="display: none;" id="inputEditar"
+                        name="imgFotoEditada" type="file" accept="image/jpeg" onchange="previewModificarActividad(this);">
+                    <div class="modal-footer" style="width: 100%; justify-content: flex-start;">
+                        <div id="alertaCamposVacios" style="width: 100%;">
+                        </div>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-success">Guardar cambios</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -29,7 +29,7 @@ def vwInicio(request):
     except:
         pass
 
-    list_categorias = activi_comerciales.objects.filter(visible = True, eliminado=False)
+    list_categorias = activi_comerciales.objects.filter(visible = True)
     return render(request, "index.html", {"categorias": list_categorias})
 
 

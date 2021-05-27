@@ -37,7 +37,7 @@ def vwTplActComercial(request):
 
     actividades = activi_comerciales.objects.all()
     datos = {"act_comercial_active": "activado"}
-    return render(request, "tplAggActComercial.html", {"list_act_comercial": actividades, "datos": datos})
+    return render(request, "tplActComercial.html", {"list_act_comercial": actividades, "datos": datos})
 
 def vwGrdActComercial(request):
     user_session = Usuario(request)
@@ -55,9 +55,13 @@ def vwGrdActComercial(request):
     if request.method == "POST":
         try:
             with transaction.atomic():
-
-
-
+                unaActiviComercial = activi_comerciales()
+                unaActiviComercial.nombre = request.POST['txtActNombre']
+                unaActiviComercial.ruta_foto = request.FILES['imgFotoRegistrar']
+                a, b = os.path.splitext(unaActiviComercial.ruta_foto.name)
+                unaActiviComercial.ruta_foto.name = str(unaActiviComercial.nombre) + b
+                unaActiviComercial.visible = True
+                unaActiviComercial.save()
                 return JsonResponse({"result": "1"})
         except Exception as e:
             return JsonResponse({"result": "0"})
@@ -78,9 +82,17 @@ def vwEdiActComercial(request):
     if request.method == "POST":
         try:
             with transaction.atomic():
-
-
-
+                unaActiviComercial = activi_comerciales.objects.get(id=request.POST ['actividad_id'])
+                unaActiviComercial.nombre = request.POST['txtActNombre']
+                ruta = unaActiviComercial.ruta_foto.name
+                try:
+                    unaActiviComercial.ruta_foto = request.FILES['imgFotoEditada']
+                    a, b = os.path.splitext(unaActiviComercial.ruta_foto.name)
+                    unaActiviComercial.ruta_foto.name = str(unaActiviComercial.nombre) + b
+                    os.remove("media\\" + ruta)
+                except:
+                    pass
+                unaActiviComercial.save()
                 return JsonResponse({"result": "1"})
         except Exception as e:
             return JsonResponse({"result": "0"})
@@ -101,9 +113,10 @@ def vwEliActComercial(request):
     if request.method == "POST":
         try:
             with transaction.atomic():
-
-
-
+                activiComercial = activi_comerciales.objects.get(id=request.POST['actividad_id'])
+                imgBorrar = "media\\" + activiComercial.ruta_foto.name
+                os.remove(imgBorrar)
+                activiComercial.delete()
                 return JsonResponse({"result": "1"})
         except Exception as e:
             return JsonResponse({"result": "0"})
@@ -124,9 +137,9 @@ def vwHabiliActivi(request):
     if request.method == "POST":
         try:
             with transaction.atomic():
-
-
-
+                activiComercial = activi_comerciales.objects.get(id=request.POST['actividad_id'])
+                activiComercial.visible = True
+                activiComercial.save()
                 return JsonResponse({"result": "1"})
         except Exception as e:
             return JsonResponse({"result": "0"})
@@ -148,9 +161,9 @@ def vwDeshabiliActi(request):
     if request.method == "POST":
         try:
             with transaction.atomic():
-
-
-
+                activiComercial = activi_comerciales.objects.get(id=request.POST['actividad_id'])
+                activiComercial.visible = False
+                activiComercial.save()
                 return JsonResponse({"result": "1"})
         except Exception as e:
             return JsonResponse({"result": "0"})

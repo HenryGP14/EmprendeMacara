@@ -26,8 +26,10 @@ class activi_comerciales(models.Model):
     visible = models.BooleanField(default=True)
     # media/ActividadC
     ruta_foto = models.ImageField(upload_to="ActividadC", null=True, blank=False)
-    eliminado = models.BooleanField(default=False)
 
+    def count_empresas(self):
+        count = empresas.objects.filter(activi_comercial_id=self.id).count()
+        return count
 
 class empresas(models.Model):
     # un objeto de tipo ActiviComercial que tiene el id de un Actividad Comercial

@@ -8,11 +8,11 @@ urlpatterns = [
     path('empresas/', views.vwTplEmpresas, name="empresas"),
     path('solicitudes/', views.vwTplSolicitudes, name="solicitudes"),
     path('perfil-admin/', views.vwTplPerfil, name="perfil-admin"),
-    path('act-comercial', views.vwTplActComercial, name="act-comerciales"),
+    path('act-comerciales', views.vwTplActComercial, name="act-comerciales"),
     # URL DE ACCIONES
     path('save-perfil/', views.vwGrdPerfil, name="save-perfil"),
     path('registrar-actividad-comercial/', views.vwGrdActComercial, name="registrar-actividad-comercial"),
-    path('editar-actividad-comercial/', views.vwEdiActComercial, name="editar-actividad-comercial"),
+    path('modificar-actividad-comercial/', views.vwEdiActComercial, name="modificar-actividad-comercial"),
     path('eliminar-actividad-comercial/', views.vwEliActComercial, name="eliminar-actividad-comercial"),
     path('habilitar-actividad-comercial/', views.vwHabiliActivi, name="habilitar-actividad-comercial"),
     path('deshabilitar-actividad-comercial/', views.vwDeshabiliActi, name="deshabilitar-actividad-comercial"),
