@@ -39,6 +39,122 @@ def vwTplActComercial(request):
     datos = {"act_comercial_active": "activado"}
     return render(request, "tplAggActComercial.html", {"list_act_comercial": actividades, "datos": datos})
 
+def vwGrdActComercial(request):
+    user_session = Usuario(request)
+    try:
+        if not request.session["usuario"]:
+            messages.info(request, "Debes iniciar sessión para administrar la página")
+            return redirect("login")
+        elif request.session["usuario"]["rol_id"] == 2:
+            return redirect("controlNegocio")
+        elif request.session["usuario"]["rol_id"] == 1:
+            return redirect("index")
+    except:
+        pass
+
+    if request.method == "POST":
+        try:
+            with transaction.atomic():
+
+
+
+                return JsonResponse({"result": "1"})
+        except Exception as e:
+            return JsonResponse({"result": "0"})
+
+def vwEdiActComercial(request):
+    user_session = Usuario(request)
+    try:
+        if not request.session["usuario"]:
+            messages.info(request, "Debes iniciar sessión para administrar la página")
+            return redirect("login")
+        elif request.session["usuario"]["rol_id"] == 2:
+            return redirect("controlNegocio")
+        elif request.session["usuario"]["rol_id"] == 1:
+            return redirect("index")
+    except:
+        pass
+
+    if request.method == "POST":
+        try:
+            with transaction.atomic():
+
+
+
+                return JsonResponse({"result": "1"})
+        except Exception as e:
+            return JsonResponse({"result": "0"})
+
+def vwEliActComercial(request):
+    user_session = Usuario(request)
+    try:
+        if not request.session["usuario"]:
+            messages.info(request, "Debes iniciar sessión para administrar la página")
+            return redirect("login")
+        elif request.session["usuario"]["rol_id"] == 2:
+            return redirect("controlNegocio")
+        elif request.session["usuario"]["rol_id"] == 1:
+            return redirect("index")
+    except:
+        pass
+
+    if request.method == "POST":
+        try:
+            with transaction.atomic():
+
+
+
+                return JsonResponse({"result": "1"})
+        except Exception as e:
+            return JsonResponse({"result": "0"})
+
+def vwHabiliActivi(request):
+    user_session = Usuario(request)
+    try:
+        if not request.session["usuario"]:
+            messages.info(request, "Debes iniciar sessión para administrar la página")
+            return redirect("login")
+        elif request.session["usuario"]["rol_id"] == 2:
+            return redirect("controlNegocio")
+        elif request.session["usuario"]["rol_id"] == 1:
+            return redirect("index")
+    except:
+        pass
+
+    if request.method == "POST":
+        try:
+            with transaction.atomic():
+
+
+
+                return JsonResponse({"result": "1"})
+        except Exception as e:
+            return JsonResponse({"result": "0"})
+
+
+def vwDeshabiliActi(request):
+    user_session = Usuario(request)
+    try:
+        if not request.session["usuario"]:
+            messages.info(request, "Debes iniciar sessión para administrar la página")
+            return redirect("login")
+        elif request.session["usuario"]["rol_id"] == 2:
+            return redirect("controlNegocio")
+        elif request.session["usuario"]["rol_id"] == 1:
+            return redirect("index")
+    except:
+        pass
+
+    if request.method == "POST":
+        try:
+            with transaction.atomic():
+
+
+
+                return JsonResponse({"result": "1"})
+        except Exception as e:
+            return JsonResponse({"result": "0"})
+
 # Vista que renderiza la plantilla de lista de empresas
 def vwTplEmpresas(request):
     user_session = Usuario(request)
@@ -52,7 +168,6 @@ def vwTplEmpresas(request):
     # Se envía la clase css activado para que en el menú quede seleccionada la opción
     datos = {"lista_active": "activado"}
     return render(request, "tplListaEmpresas.html", context={"datos": datos})
-
 
 # Vista que renderiza la plantilla que muestra la solicitudes que empresas que desean ser parte de Emprendimientos Macará
 def vwTplSolicitudes(request):

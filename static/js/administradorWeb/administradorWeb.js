@@ -563,3 +563,4 @@ function rechazarSolicit(id_empresa) {
         })
     }).always(function (data) {});
 }
+
