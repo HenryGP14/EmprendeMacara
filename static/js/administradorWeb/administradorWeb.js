@@ -74,7 +74,7 @@ function savePerfil(parametros) {
             icon: 'error',
             text: 'Error al guardar los datos del perfil, por favor intente nuevamente'
         })
-    }).always(function (data) { });
+    }).always(function (data) {});
 }
 
 // Evento submit de un formulario que realiza una petición Ajax a una vista Django para buscar empresas
@@ -123,7 +123,7 @@ $(document).ready(function () {
                 '<strong>¡Ups!</strong> Existió un error el buscar la empresa, por favor intente nuevamente.' +
                 '</div>';
             $("#mensaje").prepend(mensaje)
-        }).always(function (data) { });
+        }).always(function (data) {});
     });
 });
 
@@ -161,7 +161,7 @@ function getEmpresas() {
             icon: 'error',
             text: 'Existió un problema al cargar las empresas, por favor actualice nuevamente la página'
         })
-    }).always(function (data) { });
+    }).always(function (data) {});
 }
 
 // Función que actualiza la lista de empresas que se muestran al usuario
@@ -314,7 +314,7 @@ function cambiarEstado(id_empresa, estado_empresa) {
             icon: 'error',
             text: 'Error al cambiar el estado de la empresa, por favor intente nuevamente'
         })
-    }).always(function (data) { });
+    }).always(function (data) {});
 }
 
 // Evento submit del formulario que realiza una petición Ajax a una vista Django para buscar solicitudes
@@ -363,7 +363,7 @@ $(document).ready(function () {
                 '<strong>¡Ups!</strong>  Existió un error el buscar la solicitud, por favor intente nuevamente.' +
                 '</div>';
             $("#mensaje").prepend(mensaje)
-        }).always(function (data) { });
+        }).always(function (data) {});
     });
 });
 
@@ -394,7 +394,7 @@ function getSolicitudes() {
             icon: 'error',
             text: 'Existió un problema al cargar las solicitudes, por favor actualice nuevamente la página'
         })
-    }).always(function (data) { });
+    }).always(function (data) {});
 }
 
 // Función que actualiza la lista de solicitudes que se muestran al usuario
@@ -503,7 +503,7 @@ function aceptarSolicit(id_empresa, empresa) {
                     icon: 'error',
                     text: 'Error al aceptar la solicitud de la empresa, por favor intente nuevamente'
                 })
-            }).always(function (data) { });
+            }).always(function (data) {});
         }
     });
 }
@@ -561,7 +561,7 @@ function rechazarSolicit(id_empresa) {
             icon: 'error',
             text: 'Error al rechazar la solicitud de la empresa, por favor intente nuevamente'
         })
-    }).always(function (data) { });
+    }).always(function (data) {});
 }
 
 function previewRegistrarActividad(input) {
@@ -597,27 +597,27 @@ $(document).ready(function () {
             contentType: false,
             processData: false
         }).done(function (data) {
-           if(data.result == '1'){
+            if (data.result == '1') {
                 location.reload()
-           }else{
-            Swal.fire({
-                icon: 'error',
-                text: 'Error al registrar la actividad comercial, por favor intente nuevamente'
-            })
-           }
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    text: 'Error al registrar la actividad comercial, por favor intente nuevamente'
+                })
+            }
         }).fail(function (jqXHR, textStatus, errorThrown) {
             Swal.fire({
                 icon: 'error',
                 text: 'Error al registrar la actividad comercial, por favor intente nuevamente'
             })
-        }).always(function (data) { });
+        }).always(function (data) {});
     });
 });
 
-function modificarActivi(id, nombre, rutaFoto){
+function modificarActivi(id, nombre, rutaFoto) {
     $('#formEdiActividad #actividad_id').text(id)
     $('#formEdiActividad #txtActNombre').val(nombre);
-    $("#formEdiActividad #fotoModificar").attr("src",'/media/'+rutaFoto);
+    $("#formEdiActividad #fotoModificar").attr("src", '/media/' + rutaFoto);
     $('#modalEdiActividad').modal('show')
 }
 
@@ -635,20 +635,20 @@ $(document).ready(function () {
             contentType: false,
             processData: false
         }).done(function (data) {
-           if(data.result == '1'){
+            if (data.result == '1') {
                 location.reload()
-           }else{
-            Swal.fire({
-                icon: 'error',
-                text: 'Error al modificar la actividad comercial, por favor intente nuevamente'
-            })
-           }
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    text: 'Error al modificar la actividad comercial, por favor intente nuevamente'
+                })
+            }
         }).fail(function (jqXHR, textStatus, errorThrown) {
             Swal.fire({
                 icon: 'error',
                 text: 'Error al modificar la actividad comercial, por favor intente nuevamente'
             })
-        }).always(function (data) { });
+        }).always(function (data) {});
     });
 });
 
@@ -689,7 +689,7 @@ function habilitarActivi(id, actividad) {
                     icon: 'error',
                     text: 'Error al habilitar la actividad comercial, por favor intente nuevamente'
                 })
-            }).always(function (data) { });
+            }).always(function (data) {});
         }
     });
 }
@@ -731,7 +731,7 @@ function deshabiliActivi(id, actividad) {
                     icon: 'error',
                     text: 'Error al deshabilitar la actividad comercial, por favor intente nuevamente'
                 })
-            }).always(function (data) { });
+            }).always(function (data) {});
         }
     });
 }
@@ -773,7 +773,7 @@ function eliminarActivi(id, actividad) {
                     icon: 'error',
                     text: 'Error al eliminar la actividad comercial, por favor intente nuevamente'
                 })
-            }).always(function (data) { });
+            }).always(function (data) {});
         }
     });
 }

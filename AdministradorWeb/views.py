@@ -35,7 +35,7 @@ def vwTplActComercial(request):
     except:
         pass
 
-    actividades = activi_comerciales.objects.all()
+    actividades = activi_comerciales.objects.all().order_by('nombre')
     datos = {"act_comercial_active": "activado"}
     return render(request, "tplActComercial.html", {"list_act_comercial": actividades, "datos": datos})
 
@@ -64,7 +64,7 @@ def vwGrdActComercial(request):
                 unaActiviComercial.save()
                 return JsonResponse({"result": "1"})
         except Exception as e:
-            return JsonResponse({"result": "0"})
+            return JsonResponse({"result": str(e)})
 
 def vwEdiActComercial(request):
     user_session = Usuario(request)
