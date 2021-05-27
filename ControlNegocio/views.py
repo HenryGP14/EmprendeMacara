@@ -353,7 +353,7 @@ def vwObtenerServicio(request):
 
     unServicio = servicios()
     unServicio = servicios.objects.get(id=request.POST["idServicio"])
-    editServicio.id = unServicio.id
+
     return JsonResponse(
         {
         "empresa": unServicio.empresa.id, 
@@ -361,7 +361,7 @@ def vwObtenerServicio(request):
         "descripcion": unServicio.descripcion,
         "ruta_foto": "/media/" + unServicio.ruta_foto.name, 
         "visible": unServicio.visible,
-        "servicio_id": unServicio.id
+        "servicio_id": unServicio.id,
         }
     )
 

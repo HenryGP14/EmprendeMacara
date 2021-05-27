@@ -65,10 +65,9 @@
                                     </h5>
                                     <div>
                                         <a href="javascript:eliminarProducto({{unProducto.id}}, '{{unProducto.nombre}}')"
-                                        class="btn btn-light"
-                                            title="Eliminar producto">
+                                            class="btn btn-light" title="Eliminar producto">
                                             <i class="fas fa-trash"></i>
-                                        </a> 
+                                        </a>
                                         <a href="javascript:deshabiProducto({{unProducto.id}}, '{{unProducto.nombre}}')"
                                             class="btn btn-light" title="Deshabilitar producto">
                                             <i class="fas fa-ban"></i>
@@ -108,8 +107,7 @@
                                     <div style="display:inline-block"></div>
                                     <div>
                                         <a href="javascript:eliminarServicio({{unServicio.id}}, '{{unServicio.nombre}}')"
-                                        class="btn btn-light"
-                                            title="Eliminar servicio">
+                                            class="btn btn-light" title="Eliminar servicio">
                                             <i class="fas fa-trash"></i>
                                         </a>
                                         <a href="javascript:deshabiServicio({{unServicio.id}}, '{{unServicio.nombre}}')"
@@ -151,7 +149,7 @@
                                     </h5>
                                     <div>
                                         <a href="javascript:habiliProducto({{unProducto.id}}, '{{unProducto.nombre}}')"
-                                        class="btn btn-light" title="Habilitar producto">
+                                            class="btn btn-light" title="Habilitar producto">
                                             <i class="fas fa-undo"></i>
                                         </a>
                                     </div>
@@ -181,7 +179,7 @@
                                     <div style="display:inline-block"></div>
                                     <div>
                                         <a href="javascript:habiliServicio({{unServicio.id}}, '{{unServicio.nombre}}')"
-                                        class="btn btn-light" title="Habilitar servicio">
+                                            class="btn btn-light" title="Habilitar servicio">
                                             <i class="fas fa-undo"></i>
                                         </a>
                                     </div>
@@ -452,7 +450,7 @@
     });
 
     //======VALIDAR FOTO
-    function validarinput(idInput) { }
+    function validarinput(idInput) {}
 
 
     //======DESHABILITAR
@@ -468,12 +466,14 @@
                 $.ajax({
                     type: 'POST',
                     url: '{% url "deshabilitarServicio" %}',
-                    data: { "servicio_id": id, csrfmiddlewaretoken: '{{ csrf_token }}' },
+                    data: {
+                        "servicio_id": id,
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
                 }).done(function (d) {
                     if (d.result == '1') {
                         location.href = "{% url 'ProductosServicios' %}"
-                    }
-                    else {
+                    } else {
                         Swal.fire({
                             icon: 'error',
                             text: 'Error al deshabilitar el servicio, por favor intente nuevamente'
@@ -484,8 +484,7 @@
                         icon: 'error',
                         text: 'Error al deshabilitar el servicio, por favor intente nuevamente'
                     })
-                }).always(function (data) {
-                });
+                }).always(function (data) {});
             }
         });
     }
@@ -502,12 +501,14 @@
                 $.ajax({
                     type: 'POST',
                     url: '{% url "deshabilitarProducto" %}',
-                    data: { "producto_id": id, csrfmiddlewaretoken: '{{ csrf_token }}' },
+                    data: {
+                        "producto_id": id,
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
                 }).done(function (d) {
                     if (d.result == '1') {
                         location.href = "{% url 'ProductosServicios' %}"
-                    }
-                    else {
+                    } else {
                         Swal.fire({
                             icon: 'error',
                             text: 'Error al deshabilitar el producto, por favor intente nuevamente'
@@ -518,8 +519,7 @@
                         icon: 'error',
                         text: 'Error al deshabilitar el producto, por favor intente nuevamente'
                     })
-                }).always(function (data) {
-                });
+                }).always(function (data) {});
             }
         });
     }
@@ -536,12 +536,14 @@
                 $.ajax({
                     type: 'POST',
                     url: '{% url "habilitarProducto" %}',
-                    data: { "producto_id": id, csrfmiddlewaretoken: '{{ csrf_token }}' },
+                    data: {
+                        "producto_id": id,
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
                 }).done(function (d) {
                     if (d.result == '1') {
                         location.href = "{% url 'ProductosServicios' %}"
-                    }
-                    else {
+                    } else {
                         Swal.fire({
                             icon: 'error',
                             text: 'Error al habilitar el producto, por favor intente nuevamente'
@@ -552,8 +554,7 @@
                         icon: 'error',
                         text: 'Error al habilitar el producto, por favor intente nuevamente'
                     })
-                }).always(function (data) {
-                });
+                }).always(function (data) {});
             }
         });
     }
@@ -570,12 +571,14 @@
                 $.ajax({
                     type: 'POST',
                     url: '{% url "habilitarServicio" %}',
-                    data: { "servicio_id": id, csrfmiddlewaretoken: '{{ csrf_token }}' },
+                    data: {
+                        "servicio_id": id,
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
                 }).done(function (d) {
                     if (d.result == '1') {
                         location.href = "{% url 'ProductosServicios' %}"
-                    }
-                    else {
+                    } else {
                         Swal.fire({
                             icon: 'error',
                             text: 'Error al habilitar el servicio, por favor intente nuevamente'
@@ -586,13 +589,12 @@
                         icon: 'error',
                         text: 'Error al habilitar el servicio, por favor intente nuevamente'
                     })
-                }).always(function (data) {
-                });
+                }).always(function (data) {});
             }
         });
     }
 
-    
+
     function eliminarServicio(id, servicio) {
         swal({
             text: "¿Desea eliminar el servicio " + servicio + "?",
@@ -605,12 +607,14 @@
                 $.ajax({
                     type: 'POST',
                     url: '{% url "eliminarServicio" %}',
-                    data: { "servicio_id": id, csrfmiddlewaretoken: '{{ csrf_token }}' },
+                    data: {
+                        "servicio_id": id,
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
                 }).done(function (d) {
                     if (d.result == '1') {
                         location.href = "{% url 'ProductosServicios' %}"
-                    }
-                    else {
+                    } else {
                         Swal.fire({
                             icon: 'error',
                             text: 'Error al eliminar el servicio, por favor intente nuevamente'
@@ -621,13 +625,12 @@
                         icon: 'error',
                         text: 'Error al eliminar el servicio, por favor intente nuevamente'
                     })
-                }).always(function (data) {
-                });
+                }).always(function (data) {});
             }
         });
     }
 
-    
+
     function eliminarProducto(id, producto) {
         swal({
             text: "¿Desea eliminar el producto " + producto + "?",
@@ -640,12 +643,14 @@
                 $.ajax({
                     type: 'POST',
                     url: '{% url "eliminarProducto" %}',
-                    data: { "producto_id": id, csrfmiddlewaretoken: '{{ csrf_token }}' },
+                    data: {
+                        "producto_id": id,
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
                 }).done(function (d) {
                     if (d.result == '1') {
                         location.href = "{% url 'ProductosServicios' %}"
-                    }
-                    else {
+                    } else {
                         Swal.fire({
                             icon: 'error',
                             text: 'Error al eliminar el producto, por favor intente nuevamente'
@@ -656,8 +661,7 @@
                         icon: 'error',
                         text: 'Error al eliminar el producto, por favor intente nuevamente'
                     })
-                }).always(function (data) {
-                });
+                }).always(function (data) {});
             }
         });
     }
