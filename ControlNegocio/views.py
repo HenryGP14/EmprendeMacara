@@ -133,7 +133,7 @@ def vwOpcProductosServicios(request):
 # ========VISTA ELIMINAR=======
 
 
-def vwEliminarProducto(request, id):
+def vwEliminarProducto(request):
     user_session = Usuario(request)
     try:
         if not request.session["usuario"] or request.session["usuario"]["rol_id"] == 1:
@@ -142,15 +142,17 @@ def vwEliminarProducto(request, id):
             return redirect("admin-web")
     except:
         pass
+    try:
+        unProducto = productos()
+        unProducto = productos.objects.get(id=request.POST['producto_id'])
+        unProducto.eliminado = True
+        unProducto.save()
+        return JsonResponse({"result": "1"})
+    except:
+        return JsonResponse({"result": "0"})
 
-    unProducto = productos()
-    unProducto = productos.objects.get(id=id)
-    unProducto.eliminado = True
-    unProducto.save()
-    return redirect('ProductosServicios')
 
-
-def vwEliminarServicio(request, id):
+def vwEliminarServicio(request):
     user_session = Usuario(request)
     try:
         if not request.session["usuario"] or request.session["usuario"]["rol_id"] == 1:
@@ -159,17 +161,19 @@ def vwEliminarServicio(request, id):
             return redirect("admin-web")
     except:
         pass
-
-    unServicio = servicios()
-    unServicio = servicios.objects.get(id=id)
-    unServicio.eliminado = True
-    unServicio.save()
-    return redirect('ProductosServicios')
+    try:
+        unServicio = servicios()
+        unServicio = servicios.objects.get(id=request.POST['servicio_id'])
+        unServicio.eliminado = True
+        unServicio.save()
+        return JsonResponse({"result": "1"})
+    except:
+        return JsonResponse({"result": "0"})
 
 # ========VISTA HABILITAR=======
 
 
-def vwHabilitarServicio(request, id):
+def vwHabilitarServicio(request):
     user_session = Usuario(request)
     try:
         if not request.session["usuario"] or request.session["usuario"]["rol_id"] == 1:
@@ -178,15 +182,18 @@ def vwHabilitarServicio(request, id):
             return redirect("admin-web")
     except:
         pass
+    try:
+        unServicio = servicios()
+        unServicio = servicios.objects.get(id=request.POST['servicio_id'])
+        unServicio.visible = True
+        unServicio.save()
+        return JsonResponse({"result": "1"})
+    except:
+        return JsonResponse({"result": "0"})
 
-    unServicio = servicios()
-    unServicio = servicios.objects.get(id=id)
-    unServicio.visible = True
-    unServicio.save()
-    return redirect('ProductosServicios')
 
 
-def vwHabilitarProducto(request, id):
+def vwHabilitarProducto(request):
     user_session = Usuario(request)
     try:
         if not request.session["usuario"] or request.session["usuario"]["rol_id"] == 1:
@@ -195,16 +202,38 @@ def vwHabilitarProducto(request, id):
             return redirect("admin-web")
     except:
         pass
+    try:
+        unProducto = productos()
+        unProducto = productos.objects.get(id=request.POST['producto_id'])
+        unProducto.visible = True
+        unProducto.save()
+        return JsonResponse({"result": "1"})
+    except:
+        return JsonResponse({"result": "0"})
 
-    unProducto = productos()
-    unProducto = productos.objects.get(id=id)
-    unProducto.visible = True
-    unProducto.save()
-    return redirect('ProductosServicios')
 # ========VISTAS DESHABILITAR=======
 
 
-def vwDeshabilitarProducto(request, id):
+def vwDeshabilitarProducto(request):
+    user_session = Usuario(request)
+    try:
+        if not request.session["usuario"] or request.session["usuario"]["rol_id"] == 1:
+            return redirect("index")
+        elif request.session["usuario"]["rol_id"] == 3:
+            return redirect("admin-web")
+    except:
+        pass
+    try:
+        unProducto = productos()
+        unProducto = productos.objects.get(id=request.POST['producto_id'])
+        unProducto.visible = False
+        unProducto.save()
+        return JsonResponse({"result": "1"})
+    except:
+        return JsonResponse({"result": "0"})
+
+
+def vwDeshabilitarServicio(request):
     user_session = Usuario(request)
     try:
         if not request.session["usuario"] or request.session["usuario"]["rol_id"] == 1:
@@ -214,28 +243,14 @@ def vwDeshabilitarProducto(request, id):
     except:
         pass
 
-    unProducto = productos()
-    unProducto = productos.objects.get(id=id)
-    unProducto.visible = False
-    unProducto.save()
-    return redirect('ProductosServicios')
-
-
-def vwDeshabilitarServicio(request, id):
-    user_session = Usuario(request)
     try:
-        if not request.session["usuario"] or request.session["usuario"]["rol_id"] == 1:
-            return redirect("index")
-        elif request.session["usuario"]["rol_id"] == 3:
-            return redirect("admin-web")
+        unServicio = servicios()
+        unServicio = servicios.objects.get(id=request.POST['servicio_id'])
+        unServicio.visible = False
+        unServicio.save()
+        return JsonResponse({"result": "1"})
     except:
-        pass
-
-    unServicio = servicios()
-    unServicio = servicios.objects.get(id=id)
-    unServicio.visible = False
-    unServicio.save()
-    return redirect('ProductosServicios')
+        return JsonResponse({"result": "0"})
 
 # =========VISTAS GUARDAR============
 

@@ -64,11 +64,12 @@
                                         ${{unProducto.precio_unitario}}
                                     </h5>
                                     <div>
-                                        <a href="{% url 'eliminarProducto' id=unProducto.id %}" class="btn btn-light"
+                                        <a href="javascript:eliminarProducto({{unProducto.id}}, '{{unProducto.nombre}}')"
+                                        class="btn btn-light"
                                             title="Eliminar producto">
                                             <i class="fas fa-trash"></i>
-                                        </a>
-                                        <a href="{% url 'deshabilitarProducto' id=unProducto.id %}"
+                                        </a> 
+                                        <a href="javascript:deshabiProducto({{unProducto.id}}, '{{unProducto.nombre}}')"
                                             class="btn btn-light" title="Deshabilitar producto">
                                             <i class="fas fa-ban"></i>
                                         </a>
@@ -106,11 +107,12 @@
                                 <div class="card-action">
                                     <div style="display:inline-block"></div>
                                     <div>
-                                        <a href="{% url 'eliminarServicio' id=unServicio.id %}" class="btn btn-light"
+                                        <a href="javascript:eliminarServicio({{unServicio.id}}, '{{unServicio.nombre}}')"
+                                        class="btn btn-light"
                                             title="Eliminar servicio">
                                             <i class="fas fa-trash"></i>
                                         </a>
-                                        <a href="{% url 'deshabilitarServicio' id=unServicio.id %}"
+                                        <a href="javascript:deshabiServicio({{unServicio.id}}, '{{unServicio.nombre}}')"
                                             class="btn btn-light" title="Deshabilitar servicio">
                                             <i class="fas fa-ban"></i>
                                         </a>
@@ -148,7 +150,8 @@
                                         ${{unProducto.precio_unitario}}
                                     </h5>
                                     <div>
-                                        <a href="{% url 'habilitarProducto' id=unProducto.id %}" class="btn btn-light">
+                                        <a href="javascript:habiliProducto({{unProducto.id}}, '{{unProducto.nombre}}')"
+                                        class="btn btn-light" title="Habilitar producto">
                                             <i class="fas fa-undo"></i>
                                         </a>
                                     </div>
@@ -177,7 +180,8 @@
                                 <div class="card-action">
                                     <div style="display:inline-block"></div>
                                     <div>
-                                        <a href="{% url 'habilitarServicio' id=unServicio.id %}" class="btn btn-light">
+                                        <a href="javascript:habiliServicio({{unServicio.id}}, '{{unServicio.nombre}}')"
+                                        class="btn btn-light" title="Habilitar servicio">
                                             <i class="fas fa-undo"></i>
                                         </a>
                                     </div>
@@ -448,6 +452,214 @@
     });
 
     //======VALIDAR FOTO
-    function validarinput(idInput) {}
+    function validarinput(idInput) { }
+
+
+    //======DESHABILITAR
+    function deshabiServicio(id, servicio) {
+        swal({
+            text: "¿Desea deshabilitar el servicio " + servicio + "?",
+            icon: "info",
+            buttons: ['NO', 'SI'],
+            dangerMode: true
+        }).then((value) => {
+            // Si es true, significa que respondió SI
+            if (value == true) {
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "deshabilitarServicio" %}',
+                    data: { "servicio_id": id, csrfmiddlewaretoken: '{{ csrf_token }}' },
+                }).done(function (d) {
+                    if (d.result == '1') {
+                        location.href = "{% url 'ProductosServicios' %}"
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'error',
+                            text: 'Error al deshabilitar el servicio, por favor intente nuevamente'
+                        })
+                    }
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: 'Error al deshabilitar el servicio, por favor intente nuevamente'
+                    })
+                }).always(function (data) {
+                });
+            }
+        });
+    }
+
+    function deshabiProducto(id, producto) {
+        swal({
+            text: "¿Desea deshabilitar el producto " + producto + "?",
+            icon: "info",
+            buttons: ['NO', 'SI'],
+            dangerMode: true
+        }).then((value) => {
+            // Si es true, significa que respondió SI
+            if (value == true) {
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "deshabilitarProducto" %}',
+                    data: { "producto_id": id, csrfmiddlewaretoken: '{{ csrf_token }}' },
+                }).done(function (d) {
+                    if (d.result == '1') {
+                        location.href = "{% url 'ProductosServicios' %}"
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'error',
+                            text: 'Error al deshabilitar el producto, por favor intente nuevamente'
+                        })
+                    }
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: 'Error al deshabilitar el producto, por favor intente nuevamente'
+                    })
+                }).always(function (data) {
+                });
+            }
+        });
+    }
+
+    function habiliProducto(id, producto) {
+        swal({
+            text: "¿Desea habilitar el producto " + producto + "?",
+            icon: "info",
+            buttons: ['NO', 'SI'],
+            dangerMode: true
+        }).then((value) => {
+            // Si es true, significa que respondió SI
+            if (value == true) {
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "habilitarProducto" %}',
+                    data: { "producto_id": id, csrfmiddlewaretoken: '{{ csrf_token }}' },
+                }).done(function (d) {
+                    if (d.result == '1') {
+                        location.href = "{% url 'ProductosServicios' %}"
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'error',
+                            text: 'Error al habilitar el producto, por favor intente nuevamente'
+                        })
+                    }
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: 'Error al habilitar el producto, por favor intente nuevamente'
+                    })
+                }).always(function (data) {
+                });
+            }
+        });
+    }
+
+    function habiliServicio(id, servicio) {
+        swal({
+            text: "¿Desea habilitar el servicio " + servicio + "?",
+            icon: "info",
+            buttons: ['NO', 'SI'],
+            dangerMode: true
+        }).then((value) => {
+            // Si es true, significa que respondió SI
+            if (value == true) {
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "habilitarServicio" %}',
+                    data: { "servicio_id": id, csrfmiddlewaretoken: '{{ csrf_token }}' },
+                }).done(function (d) {
+                    if (d.result == '1') {
+                        location.href = "{% url 'ProductosServicios' %}"
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'error',
+                            text: 'Error al habilitar el servicio, por favor intente nuevamente'
+                        })
+                    }
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: 'Error al habilitar el servicio, por favor intente nuevamente'
+                    })
+                }).always(function (data) {
+                });
+            }
+        });
+    }
+
+    
+    function eliminarServicio(id, servicio) {
+        swal({
+            text: "¿Desea eliminar el servicio " + servicio + "?",
+            icon: "info",
+            buttons: ['NO', 'SI'],
+            dangerMode: true
+        }).then((value) => {
+            // Si es true, significa que respondió SI
+            if (value == true) {
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "eliminarServicio" %}',
+                    data: { "servicio_id": id, csrfmiddlewaretoken: '{{ csrf_token }}' },
+                }).done(function (d) {
+                    if (d.result == '1') {
+                        location.href = "{% url 'ProductosServicios' %}"
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'error',
+                            text: 'Error al eliminar el servicio, por favor intente nuevamente'
+                        })
+                    }
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: 'Error al eliminar el servicio, por favor intente nuevamente'
+                    })
+                }).always(function (data) {
+                });
+            }
+        });
+    }
+
+    
+    function eliminarProducto(id, producto) {
+        swal({
+            text: "¿Desea eliminar el producto " + producto + "?",
+            icon: "info",
+            buttons: ['NO', 'SI'],
+            dangerMode: true
+        }).then((value) => {
+            // Si es true, significa que respondió SI
+            if (value == true) {
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "eliminarProducto" %}',
+                    data: { "producto_id": id, csrfmiddlewaretoken: '{{ csrf_token }}' },
+                }).done(function (d) {
+                    if (d.result == '1') {
+                        location.href = "{% url 'ProductosServicios' %}"
+                    }
+                    else {
+                        Swal.fire({
+                            icon: 'error',
+                            text: 'Error al eliminar el producto, por favor intente nuevamente'
+                        })
+                    }
+                }).fail(function (jqXHR, textStatus, errorThrown) {
+                    Swal.fire({
+                        icon: 'error',
+                        text: 'Error al eliminar el producto, por favor intente nuevamente'
+                    })
+                }).always(function (data) {
+                });
+            }
+        });
+    }
 </script>
 {% endblock js2 %}

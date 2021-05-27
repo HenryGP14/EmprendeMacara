@@ -13,14 +13,14 @@ urlpatterns = [
     path('perfil', views.vwTplPerfil, name="perfil"),
     path('ConfiguracionEmpresa', views.vwConfiguracionEmpresa, name="ConfiguracionEmpresa"),
     #==============URL  ELIMINAR==============
-    path('eliminarProducto/<int:id>', views.vwEliminarProducto, name="eliminarProducto"),
-    path('eliminarServicio/<int:id>', views.vwEliminarServicio, name="eliminarServicio"),
+    path('eliminarProducto/', views.vwEliminarProducto, name="eliminarProducto"),
+    path('eliminarServicio/', views.vwEliminarServicio, name="eliminarServicio"),
     #==============URL HABILITAR==============
-    path('habilitarProducto/<int:id>', views.vwHabilitarProducto, name="habilitarProducto"),
-    path('habilitarServicio/<int:id>', views.vwHabilitarServicio, name="habilitarServicio"),
+    path('habilitarProducto/', views.vwHabilitarProducto, name="habilitarProducto"),
+    path('habilitarServicio/', views.vwHabilitarServicio, name="habilitarServicio"),
     #==============URL DESHABILITAR================
-    path('deshabilitarProducto/<int:id>', views.vwDeshabilitarProducto, name="deshabilitarProducto"),
-    path('deshabilitarServicio/<int:id>', views.vwDeshabilitarServicio, name="deshabilitarServicio"),
+    path('deshabilitarProducto/', views.vwDeshabilitarProducto, name="deshabilitarProducto"),
+    path('deshabilitarServicio/', views.vwDeshabilitarServicio, name="deshabilitarServicio"),
     #==============URL GUARDAR==================
     path('anadirProducto', views.vwAnadirProducto, name="anadirProducto"),
     path('anadirServicio', views.vwAnadirServicio, name="anadirServicio"),

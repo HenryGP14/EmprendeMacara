@@ -26,6 +26,7 @@ class activi_comerciales(models.Model):
     visible = models.BooleanField(default=True)
     # media/ActividadC
     ruta_foto = models.ImageField(upload_to="ActividadC", null=True, blank=False)
+    eliminado = models.BooleanField(default=False)
 
 
 class empresas(models.Model):
