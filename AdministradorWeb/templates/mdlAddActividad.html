@@ -11,9 +11,9 @@
                 <form id="formAddActividad" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group">
-                        <label for="txtActNombre" class="col-form-label">Nombre:</label>
-                        <input type="text" class="form-control form-control-sm" name="txtActNombre"
-                            placeholder="Ingrese su nombre" id="txtActNombre" autocomplete="off" onkeypress="javascript:soloLetras(event)" maxlength="50" required>
+                        <label for="txtRegActNombre" class="col-form-label">Nombre:</label>
+                        <input type="text" class="form-control form-control-sm" name="txtRegActNombre"
+                            placeholder="Ingrese su nombre" id="txtRegActNombre" autocomplete="off" onkeypress="javascript:soloLetras(event)" maxlength="50" required>
                     </div>
                     <img name="foto" id="fotoRegistrar" class="img-thumbnail img-fluid foto" style="display: block;">
                     <label for="inputRegistrar" class="btn btn-primary btnsubir">Subir foto</label>

@@ -616,7 +616,7 @@ $(document).ready(function () {
 
 function modificarActivi(id, nombre, rutaFoto) {
     $('#formEdiActividad #actividad_id').text(id)
-    $('#formEdiActividad #txtActNombre').val(nombre);
+    $('#formEdiActividad #txtEditActNombre').val(nombre);
     $("#formEdiActividad #fotoModificar").attr("src", '/media/' + rutaFoto);
     $('#modalEdiActividad').modal('show')
 }
@@ -764,14 +764,14 @@ function eliminarActivi(id, actividad) {
                 } else {
                     Swal.fire({
                         icon: 'error',
-                        text: 'Error al eliminar la actividad comercial, por favor intente nuevamente'
+                        text: 'Error al eliminar la actividad comercial, por favor intente nuevamente '+data.result
                     })
                 }
             }).fail(function (jqXHR, textStatus, errorThrown) {
                 document.body.style.cursor = 'default';
                 Swal.fire({
                     icon: 'error',
-                    text: 'Error al eliminar la actividad comercial, por favor intente nuevamente'
+                    text: 'Error al eliminar la actividad comercial, por favor intente nuevamente '+ errorThrown
                 })
             }).always(function (data) {});
         }
