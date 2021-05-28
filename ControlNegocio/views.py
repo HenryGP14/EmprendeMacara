@@ -438,12 +438,12 @@ def vwEditarProducto(request):
     unProducto.cantidad = int(request.POST["EditCantidadProducto"])
     unProducto.precio_unitario = float(request.POST["EditPrecUnitProducto"])
 
-    ruta = unProducto.ruta_foto.url
+    ruta = unProducto.ruta_foto.name
     try:
         unProducto.ruta_foto = request.FILES["inputeditproducto"]
         a, b = os.path.splitext(unProducto.ruta_foto.name)
         unProducto.ruta_foto.name = "Pro_E" + str(unEmpresa.id) + b
-        os.remove(ruta)
+        os.remove('media/'+ruta)
     except:
         pass
     unProducto.visible = True
@@ -470,12 +470,12 @@ def vwEditarServicio(request):
     unServicio.nombre = request.POST["EditNombreServicio"]
     unServicio.descripcion = request.POST["EditDescripcionServicio"]
 
-    ruta = unServicio.ruta_foto.url
+    ruta = unServicio.ruta_foto.name
     try:
         unServicio.ruta_foto = request.FILES["inputeditservicio"]
         a, b = os.path.splitext(unServicio.ruta_foto.name)
         unServicio.ruta_foto.name = "Serv_E" + str(unEmpresa.id) + b
-        os.remove(ruta)
+        os.remove('media/'+ruta)
     except:
         print("no existe foto")
     unServicio.visible = True
@@ -685,8 +685,8 @@ def vwEdtPerfil(request):
                 unaActividad.id = int(request.POST["cmbActComerc"])
                 unaEmpresa.activi_comercial = unaActividad
                 # Se obtiene el directorio en donde se encuentran guardadas las imágenes
-                imgPortada = unaEmpresa.ruta_foto.name.url
-                imgPerfil = unaEmpresa.perfil_foto.name.url
+                imgPortada = unaEmpresa.ruta_foto.name.name
+                imgPerfil = unaEmpresa.perfil_foto.name.name
 
                 try:
                     unaEmpresa.ruta_foto = request.FILES["imgFoto"]
@@ -694,7 +694,7 @@ def vwEdtPerfil(request):
                     unaEmpresa.ruta_foto.name = "portada_empresa_" + \
                         str(unaEmpresa.id) + b
                     # Elimina la foto guardada en el directorio media del servidor
-                    os.remove(imgPortada)
+                    os.remove('media/'+imgPortada)
                 except Exception as e:
                     pass
 
@@ -704,7 +704,7 @@ def vwEdtPerfil(request):
                     unaEmpresa.perfil_foto.name = "perfil_empresa_" + \
                         str(unaEmpresa.id) + b
                     # Elimina la foto guardada en el directorio media del servidor
-                    os.remove(imgPerfil)
+                    os.remove('media/'+imgPerfil)
                 except Exception as e:
                     pass
 
@@ -742,7 +742,7 @@ def vwEdtPerfil(request):
 
         return JsonResponse({"result": "1"})
     except Exception as e:
-        return JsonResponse({"result": str(e)})
+        return JsonResponse({"result": "0"})
 
 
 # Vista que elimina fotos del carousel de la empresa
@@ -762,7 +762,7 @@ def vwElmFoto(request):
         idFoto = int(request.POST["id_foto"])
         foto = fotos_empresas.objects.get(id=idFoto)
         # Elimina la foto guardada en la carpeta media del servidor
-        os.remove(foto.ruta_foto.url)
+        os.remove('media/'+foto.ruta_foto.name)
         # Elimina el directorio de la foto en la base de datos
         foto.delete()
         return JsonResponse({"result": "1"})
