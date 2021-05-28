@@ -616,7 +616,7 @@ $(document).ready(function () {
 
 function modificarActivi(id, nombre, rutaFoto) {
     $('#formEdiActividad #actividad_id').text(id)
-    $('#formEdiActividad #txtActNombre').val(nombre);
+    $('#formEdiActividad #txtEditActNombre').val(nombre);
     $("#formEdiActividad #fotoModificar").attr("src", '/media/' + rutaFoto);
     $('#modalEdiActividad').modal('show')
 }

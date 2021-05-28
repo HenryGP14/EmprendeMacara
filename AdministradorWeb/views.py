@@ -56,7 +56,7 @@ def vwGrdActComercial(request):
         try:
             with transaction.atomic():
                 unaActiviComercial = activi_comerciales()
-                unaActiviComercial.nombre = request.POST['txtActNombre']
+                unaActiviComercial.nombre = request.POST['txtRegActNombre']
                 unaActiviComercial.ruta_foto = request.FILES['imgFotoRegistrar']
                 a, b = os.path.splitext(unaActiviComercial.ruta_foto.name)
                 unaActiviComercial.ruta_foto.name = str(unaActiviComercial.nombre) + b
@@ -83,7 +83,7 @@ def vwEdiActComercial(request):
         try:
             with transaction.atomic():
                 unaActiviComercial = activi_comerciales.objects.get(id=request.POST ['actividad_id'])
-                unaActiviComercial.nombre = request.POST['txtActNombre']
+                unaActiviComercial.nombre = request.POST['txtEditActNombre']
                 ruta = unaActiviComercial.ruta_foto.name
                 try:
                     unaActiviComercial.ruta_foto = request.FILES['imgFotoEditada']
