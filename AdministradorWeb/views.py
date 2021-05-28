@@ -119,7 +119,7 @@ def vwEliActComercial(request):
                 activiComercial.delete()
                 return JsonResponse({"result": "1"})
         except Exception as e:
-            return JsonResponse({"result": "0"})
+            return JsonResponse({"result": str(e)})
 
 def vwHabiliActivi(request):
     user_session = Usuario(request)
