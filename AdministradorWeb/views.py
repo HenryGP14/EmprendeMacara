@@ -84,12 +84,12 @@ def vwEdiActComercial(request):
             with transaction.atomic():
                 unaActiviComercial = activi_comerciales.objects.get(id=request.POST ['actividad_id'])
                 unaActiviComercial.nombre = request.POST['txtEditActNombre']
-                ruta = unaActiviComercial.ruta_foto.name
+                ruta = unaActiviComercial.ruta_foto.url
                 try:
                     unaActiviComercial.ruta_foto = request.FILES['imgFotoEditada']
                     a, b = os.path.splitext(unaActiviComercial.ruta_foto.name)
                     unaActiviComercial.ruta_foto.name = str(unaActiviComercial.nombre) + b
-                    os.remove("media\\" + ruta)
+                    os.remove(ruta)
                 except:
                     pass
                 unaActiviComercial.save()
@@ -114,7 +114,7 @@ def vwEliActComercial(request):
         try:
             with transaction.atomic():
                 activiComercial = activi_comerciales.objects.get(id=request.POST['actividad_id'])
-                os.remove("media\\" + activiComercial.ruta_foto.name)
+                os.remove(activiComercial.ruta_foto.url)
                 activiComercial.delete()
                 return JsonResponse({"result": "1"})
         except Exception as e:
@@ -236,7 +236,7 @@ def vwGrdPerfil(request):
                             unUsuario.correo = request.POST["txtUsuario"]
                             unUsuario.nom_usuario = request.POST["txtAdministrador"]
                             try:
-                                imgBorrar = "media\\" + unUsuario.ruta_foto.name
+                                imgBorrar = unUsuario.ruta_foto.url
                                 unUsuario.ruta_foto = request.FILES["imgFoto"]
                                 a, b = os.path.splitext(unUsuario.ruta_foto.name)
                                 unUsuario.ruta_foto.name = "PerfilAdministrador" + str(unUsuario.id) + b
@@ -261,7 +261,7 @@ def vwGrdPerfil(request):
                     unUsuario.correo = request.POST["txtUsuario"]
                     unUsuario.nom_usuario = request.POST["txtAdministrador"]
                     try:
-                        imgBorrar = "media\\" + unUsuario.ruta_foto.name
+                        imgBorrar = unUsuario.ruta_foto.url
                         unUsuario.ruta_foto = request.FILES["imgFoto"]
                         a, b = os.path.splitext(unUsuario.ruta_foto.name)
                         unUsuario.ruta_foto.name = "PerfilAdministrador" + str(unUsuario.id) + b
@@ -280,7 +280,7 @@ def vwGrdPerfil(request):
                 else:
                     unUsuario.nom_usuario = request.POST["txtAdministrador"]
                     try:
-                        imgBorrar = "media\\" + unUsuario.ruta_foto.name
+                        imgBorrar = unUsuario.ruta_foto.url
                         unUsuario.ruta_foto = request.FILES["imgFoto"]
                         a, b = os.path.splitext(unUsuario.ruta_foto.name)
                         unUsuario.ruta_foto.name = "PerfilAdministrador" + str(unUsuario.id) + b

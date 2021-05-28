@@ -438,12 +438,12 @@ def vwEditarProducto(request):
     unProducto.cantidad = int(request.POST["EditCantidadProducto"])
     unProducto.precio_unitario = float(request.POST["EditPrecUnitProducto"])
 
-    ruta = unProducto.ruta_foto.name
+    ruta = unProducto.ruta_foto.url
     try:
         unProducto.ruta_foto = request.FILES["inputeditproducto"]
         a, b = os.path.splitext(unProducto.ruta_foto.name)
         unProducto.ruta_foto.name = "Pro_E" + str(unEmpresa.id) + b
-        os.remove("media\\" + ruta)
+        os.remove(ruta)
     except:
         pass
     unProducto.visible = True
@@ -470,12 +470,12 @@ def vwEditarServicio(request):
     unServicio.nombre = request.POST["EditNombreServicio"]
     unServicio.descripcion = request.POST["EditDescripcionServicio"]
 
-    ruta = unServicio.ruta_foto.name
+    ruta = unServicio.ruta_foto.url
     try:
         unServicio.ruta_foto = request.FILES["inputeditservicio"]
         a, b = os.path.splitext(unServicio.ruta_foto.name)
         unServicio.ruta_foto.name = "Serv_E" + str(unEmpresa.id) + b
-        os.remove("media\\" + ruta)
+        os.remove(ruta)
     except:
         print("no existe foto")
     unServicio.visible = True
@@ -685,8 +685,8 @@ def vwEdtPerfil(request):
                 unaActividad.id = int(request.POST["cmbActComerc"])
                 unaEmpresa.activi_comercial = unaActividad
                 # Se obtiene el directorio en donde se encuentran guardadas las imágenes
-                imgPortada = "media/" + unaEmpresa.ruta_foto.name
-                imgPerfil = "media/" + unaEmpresa.perfil_foto.name
+                imgPortada = unaEmpresa.ruta_foto.name.url
+                imgPerfil = unaEmpresa.perfil_foto.name.url
 
                 try:
                     unaEmpresa.ruta_foto = request.FILES["imgFoto"]
@@ -762,7 +762,7 @@ def vwElmFoto(request):
         idFoto = int(request.POST["id_foto"])
         foto = fotos_empresas.objects.get(id=idFoto)
         # Elimina la foto guardada en la carpeta media del servidor
-        os.remove("media\\" + foto.ruta_foto.name)
+        os.remove(foto.ruta_foto.url)
         # Elimina el directorio de la foto en la base de datos
         foto.delete()
         return JsonResponse({"result": "1"})
