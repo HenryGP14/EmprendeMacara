@@ -764,14 +764,14 @@ function eliminarActivi(id, actividad) {
                 } else {
                     Swal.fire({
                         icon: 'error',
-                        text: 'Error al eliminar la actividad comercial, por favor intente nuevamente '+data.result
+                        text: 'Error al eliminar la actividad comercial, por favor intente nuevamente'
                     })
                 }
             }).fail(function (jqXHR, textStatus, errorThrown) {
                 document.body.style.cursor = 'default';
                 Swal.fire({
                     icon: 'error',
-                    text: 'Error al eliminar la actividad comercial, por favor intente nuevamente '+ errorThrown
+                    text: 'Error al eliminar la actividad comercial, por favor intente nuevamente'
                 })
             }).always(function (data) {});
         }
