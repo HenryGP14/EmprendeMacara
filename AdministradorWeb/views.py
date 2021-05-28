@@ -114,8 +114,7 @@ def vwEliActComercial(request):
         try:
             with transaction.atomic():
                 activiComercial = activi_comerciales.objects.get(id=request.POST['actividad_id'])
-                imgBorrar = "media\\" + activiComercial.ruta_foto.name
-                os.remove(imgBorrar)
+                os.remove("media\\" + activiComercial.ruta_foto.name)
                 activiComercial.delete()
                 return JsonResponse({"result": "1"})
         except Exception as e:
