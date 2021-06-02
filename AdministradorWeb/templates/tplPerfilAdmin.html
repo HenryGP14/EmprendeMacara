@@ -65,7 +65,7 @@
                 </section>
             </div>
             <div class="col-sm-3 text-center">
-                {% if request.session.usuario.perfil %}
+                {% if datos.unUsuario.ruta_foto %}
                 <img id="foto" src="{{ datos.unUsuario.ruta_foto.url }}" class="img-thumbnail img-fluid" name="foto">
                 {% else %}
                 <img id="foto" src="{% static 'img/user.png' %}" class="img-thumbnail img-fluid" name="foto">

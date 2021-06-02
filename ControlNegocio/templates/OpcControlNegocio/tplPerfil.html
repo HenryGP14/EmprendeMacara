@@ -199,7 +199,7 @@
                                 href="javascript:deleteFoto('{{foto.id}}');"><i class="fa fa-trash"
                                     aria-hidden="true"></i></a>
                             <div class="content-img-carrusel">
-                                <img id="foto{{foto.id}}" src="media/{{ foto.ruta_foto }}"
+                                <img id="foto{{foto.id}}" src="{{ foto.ruta_foto.url }}"
                                     class="img-thumbnail img-fluid fotoCarousel">
                             </div>
                         </div>
