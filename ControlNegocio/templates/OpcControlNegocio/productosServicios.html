@@ -342,7 +342,6 @@
                 csrfmiddlewaretoken: '{{ csrf_token }}'
             },
         }).done(function (d) {
-            console.log(d)
             $('#EditNombreServicio').val(d.nombre);
             $('#EditDescripcionServicio').val(d.descripcion);
             $('#fotoEditServicio').attr('src', d.ruta_foto);
@@ -365,7 +364,6 @@
                 csrfmiddlewaretoken: '{{ csrf_token }}'
             },
         }).done(function (d) {
-            console.log(d)
             $('#EditNombreProducto').val(d.nombre);
             $('#EditDescripcionProducto').val(d.descripcion);
             $('#EditCantidadProducto').val(d.cantidad);

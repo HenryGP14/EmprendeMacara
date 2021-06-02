@@ -14,9 +14,10 @@
                                 <label for="txtAdministrador" class="col-form-label">Nombre: </label>
                             </section>
                             <section class="col-sm-6">
-                                <input type="text" class="form-control" id="txtAdministrador" name="txtAdministrador" value="{{datos.unUsuario.nom_usuario}}"
-                                    placeholder="Ingrese su nombre" autocomplete="off" maxlength="26"
-                                    onkeypress="javascript:soloLetras(event);" required />
+                                <input type="text" class="form-control" id="txtAdministrador" name="txtAdministrador"
+                                    value="{{datos.unUsuario.nom_usuario}}" placeholder="Ingrese su nombre"
+                                    autocomplete="off" maxlength="26" onkeypress="javascript:soloLetras(event);"
+                                    required />
                             </section>
                         </section>
                         <section class="form-group row justify-content-center">
@@ -24,9 +25,9 @@
                                 <label for="txtUsuario" class="col-form-label">Usuario: </label>
                             </section>
                             <section class="col-sm-6">
-                                <input type="email" class="form-control" id="txtUsuario" name="txtUsuario" value="{{datos.unUsuario.correo}}"
-                                    maxlength="75" placeholder="Ejemplo: usuario@gmail.com" autocomplete="off"
-                                    required />
+                                <input type="email" class="form-control" id="txtUsuario" name="txtUsuario"
+                                    value="{{datos.unUsuario.correo}}" maxlength="75"
+                                    placeholder="Ejemplo: usuario@gmail.com" autocomplete="off" required />
                             </section>
                         </section>
 
@@ -38,8 +39,7 @@
                                 <input type="password" class="form-control" id="txtContraActul" name="txtContraActul"
                                     placeholder="Ingrese la contraseña anterior" autocomplete="off"
                                     pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,}$"
-                                    title="La contraseña debe tener al menos 6 caracteres, un número, una mayúscula y minúscula"
-                                    />
+                                    title="La contraseña debe tener al menos 6 caracteres, un número, una mayúscula y minúscula" />
                             </section>
                         </section>
                         <section class="form-group row justify-content-center">
@@ -66,7 +66,7 @@
             </div>
             <div class="col-sm-3 text-center">
                 {% if request.session.usuario.perfil %}
-                <img id="foto" src="/media/{{datos.unUsuario.ruta_foto}}" class="img-thumbnail img-fluid" name="foto">
+                <img id="foto" src="{{ datos.unUsuario.ruta_foto.url }}" class="img-thumbnail img-fluid" name="foto">
                 {% else %}
                 <img id="foto" src="{% static 'img/user.png' %}" class="img-thumbnail img-fluid" name="foto">
                 {% endif %}
@@ -88,37 +88,40 @@
         </section>
     </form>
 
-    <div class="modal fade" id="cambioUserContra" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="cambioUserContra" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="staticBackdropLabel">Mensaje</h5>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Mensaje</h5>
+                </div>
+                <div class="modal-body">
+                    Los cambios fueron realizados correctamente, la sesión se cerrará para que surgan efecto los cambios
+                    y deberá inicar sesión en caso de ser necesario.
+                </div>
+                <div class="modal-footer">
+                    <a href="{% url 'logout' %}" class="btn btn-primary">Aceptar</a>
+                </div>
             </div>
-            <div class="modal-body">
-              Los cambios fueron realizados correctamente, la sesión se cerrará para que surgan efecto los cambios y deberá inicar sesión en caso de ser necesario.
-            </div>
-            <div class="modal-footer">
-                <a href="{% url 'logout' %}" class="btn btn-primary">Aceptar</a>
-            </div>
-          </div>
         </div>
-      </div>
+    </div>
 
-      <div class="modal fade" id="mensaje_success" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="mensaje_success" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="staticBackdropLabel">Mensaje</h5>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Mensaje</h5>
+                </div>
+                <div class="modal-body">
+                    Los cambios fueron realizados correctamente
+                </div>
+                <div class="modal-footer">
+                    <a href="/administradorWeb/perfil-admin/" class="btn btn-primary">Aceptar</a>
+                </div>
             </div>
-            <div class="modal-body">
-              Los cambios fueron realizados correctamente
-            </div>
-            <div class="modal-footer">
-                <a href="/administradorWeb/perfil-admin/" class="btn btn-primary">Aceptar</a>
-            </div>
-          </div>
         </div>
-      </div>
+    </div>
 </div>
 {% endblock %}
 {% block js %}

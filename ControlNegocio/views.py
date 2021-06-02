@@ -359,7 +359,7 @@ def vwObtenerServicio(request):
         "empresa": unServicio.empresa.id, 
         "nombre": unServicio.nombre, 
         "descripcion": unServicio.descripcion,
-        "ruta_foto": "/media/" + unServicio.ruta_foto.name, 
+        "ruta_foto": unServicio.ruta_foto.url, 
         "visible": unServicio.visible,
         "servicio_id": unServicio.id,
         }
@@ -384,7 +384,7 @@ def vwObtenerProducto(request):
             "descripcion": unProducto.descripcion,
             "cantidad": unProducto.cantidad,
             "precio_unitario": unProducto.precio_unitario,
-            "ruta_foto": "/media/" + unProducto.ruta_foto.name,
+            "ruta_foto": unProducto.ruta_foto.url,
             "visible": unProducto.visible,
             "producto_id": unProducto.id,
         }
