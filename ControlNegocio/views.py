@@ -685,26 +685,37 @@ def vwEdtPerfil(request):
                 unaActividad.id = int(request.POST["cmbActComerc"])
                 unaEmpresa.activi_comercial = unaActividad
                 # Se obtiene el directorio en donde se encuentran guardadas las imágenes
-                imgPortada = unaEmpresa.ruta_foto.name.name
-                imgPerfil = unaEmpresa.perfil_foto.name.name
-
                 try:
-                    unaEmpresa.ruta_foto = request.FILES["imgFoto"]
-                    a, b = os.path.splitext(unaEmpresa.ruta_foto.name)
-                    unaEmpresa.ruta_foto.name = "portada_empresa_" + \
-                        str(unaEmpresa.id) + b
-                    # Elimina la foto guardada en el directorio media del servidor
-                    os.remove('media/'+imgPortada)
+                    if(unaEmpresa.ruta_foto != ""):
+                        imgPortada = unaEmpresa.ruta_foto.url
+                        unaEmpresa.ruta_foto = request.FILES["imgFoto"]
+                        a, b = os.path.splitext(unaEmpresa.ruta_foto.name)
+                        unaEmpresa.ruta_foto.name = "portada_empresa_" + \
+                            str(unaEmpresa.id) + b
+                        # Elimina la foto guardada en el directorio media del servidor
+                        os.remove(imgPortada)
+                    else:
+                        unaEmpresa.ruta_foto = request.FILES["imgFoto"]
+                        a, b = os.path.splitext(unaEmpresa.ruta_foto.name)
+                        unaEmpresa.ruta_foto.name = "portada_empresa_" + \
+                            str(unaEmpresa.id) + b
                 except Exception as e:
                     pass
 
                 try:
-                    unaEmpresa.perfil_foto = request.FILES["imgFotoPerfil"]
-                    a, b = os.path.splitext(unaEmpresa.perfil_foto.name)
-                    unaEmpresa.perfil_foto.name = "perfil_empresa_" + \
-                        str(unaEmpresa.id) + b
-                    # Elimina la foto guardada en el directorio media del servidor
-                    os.remove('media/'+imgPerfil)
+                    if(unaEmpresa.ruta_foto != ""):
+                        imgPerfil = unaEmpresa.perfil_foto.url
+                        unaEmpresa.perfil_foto = request.FILES["imgFotoPerfil"]
+                        a, b = os.path.splitext(unaEmpresa.perfil_foto.name)
+                        unaEmpresa.perfil_foto.name = "perfil_empresa_" + \
+                            str(unaEmpresa.id) + b
+                        # Elimina la foto guardada en el directorio media del servidor
+                        os.remove(imgPerfil)
+                    else:
+                        unaEmpresa.perfil_foto = request.FILES["imgFotoPerfil"]
+                        a, b = os.path.splitext(unaEmpresa.perfil_foto.name)
+                        unaEmpresa.perfil_foto.name = "perfil_empresa_" + \
+                            str(unaEmpresa.id) + b
                 except Exception as e:
                     pass
 
@@ -742,7 +753,7 @@ def vwEdtPerfil(request):
 
         return JsonResponse({"result": "1"})
     except Exception as e:
-        return JsonResponse({"result": "0"})
+        return JsonResponse({"result": str(e)})
 
 
 # Vista que elimina fotos del carousel de la empresa
