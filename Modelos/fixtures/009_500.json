@@ -1,0 +1,39 @@
+[
+    {
+        "model": "Modelos.usuarios",
+        "pk": 1,
+        "fields": {
+            "nom_usuario": "Narcisa Pesantez",
+            "correo": "narcisa_pesantez@gmail.com",
+            "credenciales": "123456",
+            "ruta_foto": null,
+            "estado": true,
+            "correo_verificado": true,
+            "rol_id": 2
+        }
+    },
+    {
+        "model": "Modelos.empresas",
+        "pk": 1,
+        "fields": {
+            "activi_comercial_id": 1,
+            "correo": "narcisa_pesantez@gmail.com",
+            "descripcion": "Sin datos",
+            "dias_atencion": "Lunes - Domingo",
+            "direccion": "Barrio Velasco Ibarra y Amazonas",
+            "estado": "Habilitada",
+            "forma_pago": "Efectivo y depósitos bancarios",
+            "forma_venta": "Local y en la Web",
+            "gerente": "Narcisa Pesantez y Janina Tinoco",
+            "inicio_atencion": "08:00",
+            "fin_atencion": "17:00",
+            "nom_empresa": "Especias y Sabores JN",
+            "perfil_foto": null,
+            "politicas": "Sin datos",
+            "ruc": "0999999999001",
+            "ruta_foto": null,
+            "slogan": "Realizamos entregas a domicilio sin recargo alguno",
+            "usuario_id": 1
+        }
+    }
+]
