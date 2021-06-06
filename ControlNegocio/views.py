@@ -818,7 +818,7 @@ def vwGuardarFoto(request):
         pass
     try:
         unaEmpresa = empresas.objects.get(usuario_id=request.session["usuario"]["id"])
-        if(unaEmpresa.ruta_foto != ""):
+        if(unaEmpresa.perfil_foto != ""):
             imgPerfil = unaEmpresa.perfil_foto.url
             unaEmpresa.perfil_foto = request.FILES["imgFotoPerfil"]
             a, b = os.path.splitext(unaEmpresa.perfil_foto.name)
@@ -831,5 +831,7 @@ def vwGuardarFoto(request):
             a, b = os.path.splitext(unaEmpresa.perfil_foto.name)
             unaEmpresa.perfil_foto.name = "perfil_empresa_" + \
                 str(unaEmpresa.id) + b
+        unaEmpresa.save()
+        return JsonResponse({"result": "1"})
     except Exception as e:
-        return JsonResponse({"result": "0"})
+        return JsonResponse({"result": str(e)})
