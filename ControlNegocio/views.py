@@ -825,7 +825,13 @@ def vwGuardarFoto(request):
             unaEmpresa.perfil_foto.name = "perfil_empresa_" + \
                 str(unaEmpresa.id) + b
             # Elimina la foto guardada en el directorio media del servidor
-            os.remove(imgPerfil)
+            try:
+                os.remove(imgPerfil[1:])
+            except Exception as e:
+                unaEmpresa.perfil_foto = request.FILES["imgFotoPerfil"]
+                a, b = os.path.splitext(unaEmpresa.perfil_foto.name)
+                unaEmpresa.perfil_foto.name = "perfil_empresa_" + \
+                    str(unaEmpresa.id) + b
         else:
             unaEmpresa.perfil_foto = request.FILES["imgFotoPerfil"]
             a, b = os.path.splitext(unaEmpresa.perfil_foto.name)
@@ -834,4 +840,40 @@ def vwGuardarFoto(request):
         unaEmpresa.save()
         return JsonResponse({"result": "1"})
     except Exception as e:
-        return JsonResponse({"result": str(e)})
+        return JsonResponse({"result": "0"})
+
+def vwGuardarPortada(request):
+    user_session = Usuario(request)
+    try:
+        if not request.session["usuario"] or request.session["usuario"]["rol_id"] == 1:
+            return redirect("index")
+        elif request.session["usuario"]["rol_id"] == 3:
+            return redirect("admin-web")
+    except:
+        pass
+    try:
+        unaEmpresa = empresas.objects.get(usuario_id=request.session["usuario"]["id"])
+        if(unaEmpresa.ruta_foto != ""):
+            imgPortada = unaEmpresa.ruta_foto.url
+            unaEmpresa.ruta_foto = request.FILES["imgFoto"]
+            a, b = os.path.splitext(unaEmpresa.ruta_foto.name)
+            unaEmpresa.ruta_foto.name = "portada_empresa_" + \
+                str(unaEmpresa.id) + b
+            # Elimina la foto guardada en el directorio media del servidor
+            try:
+                os.remove(imgPortada[1:])
+            except Exception as e:
+                unaEmpresa.ruta_foto = request.FILES["imgFoto"]
+                a, b = os.path.splitext(unaEmpresa.ruta_foto.name)
+                unaEmpresa.ruta_foto.name = "portada_empresa_" + \
+                    str(unaEmpresa.id) + b
+        else:
+            unaEmpresa.ruta_foto = request.FILES["imgFoto"]
+            a, b = os.path.splitext(unaEmpresa.ruta_foto.name)
+            unaEmpresa.ruta_foto.name = "portada_empresa_" + \
+                str(unaEmpresa.id) + b
+        unaEmpresa.save()
+        return JsonResponse({"result": "1"})
+    except Exception as e:
+        print(e)
+        return JsonResponse({"result": "0"})

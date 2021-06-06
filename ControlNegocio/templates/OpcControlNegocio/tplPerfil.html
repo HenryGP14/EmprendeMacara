@@ -162,35 +162,37 @@
                 </script>
             </div>
         </form>
-        <div class="portada">
-            <div class="titulo">
-                <h5>Foto de portada</h5>
-                <label for="imgFoto" class="btn btn-primary"><i class="fas fa-cog"></i></label>
-                <input class="btn btn-success btn-sm" type="file" name="imgFoto" id="imgFoto" form="formPerfil"
-                    accept="image/jpeg,image/png" onchange="previewImagen(this);">
-                <button class="btn btn-success m-2 btn-portada" id="btn-acc-portada">
-                    <i class="fas fa-check"></i>
-                </button>
-                <button class="btn btn-danger m-2 btn-portada" id="btn-rec-portada">
-                    <i class="fa fa-ban"></i>
-                </button>
+        <form method="POST" enctype="multipart/form-data" name="editPortada" id="editPortada">
+            {% csrf_token %}
+            <div class="portada">
+                <div class="titulo">
+                    <h5>Foto de portada</h5>
+                    <label for="imgFoto" class="btn btn-primary"><i class="fas fa-cog"></i></label>
+                    <input class="btn btn-success btn-sm" type="file" name="imgFoto" id="imgFoto"
+                        accept="image/jpeg,image/png" onchange="previewImagen(this);">
+                    <button type="submit" class="btn btn-success m-2 btn-portada" id="btn-acc-portada">
+                        <i class="fas fa-check"></i>
+                    </button>
+                    <button type="button" class="btn btn-danger m-2 btn-portada" id="btn-rec-portada">
+                        <i class="fa fa-ban"></i>
+                    </button>
+                </div>
+                <div class="img-portada">
+                    {% if unEmpresa.ruta_foto %}
+                    <img id="foto" src="{{ unEmpresa.ruta_foto.url }}" class="img-thumbnail img-fluid" name="foto">
+                    {% else %}
+                    <img id="foto" src="" class="img-thumbnail img-fluid" name="foto">
+                    {% endif %}
+                </div>
+                <script>
+                    if ($("#foto").attr("src") == "") {
+                        $(".img-portada").prepend(
+                            '<div class="alert alert-warning alerta-sin-portada">La empresa no cuenta con una imagen de portada</div>'
+                        )
+                    }
+                </script>
             </div>
-            <div class="img-portada">
-                {% if unEmpresa.ruta_foto %}
-                <img id="foto" src="{{ unEmpresa.ruta_foto.url }}" class="img-thumbnail img-fluid" name="foto"
-                form="formPerfil">
-                {% else %}
-                <img id="foto" src="" class="img-thumbnail img-fluid" name="foto" form="formPerfil">
-                {% endif %}
-            </div>
-            <script>
-                if ($("#foto").attr("src") == "") {
-                    $(".img-portada").prepend(
-                        '<div class="alert alert-warning alerta-sin-portada">La empresa no cuenta con una imagen de portada</div>'
-                    )
-                }
-            </script>
-        </div>
+        </form>
         <div class="carousel-empresa">
             <div class="titulo">
                 <h5>Foto del carousel</h5>
@@ -676,6 +678,8 @@
     // Función para crear una vista previa de la foto de portada seleccionada mediante el input file
     function previewImagen(input) {
         var formato_imagen = ["image/png", "image/jpg", "image/jpeg"];
+        $("#foto").show();
+        $(".alerta-sin-portada").remove();
         if (formato_imagen.indexOf(input.files[0].type) != -1) {
             var reader = new FileReader();
             reader.onload = function (e) {
@@ -702,7 +706,7 @@
         }
     }
 
-    // Evento que para cancelar foto de perfil
+    // Evento para cancelar la foto de perfil
     $(document).ready(function () {
         $("#btn-rec-perfil").click(function () {
             $(".btn-perfil").hide();
@@ -731,33 +735,79 @@
             }).done(function (data) {
                 document.body.style.cursor = 'default';
                 // Si el resultado es 1, la transacción fue realizada correctamente
-                if (data.result == '1') {
+                if (data.result == "1") {
                     Swal.fire({
                         icon: 'success',
                         text: 'La foto fue guardada exisotamente'
                     })
-                    location.href = '{% url "perfil" %}'
-                } else if (data.result == '0') {
-                    Swal.fire({
-                        icon: 'error',
-                        text: 'Existió un error, por favor intente nuevamente'
-                    })
+                    $(".btn-perfil").hide();
                 } else {
                     Swal.fire({
                         icon: 'error',
-                        text: data.result
+                        text: 'Existió un error, por favor intente nuevamente'
                     })
                 }
             }).fail(function (jqXHR, textStatus, errorThrown) {
                 document.body.style.cursor = 'default';
                 Swal.fire({
                     icon: 'error',
-                    text: 'Existió un error, por favor intente nuevamente' +
-                        textStatus + errorThrown
+                    text: 'Existió un error, por favor intente nuevamente'
                 })
             }).always(function (data) {});
         });
     });
+
+    // Evento para cancelar la foto de portada
+    $(document).ready(function () {
+        $("#btn-rec-portada").click(function () {
+            $(".btn-portada").hide();
+            //$(".alerta-recargar").show();
+            $("#foto").hide();
+            $(".img-portada").prepend(
+                '<div class="alert alert-danger alerta-sin-portada">Recarge la pagina o seleccione otra foto de portada</div>'
+            )
+        })
+    })
+
+    // Evento para enviar la foto de portada a guardar
+    $(document).ready(function () {
+        $("#editPortada").submit(function (e) {
+            e.preventDefault();
+            var parametros = new FormData($(this)[0]);
+            document.body.style.cursor = 'wait';
+            $.ajax({
+                url: '{% url "editar-foto-portada" %}',
+                type: 'POST',
+                data: parametros,
+                dataType: 'json',
+                cache: false,
+                contentType: false,
+                processData: false
+            }).done(function (data) {
+                document.body.style.cursor = 'default';
+                // Si el resultado es 1, la transacción fue realizada correctamente
+                if (data.result == "1") {
+                    Swal.fire({
+                        icon: 'success',
+                        text: 'La foto fue guardada exisotamente'
+                    })
+                    $(".btn-portada").hide();
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        text: 'Existió un error, por favor intente nuevamente 0'
+                    })
+                }
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                document.body.style.cursor = 'default';
+                Swal.fire({
+                    icon: 'error',
+                    text: 'Existió un error, por favor intente nuevamente'
+                })
+            }).always(function (data) {});
+        });
+    });
+
 
     // Evento change que se ejecuta cuando el input file de seleccionar una foto para el carousel tiene un nuevo valor o se ingresó una nueva foto
     $(document).ready(function () {
