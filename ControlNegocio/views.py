@@ -41,6 +41,7 @@ def vwOpcPedidosPendientes(request):
         usuario_id=request.session["usuario"]["id"])
     ltVentas = []
     for unVenta in ventas.objects.filter((Q(estado="Pendiente") | Q(estado="Enviado")) & Q(empresa_id=unEmpresa.id)):
+        det = detalles_venta.objects.filter(venta_id=unVenta.id)
         ltVentas.append(
             {
                 "idVenta": unVenta.id,
@@ -49,8 +50,8 @@ def vwOpcPedidosPendientes(request):
                 "telefono": unVenta.celular,
                 "tipoPago": unVenta.tipo_de_pago,
                 "estado": unVenta.estado,
-                "numproductos": detalles_venta.objects.filter(venta_id=unVenta.id).aggregate(Sum("cantidad"))["cantidad_sum"],
-                "Montototal": detalles_venta.objects.filter(venta_id=unVenta.id).aggregate(Sum("precio_unitario"))["precio_unitario_sum"],
+                "numproductos": det[0].cantidad,
+                "Montototal": det[0].precio_unitario,
             }
         )
     return render(
@@ -60,7 +61,7 @@ def vwOpcPedidosPendientes(request):
             "ltVentas": ltVentas,
             "numPedidos": len(ltVentas),
             "numProductosTotales": sum(item["numproductos"] for item in ltVentas),
-            "SumaMontoTotales": sum(item["Montototal"] for item in ltVentas),
+            "SumaMontoTotales": sum((item["Montototal"] * item["numproductos"]) for item in ltVentas),
             "unEmpresa": unEmpresa,
             "pendientes": "activado",
         },
