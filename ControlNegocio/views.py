@@ -684,41 +684,6 @@ def vwEdtPerfil(request):
                 unaActividad = activi_comerciales()
                 unaActividad.id = int(request.POST["cmbActComerc"])
                 unaEmpresa.activi_comercial = unaActividad
-                # Se obtiene el directorio en donde se encuentran guardadas las imágenes
-                try:
-                    if(unaEmpresa.ruta_foto != ""):
-                        imgPortada = unaEmpresa.ruta_foto.url
-                        unaEmpresa.ruta_foto = request.FILES["imgFoto"]
-                        a, b = os.path.splitext(unaEmpresa.ruta_foto.name)
-                        unaEmpresa.ruta_foto.name = "portada_empresa_" + \
-                            str(unaEmpresa.id) + b
-                        # Elimina la foto guardada en el directorio media del servidor
-                        os.remove(imgPortada)
-                    else:
-                        unaEmpresa.ruta_foto = request.FILES["imgFoto"]
-                        a, b = os.path.splitext(unaEmpresa.ruta_foto.name)
-                        unaEmpresa.ruta_foto.name = "portada_empresa_" + \
-                            str(unaEmpresa.id) + b
-                except Exception as e:
-                    pass
-
-                try:
-                    if(unaEmpresa.ruta_foto != ""):
-                        imgPerfil = unaEmpresa.perfil_foto.url
-                        unaEmpresa.perfil_foto = request.FILES["imgFotoPerfil"]
-                        a, b = os.path.splitext(unaEmpresa.perfil_foto.name)
-                        unaEmpresa.perfil_foto.name = "perfil_empresa_" + \
-                            str(unaEmpresa.id) + b
-                        # Elimina la foto guardada en el directorio media del servidor
-                        os.remove(imgPerfil)
-                    else:
-                        unaEmpresa.perfil_foto = request.FILES["imgFotoPerfil"]
-                        a, b = os.path.splitext(unaEmpresa.perfil_foto.name)
-                        unaEmpresa.perfil_foto.name = "perfil_empresa_" + \
-                            str(unaEmpresa.id) + b
-                except Exception as e:
-                    pass
-
                 unaEmpresa.save()
                 telefonos = telefo_empresas.objects.filter(empresa=unaEmpresa)
                 for t in telefonos:
