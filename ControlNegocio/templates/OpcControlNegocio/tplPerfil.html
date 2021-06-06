@@ -386,9 +386,6 @@
         </div>
     </div>
 </div>
-
-
-
 <div class="modal fade" id="modalTelefono" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
@@ -678,31 +675,59 @@
     // Función para crear una vista previa de la foto de portada seleccionada mediante el input file
     function previewImagen(input) {
         var formato_imagen = ["image/png", "image/jpg", "image/jpeg"];
-        $("#foto").show();
-        $(".alerta-sin-portada").remove();
-        if (formato_imagen.indexOf(input.files[0].type) != -1) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#foto').attr('src', e.target.result);
-            };
-            reader.readAsDataURL(input.files[0]);
-            $(".img-portada .alerta-sin-portada").hide();
-            $(".btn-portada").show();
+        if (input.files.length != 0) {
+            $(".alerta-sin-portada").remove();
+            if (formato_imagen.indexOf(input.files[0].type) != -1) {
+                $("#foto").show();
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#foto').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+                $(".img-portada .alerta-sin-portada").hide();
+                $(".btn-portada").show();
+            } else {
+                $(".btn-portada").hide();
+                $("#foto").hide();
+                $(".img-portada").html(
+                    '<div class="alert alert-danger alerta-sin-portada">Intentó subir un archivo que no es imagen, inténtelo de nuevo</div>'
+                )
+            }
+        } else {
+            $(".btn-portada").hide();
+            $("#foto").hide();
+            $(".img-portada").html(
+                '<div class="alert alert-danger alerta-sin-portada">No ha seleccionado una imagen</div>'
+            )
         }
     }
 
     // Función para crear una vista previa de la foto de perfil seleccionada mediante el input file
     function previewImagenP(input) {
         var formato_imagen = ["image/png", "image/jpg", "image/jpeg"];
-        $("#fotoPerfil").show();
-        if (formato_imagen.indexOf(input.files[0].type) != -1) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#fotoPerfil').attr('src', e.target.result);
-            };
-            reader.readAsDataURL(input.files[0]);
-            $(".img-perfil .alerta-sin-perfil").hide();
-            $(".btn-perfil").show();
+        if (input.files.length != 0) {
+            if (formato_imagen.indexOf(input.files[0].type) != -1) {
+                $("#fotoPerfil").show();
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#fotoPerfil').attr('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+                $(".img-perfil .alerta-sin-perfil").hide();
+                $(".btn-perfil").show();
+            } else {
+                $(".btn-perfil").hide();
+                $("#fotoPerfil").hide();
+                $("#img-perfil").html(
+                    '<div class="alert alert-danger alerta-sin-perfil">Intentó subir un archivo que no es imagen, inténtelo de nuevo</div>'
+                )
+            }
+        } else {
+            $(".btn-perfil").hide();
+            $("#fotoPerfil").hide();
+            $("#img-perfil").html(
+                '<div class="alert alert-danger alerta-sin-perfil">No ha seleccionado una imagen</div>'
+            )
         }
     }
 
@@ -710,9 +735,8 @@
     $(document).ready(function () {
         $("#btn-rec-perfil").click(function () {
             $(".btn-perfil").hide();
-            //$(".alerta-recargar").show();
             $("#fotoPerfil").hide();
-            $("#img-perfil").prepend(
+            $("#img-perfil").html(
                 '<div class="alert alert-danger alerta-sin-perfil">Recarge la pagina o seleccione otra foto de perfil</div>'
             )
         })
@@ -761,9 +785,8 @@
     $(document).ready(function () {
         $("#btn-rec-portada").click(function () {
             $(".btn-portada").hide();
-            //$(".alerta-recargar").show();
             $("#foto").hide();
-            $(".img-portada").prepend(
+            $(".img-portada").html(
                 '<div class="alert alert-danger alerta-sin-portada">Recarge la pagina o seleccione otra foto de portada</div>'
             )
         })
