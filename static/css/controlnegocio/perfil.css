@@ -39,3 +39,8 @@ input[type="file"]#imgFotoCarousel {
     position: absolute;
     z-index: -1;
 }
+
+.btn-perfil,
+.btn-portada {
+    display: none;
+}

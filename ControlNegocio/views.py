@@ -806,3 +806,30 @@ def vwGrdFoto(request):
             return JsonResponse({"result": "1"})
     except Exception as e:
         return JsonResponse({"result": "0"})
+
+def vwGuardarFoto(request):
+    user_session = Usuario(request)
+    try:
+        if not request.session["usuario"] or request.session["usuario"]["rol_id"] == 1:
+            return redirect("index")
+        elif request.session["usuario"]["rol_id"] == 3:
+            return redirect("admin-web")
+    except:
+        pass
+    try:
+        unaEmpresa = empresas.objects.get(usuario_id=request.session["usuario"]["id"])
+        if(unaEmpresa.ruta_foto != ""):
+            imgPerfil = unaEmpresa.perfil_foto.url
+            unaEmpresa.perfil_foto = request.FILES["imgFotoPerfil"]
+            a, b = os.path.splitext(unaEmpresa.perfil_foto.name)
+            unaEmpresa.perfil_foto.name = "perfil_empresa_" + \
+                str(unaEmpresa.id) + b
+            # Elimina la foto guardada en el directorio media del servidor
+            os.remove(imgPerfil)
+        else:
+            unaEmpresa.perfil_foto = request.FILES["imgFotoPerfil"]
+            a, b = os.path.splitext(unaEmpresa.perfil_foto.name)
+            unaEmpresa.perfil_foto.name = "perfil_empresa_" + \
+                str(unaEmpresa.id) + b
+    except Exception as e:
+        return JsonResponse({"result": "0"})

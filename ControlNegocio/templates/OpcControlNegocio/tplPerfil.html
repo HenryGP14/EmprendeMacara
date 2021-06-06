@@ -124,44 +124,56 @@
                         value="{{unEmpresa.fin_atencion}}" required />
                 </div>
             </div>
-
             <div class="fila">
 
             </div>
-
-
         </div>
     </div>
     <div class="columna">
-        <div class="portada">
-            <div class="titulo">
-                <h5>Foto de perfil</h5>
-                <label for="imgFotoPerfil" class="btn btn-primary"><i class="fas fa-cog"></i></label>
-                <input class="btn btn-success btn-sm" type="file" name="imgFotoPerfil" id="imgFotoPerfil" form="formPerfil"
-                    accept="image/jpeg,image/png" onchange="previewImagenP(this);">
+        <form method="POST" enctype="multipart/form-data" name="editFoto" id="editFoto">
+            {% csrf_token %}
+            <div class="portada">
+                <div class="titulo">
+                    <h5>Foto de perfil</h5>
+                    <label for="imgFotoPerfil" class="btn btn-primary"><i class="fas fa-cog"></i></label>
+                    <input class="btn btn-success btn-sm" type="file" name="imgFotoPerfil" id="imgFotoPerfil"
+                        accept="image/jpeg,image/png" onchange="previewImagenP(this);">
+                    <button type="submit" class="btn btn-success m-2 btn-perfil" id="btn-acc-perfil">
+                        <i class="fas fa-check"></i>
+                    </button>
+                    <button type="button" class="btn btn-danger m-2 btn-perfil" id="btn-rec-perfil">
+                        <i class="fa fa-ban"></i>
+                    </button>
+                </div>
+                <div class="img-perfil" id="img-perfil">
+                    {% if unEmpresa.perfil_foto %}
+                    <img id="fotoPerfil" src="{{ unEmpresa.perfil_foto.url }}" class="img-thumbnail img-fluid"
+                        name="fotoPerfil">
+                    {% else %}
+                    <img id="fotoPerfil" src="" class="img-thumbnail img-fluid" name="fotoPerfil">
+                    {% endif %}
+                </div>
+                <script>
+                    if ($("#fotoPerfil").attr("src") == "") {
+                        $("#img-perfil").prepend(
+                            '<div class="alert alert-warning alerta-sin-perfil">La empresa no cuenta con una imagen de perfil</div>'
+                        )
+                    }
+                </script>
             </div>
-            <div class="img-perfil">
-                {% if unEmpresa.perfil_foto %}
-                <img id="fotoPerfil" src="{{ unEmpresa.perfil_foto.url }}" class="img-thumbnail img-fluid" name="fotoPerfil"
-                    form="formPerfil">
-                {% else %}
-                <img id="fotoPerfil" src="" class="img-thumbnail img-fluid" name="fotoPerfil" form="formPerfil">
-                {% endif %}
-            </div>
-            <script>
-                if ($("#fotoPerfil").attr("src") == "") {
-                    $(".img-perfil").prepend(
-                        '<div class="alert alert-warning alerta-sin-perfil">La empresa no cuenta con una imagen de perfil</div>'
-                    )
-                }
-            </script>
-        </div>
+        </form>
         <div class="portada">
             <div class="titulo">
                 <h5>Foto de portada</h5>
                 <label for="imgFoto" class="btn btn-primary"><i class="fas fa-cog"></i></label>
                 <input class="btn btn-success btn-sm" type="file" name="imgFoto" id="imgFoto" form="formPerfil"
                     accept="image/jpeg,image/png" onchange="previewImagen(this);">
+                <button class="btn btn-success m-2 btn-portada" id="btn-acc-portada">
+                    <i class="fas fa-check"></i>
+                </button>
+                <button class="btn btn-danger m-2 btn-portada" id="btn-rec-portada">
+                    <i class="fa fa-ban"></i>
+                </button>
             </div>
             <div class="img-portada">
                 {% if unEmpresa.ruta_foto %}
@@ -404,7 +416,6 @@
 </div>
 
 {% endblock content %}
-
 
 {% block js2 %}
 
@@ -664,27 +675,89 @@
 
     // Función para crear una vista previa de la foto de portada seleccionada mediante el input file
     function previewImagen(input) {
-        if (input.files && input.files[0]) {
+        var formato_imagen = ["image/png", "image/jpg", "image/jpeg"];
+        if (formato_imagen.indexOf(input.files[0].type) != -1) {
             var reader = new FileReader();
             reader.onload = function (e) {
                 $('#foto').attr('src', e.target.result);
             };
             reader.readAsDataURL(input.files[0]);
-            $(".img-portada .alerta-sin-portada").remove();
+            $(".img-portada .alerta-sin-portada").hide();
+            $(".btn-portada").show();
         }
     }
 
-     // Función para crear una vista previa de la foto de perfil seleccionada mediante el input file
-     function previewImagenP(input) {
-        if (input.files && input.files[0]) {
+    // Función para crear una vista previa de la foto de perfil seleccionada mediante el input file
+    function previewImagenP(input) {
+        var formato_imagen = ["image/png", "image/jpg", "image/jpeg"];
+        $("#fotoPerfil").show();
+        if (formato_imagen.indexOf(input.files[0].type) != -1) {
             var reader = new FileReader();
             reader.onload = function (e) {
                 $('#fotoPerfil').attr('src', e.target.result);
             };
             reader.readAsDataURL(input.files[0]);
-            $(".img-perfil .alerta-sin-perfil").remove();
+            $(".img-perfil .alerta-sin-perfil").hide();
+            $(".btn-perfil").show();
         }
     }
+
+    // Evento que para cancelar foto de perfil
+    $(document).ready(function () {
+        $("#btn-rec-perfil").click(function () {
+            $(".btn-perfil").hide();
+            //$(".alerta-recargar").show();
+            $("#fotoPerfil").hide();
+            $("#img-perfil").prepend(
+                '<div class="alert alert-danger alerta-sin-perfil">Recarge la pagina o seleccione otra foto de perfil</div>'
+            )
+        })
+    })
+
+    // Evento para enviar la foto de perfil a guardar
+    $(document).ready(function () {
+        $("#editFoto").submit(function (e) {
+            e.preventDefault();
+            var parametros = new FormData($(this)[0]);
+            document.body.style.cursor = 'wait';
+            $.ajax({
+                url: '{% url "editar-foto-perfil" %}',
+                type: 'POST',
+                data: parametros,
+                dataType: 'json',
+                cache: false,
+                contentType: false,
+                processData: false
+            }).done(function (data) {
+                document.body.style.cursor = 'default';
+                // Si el resultado es 1, la transacción fue realizada correctamente
+                if (data.result == '1') {
+                    Swal.fire({
+                        icon: 'success',
+                        text: 'La foto fue guardada exisotamente'
+                    })
+                    location.href = '{% url "perfil" %}'
+                } else if (data.result == '0') {
+                    Swal.fire({
+                        icon: 'error',
+                        text: 'Existió un error, por favor intente nuevamente'
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        text: data.result
+                    })
+                }
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                document.body.style.cursor = 'default';
+                Swal.fire({
+                    icon: 'error',
+                    text: 'Existió un error, por favor intente nuevamente' +
+                        textStatus + errorThrown
+                })
+            }).always(function (data) {});
+        });
+    });
 
     // Evento change que se ejecuta cuando el input file de seleccionar una foto para el carousel tiene un nuevo valor o se ingresó una nueva foto
     $(document).ready(function () {

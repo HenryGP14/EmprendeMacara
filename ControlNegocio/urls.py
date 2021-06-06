@@ -44,6 +44,7 @@ urlpatterns = [
     path('delete-foto', views.vwElmFoto,name="delete-foto"),
     path('save-foto-carousel', views.vwGrdFoto,name="save-foto-carousel"),
     path('editar-perfil', views.vwEdtPerfil, name="editar-perfil"),
+    path('editar-foto-perfil', views.vwGuardarFoto, name="editar-foto-perfil"),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
