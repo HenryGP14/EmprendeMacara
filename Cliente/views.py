@@ -130,6 +130,7 @@ def vwTplDtFactura(request, producto_id):
 
     # Guardar los necesarios para enviarlos al html
     datos = {
+        "nombre_empresa": producto_obj.empresa.nom_empresa,
         "id_producto": producto_obj.id,
         "nombre_producto": producto["nom_producto"],
         "cantidad": producto["cantidad"],
