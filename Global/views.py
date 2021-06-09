@@ -18,6 +18,10 @@ def error_404_view(request, exception):
     return render(request, "error/404.html", {"error": "La página no exite"})
 
 
+def error_view(request):
+    return render(request, "error/404.html", {"error": "La página no exite"})
+
+
 # Vista que retorna el html de inicio de sesión
 def vwInicio(request):
     user_session = Usuario(request)
