@@ -5,14 +5,14 @@
 
     <div class="informacion-bancaria">
         <div><strong>Puedes depositar a las siguientes cuentas bancarias:</strong></div>
+        <div class="alert alert-success m-0" style="width: 100%;">
         {% for cuenta in datos.cuentas_bancarias %}
-        <div class="alert alert-success m-0 text-center" style="width: 100%;">
-            {{ cuenta.entidad }} - {{ cuenta.tipo_cuenta }}
+            <strong>{{ cuenta.entidad }} - {{ cuenta.tipo_cuenta }}</strong>
             <p>
                 <strong>N° </strong>{{ cuenta.numero }} - <strong>Titular: </strong>{{ cuenta.razon_social }}
             </p>
-        </div>
         {% endfor %}
+        </div>
     </div>
     <div class="upload-imagen">
         <div>Valor del depósito:</div>
@@ -23,7 +23,7 @@
         <select name="entidad-bancaria" class="form-control" required>
             <option value="default" disabled>Seleccione una opción</option>
             {% for cuenta in datos.cuentas_bancarias %}
-            <option value="{{ cuenta.entidad }}">{{ cuenta.entidad }}</option>
+            <option value="{{ cuenta.entidad }}">{{ cuenta.entidad }} - {{ cuenta.numero }}</option>
             {% endfor %}
         </select>
 
