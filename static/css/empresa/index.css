@@ -94,6 +94,8 @@ div.portada-index {
 }
 .card .card-header .card-img {
   border-radius: 11px 11px 0px 0px;
+  height: 100%;
+  object-fit: cover;
 }
 
 @media screen and (max-width: 1430px) {
